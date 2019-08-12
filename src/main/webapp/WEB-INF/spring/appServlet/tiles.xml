@@ -12,4 +12,7 @@
 	<definition extends="mainLayout" name="user/*">
 		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp" />
 	</definition>
+	<definition extends="mainLayout" name="menu/*">
+		<put-attribute name="content" value="/WEB-INF/views/menu/{1}.jsp" />
+	</definition>
 </tiles-definitions>
