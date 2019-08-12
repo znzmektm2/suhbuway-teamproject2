@@ -16,10 +16,10 @@ public class Nutrition {
     private int productId;
     private String weight;
     private String calory;
-    private String sugars;
+    private String sugar;
     private String protein;
     private String fat;
     private String salt;
 }
 
-/* PRODUCT_ID	weight	kcal	sugars	protein	Saturated fat	salt */
+/* product_id,weight,calory,sugars,protein,fat,salt */

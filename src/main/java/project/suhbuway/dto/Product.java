@@ -14,13 +14,13 @@ import lombok.ToString;
 public class Product {
     private int productId;
     private String name;
-    private String type;
+    private String nameEng;
+    private String category;
     private int price;
     private String description;
-    private boolean isAvailable;
+    private String imgUrl;
+    private boolean state;
+    private Nutrition nutrition;
 }
 
-
-/*
- * PRODUCT_ID	PRODUCT_NAME	PRODUCT_PRICE	DESCRIPTION	PRODUCT_IMG	PRODUCT_STATE
- * */
+/* product_id,name,name_eng,category,price,description,img,state */

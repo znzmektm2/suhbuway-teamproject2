@@ -16,7 +16,7 @@
 		</beans:property>
 	</beans:bean>
 
-	<!-- oracle 연결!!!!! -->
+	<!-- oracle 연결 -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="${driverName}" p:url="${url}" p:username="${userName}" p:password="${userPass}" p:maxActive="10" />
 

@@ -24,7 +24,7 @@
 	                    <span class="dp1">메뉴소개</span>
 	                    <div class="dp2">
 	                        <ul>
-	                            <li><a href="#;">샌드위치</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/menu/sandwich">샌드위치</a></li>
 	                            <li><a href="#;">찹샐러드</a></li>
 	                            <li><a href="#;">추가토핑</a></li>
 	                            <li><a href="#;">사이드ㆍ음료</a></li>
