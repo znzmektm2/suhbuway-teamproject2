@@ -2,5 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="productMapper">
 	
+	<sql id="productColumns">
+		product_id,name,name_eng,category,price,description,img,state
+	</sql>
+	<sql id="nutritionColumns">
+	   weight,calory,sugar,protein,fat,salt
+	</sql>
 	
+	<!-- ResultMaps -->
+	<resultMap type="nutrition" id="nutritionMap">
+		<id column="product_id" property="productId" />
+		<result column="weight" property="weight" />
+		<result column="calory" property="calory" />
+		<result column="sugar" property="sugar" />
+		<result column="protein" property="protein" />
+		<result column="fat" property="fat" />
+		<result column="salt" property="salt" />
+	</resultMap>
+	<resultMap type="product" id="productMap">
+		<id column="product_id" property="productId" />
+		<result column="name" property="name" />
+		<result column="name_eng" property="nameEng" />
+		<result column="category" property="category" />
+		<result column="price" property="price" />
+		<result column="description" property="description" />
+		<result column="img" property="imgUrl" />
+		<result column="state" property="state" />
+		<association property="nutrition"  resultMap="nutritionMap" />
+	</resultMap>
+	
+	<!-- query들 -->
+	<select id="selectProductsByCategory" parameterType="string" resultMap="productMap">
+		select <include refid="productColumns" />, <include refid="nutritionColumns" />
+		from product join nutrition using(product_id) where category=#{_parameter} 
+	</select>
 </mapper>
