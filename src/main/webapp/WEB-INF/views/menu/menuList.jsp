@@ -114,5 +114,6 @@ function pdVisual_catering(){//메뉴소개 : 단체메뉴 visual
 	TweenLite.to($('.visual.catering .img02'),1,{ease:Power4.easeOut,top:0,opacity:1,delay:0.2})
 };
 </script>
+
 </body>
 </html>

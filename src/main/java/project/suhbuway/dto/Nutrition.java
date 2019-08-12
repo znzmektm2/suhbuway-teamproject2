@@ -12,7 +12,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Nutrition {
-    
     private int productId;
     private String weight;
     private String calory;
