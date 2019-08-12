@@ -37,4 +37,12 @@ public class HomeController {
 	request.setAttribute("list", list);
 	return "menu/menuList";
     }
+    
+    /**
+     * Menu 리스트
+     */
+    @RequestMapping("/menu/{category}/view")
+    public String menuView(@PathVariable String category, HttpServletRequest request) {
+	return "menu/menuListView";
+    }
 }
