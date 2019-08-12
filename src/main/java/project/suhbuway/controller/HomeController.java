@@ -20,6 +20,7 @@ public class HomeController {
 
     @Autowired
     HomeService service;
+
     /**
      * 초기페이지로 이동합니다.
      */
@@ -27,9 +28,13 @@ public class HomeController {
     public String index() {
 	return "index";
     }
-    
+
     /**
      * Menu 리스트
+     * 
+     * @param category
+     * @param request
+     * @return
      */
     @RequestMapping("/menu/{category}")
     public String menu(@PathVariable String category, HttpServletRequest request) {
@@ -37,4 +42,19 @@ public class HomeController {
 	request.setAttribute("list", list);
 	return "menu/menuList";
     }
+
+    /**
+     * 메뉴 세부 사항
+     * 
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping("/menu/{category}/{id}")
+    public String menuDetail(@PathVariable String id, HttpServletRequest request) {
+	Product product = service.selectProductById(Integer.parseInt(id));
+	request.setAttribute("product", product);
+	return "menu/menuDetail";
+    }
+    
 }
