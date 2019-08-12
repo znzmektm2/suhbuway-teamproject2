@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title></title> 
 <link href="${pageContext.request.contextPath}/resources/images/suhbuway_favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 <link rel="StyleSheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
@@ -14,7 +14,7 @@
 </head>
 <body>
 <header>
-	<div id="header" class="open">
+	<div id="header1" class="open">
 	    <div class="content">
 	        <h1 class="logo"><a href="${pageContext.request.contextPath}/">SUBWAY</a></h1>
 	        <!-- gnb -->
@@ -115,20 +115,20 @@ function gnb(){//gnb
 	var spd = 0.5,
 		eft = Power4.easeOut;
 	$('#gnb >ul >li >.dp1').on('mouseenter', function(){
-		TweenLite.to($('#header').css('overflow','inherit').addClass('open'),spd,{ease:eft,height:360})
+		TweenLite.to($('#header1').css('overflow','inherit').addClass('open'),spd,{ease:eft,height:360})
 		TweenLite.to($('.dp2'),spd,{ease:eft,top:0,opacity:1})
 	})
 
 	$('#gnb').on('mouseleave', function(){
-		TweenLite.to($('#header').css('overflow','hidden'),spd,{ease:eft,height:165,onComplete:function(){
-			$('#header').removeClass('open')
+		TweenLite.to($('#header1').css('overflow','hidden'),spd,{ease:eft,height:165,onComplete:function(){
+			$('#header1').removeClass('open')
 		}})
 		TweenLite.to($('.dp2'),spd,{ease:eft,top:-20,opacity:0})
 	})
 }
 
 function bodyScroll(){//body scroll
-	var header = $('#header');
+	var header = $('#header1');
 	var subHeader = $('.sub_header')
 	var subLogo = subHeader.find('.logo')
 	var subTop = subHeader.find('.top')

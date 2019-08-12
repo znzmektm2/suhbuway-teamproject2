@@ -55,15 +55,15 @@ em{font-style:normal;}
 .content{max-width:1170px; margin:0 auto; position:relative;}
 
 /* header */
-#header{border-top:5px solid #009223;height:165px; position:absolute; left:0; width:100%; top:0; z-index:99; background-color:#fff; min-width:1280px; overflow:hidden;}
-#header.open:before{content:''; background:url(../images/common/bg_header_shodow.png) 0 100% repeat-x; height:11px; position:absolute; left:0; width:100%; bottom:-11px}
-#header:after{content:''; position:absolute; top:164px; background-color:#e5e5e5; left:0; width:100%; height:1px;}
-#header .logo{position:absolute; left:50%; top:35px; margin-left:-130px;  transition-duration:0.3s}
-#header .logo a{display:block; background:url(../images/logo.png) 0 0 no-repeat; width:259px; height:40px; overflow:hidden; font-size:0px; line-height:0px; text-indent:-9999px;}
-#header .util_menu{position:absolute; right:25px; top:40px;  transition-duration:0.4s}
-#header .util_menu ul li{float:left; margin-left:5px;}
-#header .util_menu ul li a{display:block; border:1px solid #dddddd; border-radius:50px; height:28px; line-height:28px; background-color:#fff; color:#666666; font-size:13px; letter-spacing:-0.02em; padding:0 13px; transition-duration:0.3s}
-#header .util_menu ul li a:hover{border-color:#bbb}
+#header1{border-top:5px solid #009223;height:165px; position:absolute; left:0; width:100%; top:0; z-index:99; background-color:#fff; min-width:1280px; overflow:hidden;}
+#header1.open:before{content:''; background:url(../images/common/bg_header_shodow.png) 0 100% repeat-x; height:11px; position:absolute; left:0; width:100%; bottom:-11px}
+#header1:after{content:''; position:absolute; top:164px; background-color:#e5e5e5; left:0; width:100%; height:1px;}
+#header1 .logo{position:absolute; left:50%; top:35px; margin-left:-130px;  transition-duration:0.3s}
+#header1 .logo a{display:block; background:url(../images/logo.png) 0 0 no-repeat; width:259px; height:40px; overflow:hidden; font-size:0px; line-height:0px; text-indent:-9999px;}
+#header1 .util_menu{position:absolute; right:25px; top:40px;  transition-duration:0.4s}
+#header1 .util_menu ul li{float:left; margin-left:5px;}
+#header1 .util_menu ul li a{display:block; border:1px solid #dddddd; border-radius:50px; height:28px; line-height:28px; background-color:#fff; color:#666666; font-size:13px; letter-spacing:-0.02em; padding:0 13px; transition-duration:0.3s}
+#header1 .util_menu ul li a:hover{border-color:#bbb}
 
 #gnb{text-align:center; position:absolute; left:0; width:100%; top:102px; text-align:center;}
 #gnb >ul{display:inline-block;}
@@ -81,9 +81,6 @@ em{font-style:normal;}
 
 #gnb >ul >li span.dp1,
 #gnb .dp2 ul li a{ transition-duration:0.2s}
-
-/* container */
-#container{margin-top:170px; position:relative;}
 
 /* 메인 슬라이드 */
 .main_tap_event_wrapper{position:relative; height:490px; background-color:#fff;}
@@ -189,11 +186,11 @@ em{font-style:normal;}
 .sub_header.type01 .sub_loc ul li.active a{color:#ffce32 !important}
 .sub_header.type01 .sub_loc ul li.active a:after{background-color:#ffce32 !important;}
 
-#container{margin-top:170px; position:relative;}
+#container{position:relative;}
 #container.bg_type01{background-color:#f6f6f6; padding-bottom:130px;}
 #container.bg_type01 .sub_header{background:#f6f6f6; border-bottom:0}
 #container.bg_type01 #content{padding-top:59px;}
-#content{padding-top:0; position:relative; z-index:3;}
+#content{padding-top:170px; position:relative; z-index:3;}
 #content h2.subTitle{text-align:center; font-size:40px; color:#292929; font-weight:300; letter-spacing:-0.07em; padding:134px 0 80px;}
 #content h2.subTitle > span{margin-bottom:-20px;display: block;color: #666;font-weight:normal;font-size:16px;letter-spacing: -0.025em}
 #content h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05em; padding-bottom:38px;}
@@ -223,6 +220,8 @@ strong.tit span{font-weight:bold;}
 .board_write_wrapper .rt_note{color:#999999; font-size:16px; letter-spacing:-0.05em; position:absolute; right:0; top:-29px; background:url(../images/common/icon_ess.png) 0 7px no-repeat; padding-left:10px;}
 .board_write_wrapper th{font-weight:300; color:#666666; font-size:16px; height:21px; padding-top:24px; border-bottom:1px solid #e8e8e8; text-align:left; vertical-align:top;}
 .board_write_wrapper td{height:45px; padding:12px 0; border-bottom:1px solid #e8e8e8;}
+.board_write_wrapper tr:last-child td{border-bottom: none;}
+.board_write_wrapper tr:last-child th{border-bottom: none;}
 .board_write_wrapper th .ess{background:url(../images/common/icon_ess.png) 0 0 no-repeat; width:7px; height:6px; display:inline-block; vertical-align:middle; position:relative; margin-left:4px; top:-2px;}
 .board_write_wrapper td .file_note{font-size:13px; color:#999999; margin-left:25px;}
 
