@@ -56,5 +56,5 @@ public class HomeController {
 	request.setAttribute("product", product);
 	return "menu/menuDetail";
     }
-    
+
 }
