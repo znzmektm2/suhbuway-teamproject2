@@ -10,24 +10,6 @@
 </head>
 <body>
 	<div class="contentWrap">
-		<div class="sub_header type01"><!-- 메뉴소개일경우 type01클래스 추가 -->
-			<div class="content">
-				<a class="logo" href="/" style="opacity: 0;">HOME</a>
-				<!-- sub location -->
-				<div class="sub_loc">
-					<ul>
-						<li class="active"><a href="#">샌드위치</a></li>
-						<li><a href="/saladList">찹샐러드</a></li>
-						<li><a href="/toppingList">추가토핑</a></li>
-						<li><a href="/sideDrink">사이드ㆍ음료</a></li>
-						<li><a href="/catering">단체메뉴</a></li>
-						<li><a href="/freshInfo">신선한 재료 소개</a></li>
-					</ul>
-				</div>
-				<!--// sub location -->
-				<a class="top" href="#none">TOP</a>
-			</div>
-		</div>
 		<div class="menu_list_wrapper">
 			<!-- 상품 visual -->
 			<div class="visual sandwich">
@@ -71,6 +53,7 @@ $(document).ready(function(){
 	pdVisual_sidesDrink();
 	pdVisual_fresh();
 	pdVisual_salad();
+	subHeaderAddClass();
 });
 function pdVisual_sandwich(){//메뉴소개 : 샌드위치 visual
 	TweenLite.to($('.visual.sandwich h2'),0.7,{ease:Power2.easeInOut,top:0,opacity:1})
@@ -113,6 +96,10 @@ function pdVisual_catering(){//메뉴소개 : 단체메뉴 visual
 	TweenLite.to($('.visual.catering .img01'),1,{ease:Power4.easeOut,left:'-=100',opacity:1,delay:0.4})
 	TweenLite.to($('.visual.catering .img02'),1,{ease:Power4.easeOut,top:0,opacity:1,delay:0.2})
 };
+
+function subHeaderAddClass() { // 메뉴소개 : 클래스 추가
+	$('.sub_header').addClass('type01');
+}
 </script>
 
 </body>
