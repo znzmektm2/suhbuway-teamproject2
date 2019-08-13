@@ -24,7 +24,9 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public Product selectProductById(int id) {
+    System.out.println("id " + id);
 	Product result = session.selectOne("productMapper.selectProductByIdForMenu", id);
+	System.out.println("result " + result);
 	return result;
     }
 }

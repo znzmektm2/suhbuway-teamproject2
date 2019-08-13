@@ -46,18 +46,18 @@
 						<li class="pm new">
 							<!-- label -->
 							<div class="label">
-								<span class="new"></span>
+								<span class="new">NEW</span>
 							</div>
 							<!--// label -->
 							<div class="img"><img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich_pm10.jpg"></div>
 							<strong class="tit">${list.name}</strong>
 							<span class="eng">${list.nameEng}</span>
-							<span class="cal">${list.nutrition.calory}</span>
-							<span class="price"><fmt:formatNumber value="${list.price}"/></span>
+							<span class="cal">${list.nutrition.calory} kcal</span>
+							<span class="price">￦  <fmt:formatNumber value="${list.price}"/></span>
 							<div class="summary">
 								<p>${list.name}</p>
 							</div>
-							<a class="btn_view" data-id="pm10" href="${pageContext.request.contextPath}/menu/sandwich/view"></a>
+							<a class="btn_view" data-id="pm10" href="${pageContext.request.contextPath}/menu/sandwich/${state.count}"></a>
 						</li>
 					</c:forEach>
 				</ul>

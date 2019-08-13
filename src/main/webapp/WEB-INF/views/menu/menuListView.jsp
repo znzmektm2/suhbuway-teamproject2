@@ -48,9 +48,9 @@
 							<button type="button">open</button>
 						</div>
 						<!--// 20180208 -->
-						<h2 class="name">쉬림프</h2>
-						<p class="eng">Shrimp</p>
-						<p class="cal">253 Kcal</p>
+						<h2 class="name">${product.name}</h2>
+						<p class="eng">${product.nameEng}</p>
+						<p class="cal">${product.nutrition.calory} kcal</p>
 					</div>
 					<!--// 메뉴 header -->
 					<!-- 메뉴 content -->
@@ -60,10 +60,7 @@
 							<div class="menu_img">
 								<img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich_pm10.jpg">
 							</div>
-							<p class="summary">
-								탱글한 식감이 그대로 살아있는 통새우가<br> 5마리 들어가 한 입 베어 먹을 때 마다<br>
-								진짜 새우의 풍미가 가득
-							</p>
+							<p class="summary">${product.description}</p>
 							<div class="recipe">
                                 <ul>
                                     <li>
@@ -105,7 +102,7 @@
 										<tbody>
 											<tr>
 												<td>187</td>
-												<td>253</td>
+												<td>${product.nutrition.calory}</td>
 												<td>5</td>
 												<td>12 (22%)</td>
 												<td>1 (4%)</td>
