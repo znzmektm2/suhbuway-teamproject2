@@ -41,7 +41,7 @@
 						<li class="active" style="margin-top:0;opacity:1;">
 							<strong>메뉴 선택</strong>
 							<p class="txt1">메뉴를 고르세요.<br>샌드위치(15cm 또는 30cm)와<br>찹샐러드 중 선택 가능합니다.</p>
-							<div class="select_box selectM">
+							<div class="select_box selectM addPrice">
 								<span class="slct_head">메뉴 선택</span>
 								<div class="slct_list">
 									<ul>
@@ -57,7 +57,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="select_box selectL">
+							<div class="select_box selectL addPrice">
 								<span class="slct_head">길이 선택</span>
 								<div class="slct_list">
 									<ul>
@@ -73,7 +73,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="select_box selectK">
+							<div class="select_box selectK addPrice">
 								<span class="slct_head">종류 선택</span>
 								<div class="slct_list">
 									<ul>
@@ -99,7 +99,7 @@
 						<li>
 							<strong>빵 선택 <span>(찹샐러드 선택 시 제외)</span></strong>
 							<p class="txt1">매장에서 직접 구운 6가지 종류 중<br>고객님이 원하는 빵으로<br>추가비용 없이 선택 가능합니다.</p>
-							<div class="select_box bread">
+							<div class="select_box bread add">
 								<span class="slct_head">빵 선택</span>
 								<div class="slct_list">
 									<ul>
@@ -131,7 +131,7 @@
 						<li>
 							<strong>추가토핑 선택</strong>
 							<p class="txt1">나만의 메뉴를 더욱 풍성하게 즐기세요.</p>
-							<div class="select_box">
+							<div class="select_box topping addPrice">
 								<span class="slct_head">추가토핑 선택</span>
 								<div class="slct_list">
 									<ul>
@@ -152,9 +152,12 @@
 							<strong>야채&amp;소스 선택</strong>
 							<p class="txt1">나만의 스타일을 완성하는 단계!<br>원하지 않는 야채는 빼고 좋아하는 야채는 더하세요. <br>오늘의 기분에 맞는 소스를 선택해주세요. </p>
 							<div class="select_box">
-								<span class="slct_head">야채 선택</span>
+								<span class="slct_head vegetable add">야채 선택</span>
 								<div class="slct_list">
 									<ul>
+										<li>
+											<a href="#" class="default">야채 선택</a>
+										</li>
 										<li>
 											<a href="#" data-val="sandwich">양상추</a>
 										</li>
@@ -165,9 +168,12 @@
 								</div>
 							</div>
 							<div class="select_box">
-								<span class="slct_head">소스 선택</span>
+								<span class="slct_head source add">소스 선택</span>
 								<div class="slct_list">
 									<ul>
+										<li>
+											<a href="#" class="default">소스 선택</a>
+										</li>
 										<li>
 											<a href="#" data-val="sandwich">스위트 어니언</a>
 										</li>
@@ -182,7 +188,7 @@
 							<strong>사이드메뉴&amp;음료 선택</strong>
 							<p class="txt1">바삭하고 쫀득한 달콤한 쿠키와<br>간편하고 든든한 수프,<br>커피와 음료까지 함께 즐길 수 있습니다.</p>
 							<div class="select_box">
-								<span class="slct_head">사이드메뉴 선택</span>
+								<span class="slct_head side addPrice">사이드메뉴 선택</span>
 								<div class="slct_list">
 									<ul>
 										<li>
@@ -198,7 +204,7 @@
 								</div>
 							</div>
 							<div class="select_box">
-								<span class="slct_head">음료 선택</span>
+								<span class="slct_head drink addPrice">음료 선택</span>
 								<div class="slct_list">
 									<ul>
 										<li>
@@ -237,8 +243,23 @@
 					</tr>
 				  </thead>
 				<tbody>
-					
-					<!-- <tr>
+					<tr>
+						<td>
+							<ul>
+								<li>
+									<span class='delete'>삭제</span>
+									<span class='default'>선택안함</span>
+								</li>
+							</ul>
+						</td>
+						<td class='breadK'><span class='default'>선택안함</span></td>
+						<td class='toppingK'><span class='default'>선택사항없음</span></td>
+						<td class='vegetableK'><span class='default'>선택사항없음</span></td>
+						<td class='source'><span class='default'>기본선택</span></td>
+						<td class='sideDrinkK'><span class='default'>선택사항없음</span></td>
+						<td class='oPrice'><span class='orderPrice'>￦  0</span></td>
+					</tr>
+					<tr>
 						<td>
 							<ul>
 								<li>
@@ -274,13 +295,13 @@
 						<td>
 							<ul>
 								<li>
-									<span>웨지 포테이토</span>
+									<span>Bacon Cheesy 웨지 포테이토</span>
 									<span class="price">￦200</span>
 								</li>
 							</ul>
 						</td>
 						<td><span class="orderPrice">￦  8,500</span></td>
-					</tr> -->
+					</tr>
 				</tbody>
 			</table>
 			<!-- 장바구니, 주문하기 버튼 -->
@@ -321,17 +342,16 @@ function selectBox() { //셀렉트박스 슬라이드 토글
     });
 }
 
+
 function selectMenu() { //셀렉트박스 메뉴선택
+	var selectMenuKind;
+	var selectLength = "";
+	var plusMenu;
+	var price = "800";
+	
 	$('.slct_list>ul>li>a').click(function (e) {
 		e.preventDefault(e);
 		var txt = $(this).text();
-		var trTd = "<tr><td><span class='delete'>삭제</span><span>"+
-					"</span><span class='price'>￦"+"6,000"+
-					"</span></td><td></td><td></td><td></td><td></td><td></td><td></td><tr>";
-		
-		/* <span class="delete">삭제</span>
-		<span>이탈리안 비엠티 15cm</span>
-		<span class="price">￦6,000</span> */
 		
 		$(this).parents('.slct_list').prev('.slct_head').text(txt); //텍스트 넣기
 		if($(this).parents('.select_box').hasClass('selectM')){ 
@@ -341,17 +361,32 @@ function selectMenu() { //셀렉트박스 메뉴선택
 				$('.selectL').hide();
 			}
 			$('.selectK .slct_head,.selectL .slct_head').text("종류 선택"); //장바구니, 주문하기 버튼 노출
-			$('.board_list_wrapper table tbody').append(trTd); //메뉴추가
 		}
 		if($(this).parents('.select_box').hasClass('selectM')){ //메뉴 선택시 다른 셀렉트박스 초기화
 			$('.selectK .slct_head,.selectL .slct_head').text("종류 선택");
 		}
-		if($(this).parents('.select_box').hasClass('bread')){ //장바구니, 주문하기 버튼 노출
-			$('.orderBtn').show();
+		if($(this).parents('.select_box').hasClass('selectL')){ //길이 선택
+			selectLength = $(this).text();
+		}
+		if($(this).parents('.select_box').hasClass('selectK')){ //종류 선택
+			selectMenuKind = $(this).text();
+		}
+		if($(this).parents('.select_box').hasClass('add')){ //빵, 야채, 소스 선택
+			var index = $(this).parents('add').parent('li').index();
+		console.log( $(this).parents('slct_list').parents('li'));
+			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html($(this).text());
+			console.log(index);
+		} else if($(this).parents('.select_box').hasClass('addPrice')){
+			var index = $(this).parents('addPrice').parent('li').index();
+			var addListTxt = "<ul><li><span>"
+				  + $(this).text()
+				  + "</span><span class='price'>￦"
+				  + price
+				  + "</span></li><ul>";
+			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html(addListTxt);
+			console.log(index);
 		}
 		$('.slct_list').hide(); //셀렉트박스 닫기
-		
-		
 	});
 }
 

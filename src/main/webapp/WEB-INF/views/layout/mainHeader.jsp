@@ -44,7 +44,6 @@
 	                    <div class="dp2">
 	                        <ul>
 	                            <li><a href="${pageContext.request.contextPath}/board/notice">뉴스ㆍ공지사항</a></li>
-	                            <li><a href="${pageContext.request.contextPath}/board/customer">문의사항</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -63,6 +62,7 @@
 	                            <li><a href="${pageContext.request.contextPath}/user/order">주문내역</a></li>
 	                            <li><a href="${pageContext.request.contextPath}/user/cart">장바구니</a></li>
 	                            <li><a href="${pageContext.request.contextPath}/user/point">포인트</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/user/customer">문의사항</a></li>
 	                            <li><a href="${pageContext.request.contextPath}/user/info">내정보</a></li>
 	                        </ul>
 	                    </div> 
@@ -73,7 +73,6 @@
 	                    <div class="dp2">
 	                        <ul>
 	                            <li><a href="#;">주문내역</a></li>
-	                            <li><a href="#;">회원리스트</a></li>
 	                            <li><a href="#;">매출액</a></li>
 	                        </ul>
 	                    </div>
@@ -86,6 +85,7 @@
 	                        	<li><a href="#;">주문내역</a></li>
 	                            <li><a href="#;">상품리스트</a></li>
 	                            <li><a href="#;">지점별 매출액</a></li>
+	                            <li><a href="#;">회원리스트</a></li>
 	                        </ul>
 	                    </div>
 	                </li> -->
