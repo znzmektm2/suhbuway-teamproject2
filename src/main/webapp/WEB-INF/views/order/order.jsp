@@ -325,7 +325,13 @@ function selectMenu() { //셀렉트박스 메뉴선택
 	$('.slct_list>ul>li>a').click(function (e) {
 		e.preventDefault(e);
 		var txt = $(this).text();
-		var trTd = "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><tr>";
+		var trTd = "<tr><td><span class='delete'>삭제</span><span>"+
+					"</span><span class='price'>￦"+"6,000"+
+					+"</span></td><td></td><td></td><td></td><td></td><td></td><td></td><tr>";
+		
+		/* <span class="delete">삭제</span>
+		<span>이탈리안 비엠티 15cm</span>
+		<span class="price">￦6,000</span> */
 		
 		$(this).parents('.slct_list').prev('.slct_head').text(txt); //텍스트 넣기
 		if($(this).parents('.select_box').hasClass('selectM')){ 
@@ -335,7 +341,7 @@ function selectMenu() { //셀렉트박스 메뉴선택
 				$('.selectL').hide();
 			}
 			$('.selectK .slct_head,.selectL .slct_head').text("종류 선택"); //장바구니, 주문하기 버튼 노출
-			$('.board_list_wrapper table tbody').append(trTd);
+			$('.board_list_wrapper table tbody').append(trTd); //메뉴추가
 		}
 		if($(this).parents('.select_box').hasClass('selectM')){ //메뉴 선택시 다른 셀렉트박스 초기화
 			$('.selectK .slct_head,.selectL .slct_head').text("종류 선택");
