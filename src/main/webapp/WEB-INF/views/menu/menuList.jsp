@@ -31,7 +31,7 @@
 								<span class="new">NEW</span>
 							</div>
 							<!--// label -->
-							<div class="img"><img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich_pm10.jpg"></div>
+							<div class="img"><img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich/sandwich_pm10.jpg"></div>
 							<strong class="tit">${list.name}</strong>
 							<span class="eng">${list.nameEng}</span>
 							<span class="cal">${list.nutrition.calory} kcal</span>

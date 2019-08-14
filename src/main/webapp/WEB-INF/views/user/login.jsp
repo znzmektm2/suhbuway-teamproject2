@@ -43,9 +43,9 @@
 									</tbody>
 								</table>
 							</div>
-							<div class="btns_wrapper">
-								<a class="btn bgc_point i_reg" href="#" style="width: 170px;"><span>로그인</span></a> <a
-									class="btn bgc_point kakao" href="#" style="width: 170px;"><span>카카오 로그인</span></a>
+							<div class="btns_wrapper ">
+								<a class="btn bgc_point i_reg" href="#" style="width: 170px;"><span>로그인</span></a> 
+								<a class="btn bgc_point i_reg kakao" href="#" style="width: 170px;"><span>카카오 로그인</span></a>
 							</div>
 						</form>
 						<div class="login-util">
