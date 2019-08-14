@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
 
+	// 로그인폼
     @RequestMapping("/user/login")
-    public void login() {
-	
-    }
+    public void login() {}
     
     @RequestMapping("/user/myPage")
     public void myPage() {
@@ -24,4 +23,5 @@ public class UserController {
     public void register() {
 	
     }
+    
 }
