@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="mainLayout" template="/WEB-INF/views/layout/mainLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layout/mainHeader.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/mainFooter.jsp" />
+	</definition>
+	<definition extends="mainLayout" name="index">
+		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
+	</definition>
+	<definition extends="mainLayout" name="user/*">
+		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp" />
+	</definition>
+		
+	<definition name="subLayout" template="/WEB-INF/views/layout/subLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layout/mainHeader.jsp" />
+		<put-attribute name="subMenu" value="/WEB-INF/views/layout/subMenu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/mainFooter.jsp" />
+	</definition>
+	<definition extends="subLayout" name="menu/*">
+		<put-attribute name="subContent" value="/WEB-INF/views/menu/{1}.jsp" />
+	</definition>
+	<definition extends="subLayout" name="order/*">
+		<put-attribute name="subContent" value="/WEB-INF/views/order/{1}.jsp" />
+	</definition>
+</tiles-definitions>
