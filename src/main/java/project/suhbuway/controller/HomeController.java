@@ -56,4 +56,19 @@ public class HomeController {
 	request.setAttribute("product", product);
 	return "menu/menuListView";
     }
+    
+    /**
+     * 주문하기
+     * 
+     * @param order
+     * @param request
+     * @return
+     */
+    @RequestMapping("/order/{category}")
+    public String order(@PathVariable String category, HttpServletRequest request) {
+//	List<Product> list = service.selectProductsByCategory(category);
+//	request.setAttribute("list", list);
+	return "order/order";
+    }
+
 }
