@@ -12,6 +12,9 @@
 	<definition extends="mainLayout" name="user/*">
 		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp" />
 	</definition>
+	<definition extends="mainLayout" name="board/*">
+		<put-attribute name="content" value="/WEB-INF/views/board/{1}.jsp" />
+	</definition>
 		
 	<definition name="subLayout" template="/WEB-INF/views/layout/subLayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/layout/mainHeader.jsp" />

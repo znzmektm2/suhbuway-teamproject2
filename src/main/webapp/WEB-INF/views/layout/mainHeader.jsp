@@ -43,9 +43,8 @@
 	                	<span class="dp1">새소식</span>
 	                    <div class="dp2">
 	                        <ul>
-
 	                            <li><a href="${pageContext.request.contextPath}/board/notice">뉴스ㆍ공지사항</a></li>
-	                            <li><a href="${pageContext.request.contextPath}/board/customer">문의사항</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/board/complainList">문의사항</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
