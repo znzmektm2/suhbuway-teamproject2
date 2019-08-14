@@ -51,7 +51,7 @@
 	                	<span class="dp1">서부웨이</span>
 	                    <div class="dp2">
 	                        <ul>
-	                            <li><a href="#;">매장찾기</a></li>
+	                            <li><a href="home.jsp">매장찾기</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
