@@ -151,8 +151,8 @@
 						<li>
 							<strong>야채&amp;소스 선택</strong>
 							<p class="txt1">나만의 스타일을 완성하는 단계!<br>원하지 않는 야채는 빼고 좋아하는 야채는 더하세요. <br>오늘의 기분에 맞는 소스를 선택해주세요. </p>
-							<div class="select_box">
-								<span class="slct_head vegetable add">야채 선택</span>
+							<div class="select_box add">
+								<span class="slct_head vegetable">야채 선택</span>
 								<div class="slct_list">
 									<ul>
 										<li>
@@ -167,8 +167,8 @@
 									</ul>
 								</div>
 							</div>
-							<div class="select_box">
-								<span class="slct_head source add">소스 선택</span>
+							<div class="select_box add sourceBox">
+								<span class="slct_head">소스 선택</span>
 								<div class="slct_list">
 									<ul>
 										<li>
@@ -187,8 +187,8 @@
 						<li>
 							<strong>사이드메뉴&amp;음료 선택</strong>
 							<p class="txt1">바삭하고 쫀득한 달콤한 쿠키와<br>간편하고 든든한 수프,<br>커피와 음료까지 함께 즐길 수 있습니다.</p>
-							<div class="select_box">
-								<span class="slct_head side addPrice">사이드메뉴 선택</span>
+							<div class="select_box addPrice sideDrinkBox">
+								<span class="slct_head side">사이드메뉴 선택</span>
 								<div class="slct_list">
 									<ul>
 										<li>
@@ -203,8 +203,8 @@
 									</ul>
 								</div>
 							</div>
-							<div class="select_box">
-								<span class="slct_head drink addPrice">음료 선택</span>
+							<div class="select_box addPrice sideDrinkBox">
+								<span class="slct_head drink">음료 선택</span>
 								<div class="slct_list">
 									<ul>
 										<li>
@@ -372,17 +372,23 @@ function selectMenu() { //셀렉트박스 메뉴선택
 			selectMenuKind = $(this).text();
 		}
 		if($(this).parents('.select_box').hasClass('add')){ //빵, 야채, 소스 선택
-			var index = $(this).parents('add').parent('li').index();
-		console.log( $(this).parents('slct_list').parents('li'));
+			var index = $(this).parents('li.active').index();
+			if($(this).parents('.select_box').hasClass('sourceBox')){
+				index = 4;
+			}
 			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html($(this).text());
 			console.log(index);
+			
 		} else if($(this).parents('.select_box').hasClass('addPrice')){
-			var index = $(this).parents('addPrice').parent('li').index();
+			var index = $(this).parents('li.active').index();
 			var addListTxt = "<ul><li><span>"
 				  + $(this).text()
 				  + "</span><span class='price'>￦"
 				  + price
 				  + "</span></li><ul>";
+			if($(this).parents('.select_box').hasClass('sideDrinkBox')){
+				index = 5;
+			}
 			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html(addListTxt);
 			console.log(index);
 		}
