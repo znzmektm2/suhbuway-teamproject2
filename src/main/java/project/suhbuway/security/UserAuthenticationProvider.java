@@ -14,18 +14,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import project.suhbuway.dao.user.AuthoritiesDAO;
-import project.suhbuway.dao.user.MemberDAO;
+import project.suhbuway.dao.user.UserDAO;
 import project.suhbuway.dto.Authority;
-import project.suhbuway.dto.Member;
+import project.suhbuway.dto.User;
 
 
 /**  인증처리 객체 - 입력값 DB와 비교
   */
 @Component // id="memberAuthenticationProvider"
-public class MemberAuthenticationProvider implements AuthenticationProvider {
+public class UserAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired // MemberDAO: DB에 저장된 정보
-	private MemberDAO memberDAO;	
+	private UserDAO userDAO;	
 	@Autowired // PasswordEncoder : 암호화된건 평문이랑 비교 못해서 필요 ( sercurity.xml에서 생성 )
 	private PasswordEncoder passwordEncoder;
 	@Autowired // AuthoritiesDAO: DB와 입력값 비교 성공시, 권한을 꺼내오는 DAO
@@ -39,30 +39,32 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		}
 		
 		// 아이디 비교
-		Member member = memberDAO.selectMemberById( authentication.getName() );// id
-		System.out.println("mm id="+member);
-		if(member==null) throw new UsernameNotFoundException("아이디 또는 비밀번호가 틀렸습니다");
+		User user = userDAO.selectUserById( authentication.getName() );// id
+		System.out.println("mm id="+user);
+		if(user==null) throw new UsernameNotFoundException("아이디 또는 비밀번호가 틀렸습니다");
 		
 		// 비밀번호 비교
 		String pass = authentication.getCredentials().toString(); //  getCredentials(): 평문비교, Object여서 String으로 바꿈
-		if( !passwordEncoder.matches( pass, member.getPassword() ) ) { // matches(): 암호문을 복호화해서 비교 
+		if( !passwordEncoder.matches( pass, user.getUserPassword() ) ) { // matches(): 암호문을 복호화해서 비교 
 			throw new UsernameNotFoundException("id 또는 비밀번호가 틀렸습니다.");
 		}
 		// 인증성공: 권한 가져와서 저장 ( Authority은 DTO )
-		List<Authority> list = authoritiesDAO.selectAuthorityByUserName( authentication.getName() );
+		//List<Authority> list = authoritiesDAO.selectAuthorityByUserName( authentication.getName() );
 		
 		// 타입변환: Authority -> GrantedAuthority ( 권한이 1개 이상일 경우가 있으니까 콜렉션 형태임 )
-		List<SimpleGrantedAuthority> grantedList = new ArrayList<>();
-		for( Authority au : list ) {
-			grantedList.add( new SimpleGrantedAuthority(au.getRole()) );
-		}	
+//		List<SimpleGrantedAuthority> grantedList = new ArrayList<>();
+//		for( Authority au : list ) {
+//			grantedList.add( new SimpleGrantedAuthority(au.getRole()) );
+//		}	
 																		// 아디		비번	권한( 콜렉션<GrantedAuthority> )
-		return new UsernamePasswordAuthenticationToken( member , null , grantedList );
+		//return new UsernamePasswordAuthenticationToken( user , null , grantedList );
+		return new UsernamePasswordAuthenticationToken(user, null);
 	}
 	
 	@Override
 	public boolean supports(Class<?> authentication) {
-		return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication); // 검증
+		//return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication); // 검증
+		return true;
 	}
 
 }

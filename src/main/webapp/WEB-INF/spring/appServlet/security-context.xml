@@ -30,7 +30,7 @@
 			username-parameter="id"
 			password-parameter="password" 
 			default-target-url="/"
-			authentication-failure-handler-ref="memberAuthenticationFailHandler" /> <!-- authentication-failure-url="/user/loginForm?ng" -->
+			authentication-failure-handler-ref="userAuthenticationFailHandler" /> <!-- authentication-failure-url="/user/loginForm?ng" -->
 
 		<security:logout
 			logout-url="/user/logout"
@@ -43,7 +43,7 @@
 	<!-- 계정에 따른 권한을 설정 - DB 연동( 직접 Provider 구현해서 생성 ) -->
 	<security:authentication-manager>
 		<security:authentication-provider 
-			ref="memberAuthenticationProvider">
+			ref="userAuthenticationProvider">
 		</security:authentication-provider>	
 	</security:authentication-manager>
 	

@@ -5,7 +5,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title>user register</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		// 전송 버튼 클릭 시 (검사)
+		$("a.btn.bgc_point.i_reg").click(function(){
+			// 1. 아이디 중복 검사
+			
+			// 2. 비빌번호 일치 검사
+			
+			// 34. 이름, 연락처
+			
+			
+			
+			// 5. 이메일 조합
+			//if( $("input[input=email1]").val()!="" && $("input[input=email2]").val()!="" ) {
+				//var email1 = $("input[input=email1]").val(); 
+				//var email2 = $("input[input=email2]").val();
+				//var userEmail = email1+"@"+email2;
+				//$("#frm").attr("input[input=userEmail]", userEmail );
+			//}
+			// var paramData=$("#폼아이디").serialize();
+			alert(11)
+			$("#registerForm").submit();
+		})
+		
+	})
+</script>
 </head>
 <body>
 <%-- <%@ include file="/header.jsp"%> --%>
@@ -16,9 +44,13 @@
 		<div id="content">
 			<div class="inquiry_wrapper">
 				<h2 class="subTitle">회원가입</h2>
-
 				<div class="content">
-					<form id="frm" method="post" name="frm">
+				
+					<form id="registerForm" method="post" name="registerForm" 
+							 enctype="multipart/form-data"  action="${pageContext.request.contextPath}/userRegister">
+						<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+						
 						<h3 class="h_title">정보입력</h3>
 	
 						<!-- board list s -->
@@ -35,7 +67,7 @@
 										<th scope="col">아이디<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="20" name="writer" placeholder="아이디를 입력해주세요" type="text" value="">
+												<input maxlength="20" name="userId" placeholder="아이디를 입력해주세요" type="text" value="">
 											</span>
 										</td>
 									</tr>
@@ -43,7 +75,7 @@
 										<th scope="col">비밀번호<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="writer" placeholder="비밀번호를 입력해주세요" type="password" value="">
+												<input maxlength="16" name="userPassword" placeholder="비밀번호를 입력해주세요" type="password" value="">
 											</span>
 										</td>
 									</tr>
@@ -51,7 +83,7 @@
 										<th scope="col">비밀번호 확인<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="writer"  placeholder="비밀번호를 확인해주세요"  type="password" value="">
+												<input maxlength="16" name="checkedPassword"  placeholder="비밀번호를 확인해주세요"  type="password" value="">
 											</span>
 										</td>
 									</tr>
@@ -59,7 +91,7 @@
 										<th scope="col">이름<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="10" name="writer" placeholder="이름을 입력해주세요" type="text" value="">
+												<input maxlength="10" name="userName" placeholder="이름을 입력해주세요" type="text" value="">
 											</span>
 										</td>
 									</tr>
@@ -67,7 +99,7 @@
 										<th scope="col">연락처<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="15" name="contact" onkeyup="subwayCommon.inputOnlyDigit(this);" placeholder="연락 가능한 전화번호를 입력해주세요" type="text" value="">
+												<input maxlength="15" name="userPhone" onkeyup="subwayCommon.inputOnlyDigit(this);" placeholder="연락 가능한 전화번호를 입력해주세요" type="text" value="">
 											</span>
 										</td>
 									</tr>
@@ -96,13 +128,15 @@
 													<option value="hanmir.com">hanmir.com</option>
 												</select>
 											</div>
+											<!-- dto의 userEmail 맞춰주기위해서  -->
+											<input type="hidden" name="userEmail" value="111" >
 										</td>
 									</tr>
 									<tr>
 										<th scope="col">프로필</th>
 										<td>
 											<label class="form_file" style="width:466px;">
-												<input data-maxsize="2" data-maxupload="1" id="file" name="file" onchange="formFile(this); return false;" type="file">
+												<input type="file" data-maxsize="2" data-maxupload="1" id="file" name="file" onchange="formFile(this); return false;" >
 												<input readonly="readonly" type="text">
 											</label>
 	

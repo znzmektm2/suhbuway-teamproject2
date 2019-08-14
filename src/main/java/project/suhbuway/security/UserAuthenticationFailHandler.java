@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /** 인증에 실패했을때 호출되는 객체 
  * */
 @Component // id="memberAuthenticationFailHandler"
-public class MemberAuthenticationFailHandler implements AuthenticationFailureHandler {
+public class UserAuthenticationFailHandler implements AuthenticationFailureHandler {
 	
 	@Override
 	public void onAuthenticationFailure(
@@ -25,7 +25,7 @@ public class MemberAuthenticationFailHandler implements AuthenticationFailureHan
 		
 		// 오류 후 이동은 직접이동 시켜줘야함 
 		//request.getRequestDispatcher("/WEB-INF/views/user/login.jsp?error=true").forward(request, response);
-		request.getRequestDispatcher("../test").forward(request, response);
+		request.getRequestDispatcher("../errorLogin").forward(request, response);
 	}
 
 }
