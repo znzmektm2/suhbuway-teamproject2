@@ -44,6 +44,7 @@
 	                    <div class="dp2">
 	                        <ul>
 	                            <li><a href="#;">뉴스ㆍ공지사항</a></li>
+	                            <li><a href="#">문의 사항</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
