@@ -327,7 +327,7 @@ function selectMenu() { //셀렉트박스 메뉴선택
 		var txt = $(this).text();
 		var trTd = "<tr><td><span class='delete'>삭제</span><span>"+
 					"</span><span class='price'>￦"+"6,000"+
-					+"</span></td><td></td><td></td><td></td><td></td><td></td><td></td><tr>";
+					"</span></td><td></td><td></td><td></td><td></td><td></td><td></td><tr>";
 		
 		/* <span class="delete">삭제</span>
 		<span>이탈리안 비엠티 15cm</span>
