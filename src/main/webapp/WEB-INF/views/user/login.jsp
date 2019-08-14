@@ -9,10 +9,20 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
 		// 로그인 버튼 클릭
 		$("#frm a.btn.bgc_point.i_reg").click(function(){
-			//alert(1);
+			
+/* 	        if($("#id").val() == ""){
+	            alert("로그인 아이디를 입력해주세요");
+	            $("#id").focus();
+	        }else if($("#password").val() == ""){
+	            alert("로그인 비밀번호를 입력해주세요");
+	            $("#password").focus();
+	        }else{
+	            $("#frm").attr("action", "<c:url value='/j_spring_security_check'/>");
+	            $("#frm").submit(); // 전송
+	        } */
+	        
 			$("#frm").submit(); // 전송
 			
 		});
@@ -57,11 +67,11 @@
 											</span></td>
 										</tr>
 									</tbody>
-									<!-- errorMessage != null 이면 이라는 조건문 작성하자! -->
-									<c:if test="${param.error==true}">
-										<tr><td>${requestScope.errorMessage}</td></tr>
-									</c:if>
 								</table>
+								<!-- errorMessage != null 이면 이라는 조건문 작성하자! -->
+									<c:if test="${requestScope.errorMessage!=null}">
+										<span style="color: red">${requestScope.errorMessage}</<span>
+									</c:if>
 							</div>
 							<div class="btns_wrapper">
 								<a class="btn bgc_point i_reg" href="#" style="width: 170px;"><span>로그인</span></a> 
