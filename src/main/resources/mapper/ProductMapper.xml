@@ -33,7 +33,11 @@
 	
 	<!-- query들 -->
 	<select id="selectProductsByCategory" parameterType="string" resultMap="productMap">
+		select <include refid="productColumns" />, calory
+		from product join nutrition using(product_id) where category=#{_parameter}
+	</select>
+	<select id="selectProductByIdForMenu" parameterType="int" resultMap="productMap">
 		select <include refid="productColumns" />, <include refid="nutritionColumns" />
-		from product join nutrition using(product_id) where category=#{_parameter} 
+		from product join nutrition using(product_id) where product_id=#{_parameter} 	
 	</select>
 </mapper>

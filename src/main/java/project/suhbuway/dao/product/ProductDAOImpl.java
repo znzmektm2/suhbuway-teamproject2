@@ -16,7 +16,6 @@ public class ProductDAOImpl implements ProductDAO {
     
     @Override
     public List<Product> selectProductsByCategory(String category) {
-	
 	List<Product> list = session.selectList("productMapper.selectProductsByCategory",category);
 	for(Product pro: list)
 	    System.out.println(pro);
@@ -25,8 +24,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public Product selectProductById(int id) {
-	// TODO Auto-generated method stub
-	return null;
+	Product result = session.selectOne("productMapper.selectProductByIdForMenu", id);
+	return result;
     }
-
 }

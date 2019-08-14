@@ -23,7 +23,7 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public Product selectProductById(int id) {
-	// TODO Auto-generated method stub
-	return null;
+	Product product = productDAO.selectProductById(id);
+	return product;
     }
 }
