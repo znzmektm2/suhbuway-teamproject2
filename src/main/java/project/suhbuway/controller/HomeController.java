@@ -54,7 +54,6 @@ public class HomeController {
     public String menuDetail(@PathVariable String id, HttpServletRequest request) {
 	Product product = service.selectProductById(Integer.parseInt(id));
 	request.setAttribute("product", product);
-	return "menu/menuDetail";
+	return "menu/menuListView";
     }
-    
 }
