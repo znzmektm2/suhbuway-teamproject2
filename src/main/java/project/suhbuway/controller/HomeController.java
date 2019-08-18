@@ -60,15 +60,70 @@ public class HomeController {
     /**
      * 주문하기
      * 
-     * @param order
      * @param request
      * @return
      */
-    @RequestMapping("/order/{category}")
-    public String order(@PathVariable String category, HttpServletRequest request) {
+    @RequestMapping("/order")
+    public String order(HttpServletRequest request) {
 //	List<Product> list = service.selectProductsByCategory(category);
 //	request.setAttribute("list", list);
 	return "order/order";
     }
+    
+    /**
+     * 뉴스ㆍ공지사항
+     * 
+     * @param request
+     * @return
+     */
+    @RequestMapping("/board/newsList")
+    public String newList(HttpServletRequest request) {
+//	List<Product> list = service.selectProductsByCategory(category);
+//	request.setAttribute("list", list);
+	return "board/newsList";
+    }
+    
+    /**
+     * 뉴스ㆍ공지사항 상세페이지
+     * 
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping("/board/newsView/{id}")
+    public String newsView(@PathVariable String id, HttpServletRequest request) {
+//	Product product = service.selectProductById(Integer.parseInt(id));
+//	request.setAttribute("product", product);
+	return "board/newsView";
+    }
+    
+    /**
+     * 매장찾기
+     * 
+     * @param category
+     * @param request
+     * @return
+     */
+    @RequestMapping("/storeSearch")
+    public String storeSearch(HttpServletRequest request) {
+//	List<Product> list = service.selectProductsByCategory(category);
+//	request.setAttribute("list", list);
+	return "storeSearch/storeSearch";
+    }
+    
+    /**
+     * 마이페이지
+     * 
+     * @param category
+     * @param request
+     * @return
+     */
+    @RequestMapping("/myPage/{category}")
+    public String myPage(@PathVariable String category, HttpServletRequest request) {
+//	List<Product> list = service.selectProductsByCategory(category);
+//	request.setAttribute("list", list);
+	return "myPage/info";
+    }
+
 
 }

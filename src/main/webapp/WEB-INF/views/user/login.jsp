@@ -8,7 +8,6 @@
 <title></title>
 </head>
 <body>
-	<%-- <%@ include file="/header.jsp"%> --%>
 	<div class="contentWrap">
 		<div class="bg_type01 login" id="container">
 			<div class="titWrap">
@@ -61,7 +60,6 @@
 			<!--// sub content e -->
 		</div>
 	</div>
-	<%-- <%@ include file="/footer.jsp"%> --%>
 </body>
 </html>
 

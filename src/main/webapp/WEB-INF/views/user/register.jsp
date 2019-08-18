@@ -8,8 +8,6 @@
 <title></title>
 </head>
 <body>
-<%-- <%@ include file="/header.jsp"%> --%>
-
 <div class="contentWrap">
 	<div class="bg_type01" id="container">
 		<!-- sub content s -->
@@ -123,8 +121,6 @@
 		<!--// sub content e -->
 	</div>
 </div>
-
-<%-- <%@ include file="/footer.jsp"%> --%>
 <script>
 $(document).ready(function(){
     mainScript();
