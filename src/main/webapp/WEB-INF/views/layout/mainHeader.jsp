@@ -25,7 +25,7 @@
 	                    <div class="dp2">
 	                        <ul>
 	                            <li><a href="${pageContext.request.contextPath}/menu/sandwich">샌드위치</a></li>
-	                            <li><a href="${pageContext.request.contextPath}/menu/salad"">찹샐러드</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/menu/salad">찹샐러드</a></li>
 	                            <li><a href="${pageContext.request.contextPath}/menu/topping">추가토핑</a></li>
 	                            <li><a href="${pageContext.request.contextPath}/menu/side">사이드ㆍ음료</a></li>
 	                        </ul>

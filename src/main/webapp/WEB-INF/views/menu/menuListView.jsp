@@ -28,7 +28,7 @@
 						<!-- 메뉴정보 -->
 						<div class="menu_info">
 							<div class="menu_img">
-								<img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich_pm10.jpg">
+								<img alt="${product.name}" src="${pageContext.request.contextPath}/resources/images/menu/${product.category}/${product.imgUrl}">
 							</div>
 							<p class="summary">${product.description}</p>
 							<div class="recipe">

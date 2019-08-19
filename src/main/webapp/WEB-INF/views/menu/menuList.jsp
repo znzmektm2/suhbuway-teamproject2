@@ -24,20 +24,20 @@
 			<!-- 상품목록 -->
 			<div class="pd_list_wrapper">
 				<ul>
-					<c:forEach items="${list}" var="list" varStatus="state">
+					<c:forEach items="${list}" var="item" varStatus="state">
 						<li class="pm new">
 							<!-- label -->
 							<div class="label">
 								<span class="new">NEW</span>
 							</div>
 							<!--// label -->
-							<div class="img"><img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich/sandwich_pm10.jpg"></div>
-							<strong class="tit">${list.name}</strong>
-							<span class="eng">${list.nameEng}</span>
-							<span class="cal">${list.nutrition.calory} kcal</span>
-							<span class="price">￦  <fmt:formatNumber value="${list.price}"/></span>
+							<div class="img"><img alt="${item.name}" src="${pageContext.request.contextPath}/resources/images/menu/${item.category}/${item.imgUrl}"></div>
+							<strong class="tit">${item.name}</strong>
+							<span class="eng">${item.nameEng}</span>
+							<span class="cal">${item.nutrition.calory} kcal</span>
+							<span class="price">￦  <fmt:formatNumber value="${item.price}"/></span>
 							<div class="summary">
-								<p>${list.name}</p>
+								<p>${item.description}</p>
 							</div>
 							<a class="btn_view" data-id="pm10" href="${pageContext.request.contextPath}/menu/sandwich/${state.count}"></a>
 						</li>
