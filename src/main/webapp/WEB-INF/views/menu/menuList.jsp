@@ -31,7 +31,7 @@
 								<span class="new">NEW</span>
 							</div>
 							<!--// label -->
-							<div class="img"><img alt="${item.name}" src="https://storage.googleapis.com/teamproject2/images/menu/${item.category}/${item.imgUrl}"></div>
+							<div class="img"><img alt="${item.name}" src="${pageContext.request.contextPath}/resources/images/menu/${item.category}/${item.imgUrl}"></div>
 							<strong class="tit">${item.name}</strong>
 							<span class="eng">${item.nameEng}</span>
 							<span class="cal">${item.nutrition.calory} kcal</span>

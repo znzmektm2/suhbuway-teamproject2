@@ -41,22 +41,184 @@
 						<li class="active" style="margin-top:0;opacity:1;">
 							<strong>메뉴 선택</strong>
 							<p class="txt1">메뉴를 고르세요.<br>샌드위치(15cm 또는 30cm)와<br>찹샐러드 중 선택 가능합니다.</p>
+							<div class="select_box selectM addPrice">
+								<span class="slct_head">메뉴 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">메뉴 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">샌드위치</a>
+										</li>
+										<li>
+											<a href="#" data-val="salad">찹샐러드</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="select_box selectL addPrice">
+								<span class="slct_head">길이 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">길이 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="15">15cm</a>
+										</li>
+										<li>
+											<a href="#" data-val="30">30cm</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="select_box selectK addPrice">
+								<span class="slct_head">종류 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">종류 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="AAPBUWI">쉬림프 아보카도</a>
+										</li>
+										<li>
+											<a href="#" data-val="AAPBUWI">에그마요</a>
+										</li>
+										<li>
+											<a href="#" data-val="AAPBUWI">쉬림프 아보카도</a>
+										</li>
+										<li>
+											<a href="#" data-val="AAPBUWI">에그마요</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</li>
 						<li>
 							<strong>빵 선택 <span>(찹샐러드 선택 시 제외)</span></strong>
 							<p class="txt1">매장에서 직접 구운 6가지 종류 중<br>고객님이 원하는 빵으로<br>추가비용 없이 선택 가능합니다.</p>
+							<div class="select_box bread add">
+								<span class="slct_head">빵 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">빵 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">허니오트</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">하티</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">위트</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">파마산 오레가노</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">화이트</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">플랫브레드</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</li>
 						<li>
 							<strong>추가토핑 선택</strong>
 							<p class="txt1">나만의 메뉴를 더욱 풍성하게 즐기세요.</p>
+							<div class="select_box topping addPrice">
+								<span class="slct_head">추가토핑 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">추가토핑 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">베이컨 비츠</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">쉬림프 더블업</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</li>
 						<li>
 							<strong>야채&amp;소스 선택</strong>
 							<p class="txt1">나만의 스타일을 완성하는 단계!<br>원하지 않는 야채는 빼고 좋아하는 야채는 더하세요. <br>오늘의 기분에 맞는 소스를 선택해주세요. </p>
+							<div class="select_box add">
+								<span class="slct_head vegetable">야채 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">야채 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">양상추</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">토마토</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="select_box add sourceBox">
+								<span class="slct_head">소스 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">소스 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">스위트 어니언</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">마요네즈</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</li>
 						<li>
 							<strong>사이드메뉴&amp;음료 선택</strong>
 							<p class="txt1">바삭하고 쫀득한 달콤한 쿠키와<br>간편하고 든든한 수프,<br>커피와 음료까지 함께 즐길 수 있습니다.</p>
+							<div class="select_box addPrice sideDrinkBox">
+								<span class="slct_head side">사이드메뉴 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">사이드메뉴 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">웨지 포테이토</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">더블 초코칩 쿠키</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="select_box addPrice sideDrinkBox">
+								<span class="slct_head drink">음료 선택</span>
+								<div class="slct_list">
+									<ul>
+										<li>
+											<a href="#" class="default">음료 선택</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">탄산음료</a>
+										</li>
+										<li>
+											<a href="#" data-val="sandwich">커피</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</li>
 					</ol>
 				</div>
@@ -67,114 +229,95 @@
 				</div>
 			</div>
 			<!-- 선택한 메뉴 -->
-		<div class="board_list_wrapper step1">
-			<table>
-				<thead>
-					<tr>
-						<th scope="col">메뉴</th>
-						<th scope="col">빵</th>
-						<th scope="col">추가토핑</th>
-						<th scope="col">야채종류</th>
-						<th scope="col">소스종류</th>
-						<th scope="col">사이드메뉴&amp;음료</th>
-						<th scope="col">총금액</th>
-					</tr>
-				  </thead>
-				<tbody>
-					<tr>
-						<td>
-							<ul>
-								<li>
-									<span>이탈리안 비엠티 15cm</span>
-								<span class="price">￦6,000</span>
-								</li>
-							</ul>
-						</td>
-						<td>허니오트</td>
-						<td>
-							<ul>
-								<li>
-									<span>더블치즈</span>
-									<span class="price">￦800</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-							</ul>
-						</td>
-						<td>
-							<ul>
-								<li>
-									<span>양상추</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-								<li>
-									<span>토마토</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-							</ul>
-						</td>
-						<td>
-							<ul>
-								<li>
-									<span>스위트어니언</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-							</ul>
-						</td>
-						<td>
-							<ul>
-								<li>
-									<span>웨지 포테이토</span>
-									<span class="price">￦200</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-								<li>
-									<span>탄산음료</span>
-									<span class="price">￦1,500</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-							</ul>
-						</td>
-						<td><span class="orderPrice">￦  8,500</span></td>
-					</tr>
-					<tr>
-						<td>
-							<ul>
-								<li>
-									<span>이탈리안 비엠티 15cm</span>
-								<span class="price">￦6,000</span>
-								</li>
-							</ul>
-						</td>
-						<td>허니오트</td>
-						<td>
-							-
-						</td>
-						<td>
-							<ul>
-								<li>
-									<span>양상추</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-								<li>
-									<span>토마토</span>
-									<a href="#this" class="delete">삭제</a>
-								</li>
-							</ul>
-						</td>
-						<td>
-							<ul>
-								기본소스
-							</ul>
-						</td>
-						<td>
-							-
-						</td>
-						<td><span class="orderPrice">￦  8,500</span></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<!-- //선택한 메뉴 -->
+			<div class="board_list_wrapper step1">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">메뉴</th>
+							<th scope="col">빵</th>
+							<th scope="col">추가토핑</th>
+							<th scope="col">야채종류</th>
+							<th scope="col">소스종류</th>
+							<th scope="col">사이드메뉴&amp;음료</th>
+							<th scope="col">금액</th>
+						</tr>
+					  </thead>
+					<tbody>
+						<tr>
+							<td>
+								<ul>
+									<li>
+										<span class='delete'>삭제</span>
+										<span class='default'>선택안함</span>
+									</li>
+								</ul>
+							</td>
+							<td class='breadK'><span class='default'>선택안함</span></td>
+							<td class='toppingK'><span class='default'>선택사항없음</span></td>
+							<td class='vegetableK'><span class='default'>선택사항없음</span></td>
+							<td class='source'><span class='default'>기본선택</span></td>
+							<td class='sideDrinkK'><span class='default'>선택사항없음</span></td>
+							<td class='oPrice'><span class='orderPrice'>￦  0</span></td>
+						</tr>
+						<tr class="on">
+							<td>
+								<ul>
+									<li>
+										<span class="delete">삭제</span>
+										<span>이탈리안 비엠티 15cm</span>
+										<span class="price">￦6,000</span>
+									</li>
+								</ul> 
+							</td>
+							<td>허니오트</td>
+							<td>
+								<ul>
+									<li>
+										<span>더블치즈</span>
+										<span class="price">￦800</span>
+										<a href="#">삭제</a>
+									</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>
+										<span>양상추</span>
+										<a href="#">삭제</a>
+									</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>
+										<span>스위트어니언</span>
+										<a href="#">삭제</a>
+									</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>
+										<span>Bacon Cheesy 웨지 포테이토</span>
+										<span class="price">￦200</span>
+										<a href="#">삭제</a>
+									</li>
+								</ul>
+							</td>
+							<td><span class="orderPrice">￦  8,500</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- 장바구니, 주문하기 버튼 -->
+				<div class="inquiry_wrapper orderBtn">
+					<div class="btns_wrapper">
+						<a class="btn bgc_point i_reg" style="width:170px"><span>장바구니</span></a>
+						<a class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
+					</div> 
+				</div>
+				<!-- //장바구니, 주문하기 버튼 --> 
+			</div>
+			<!-- //선택한 메뉴 -->
 		</div>
 		<!--// 매장에서 주문하기 e -->
 	</div>
@@ -182,19 +325,92 @@
 <script>
 $(document).ready(function(){
 	subwayUtilization();
+	selectBox();
+	selectMenu();
 });
+function selectBox() { //셀렉트박스 슬라이드 토글
+	$('.slct_head').click(function () {
+		if($(this).parent().hasClass('on')){
+			$(this).parent().removeClass('on').children('.slct_list').hide();
+		} else{
+			$(this).parent().addClass('on').children('.slct_list').stop().slideDown('fast');
+			$(this).parent().siblings().removeClass('on').children('.slct_list').hide();
+		}
+	});
+	
+	$(document).on("click", function(event){
+        if(!$(event.target).closest(".select_box").length){
+            $(".slct_list").hide();
+        }
+    });
+}
+
+
+function selectMenu() { //셀렉트박스 메뉴선택
+	var selectMenuKind;
+	var selectLength = "";
+	var plusMenu;
+	var price = "800";
+	
+	$('.slct_list>ul>li>a').click(function (e) {
+		e.preventDefault(e);
+		var txt = $(this).text();
+		
+		$(this).parents('.slct_list').prev('.slct_head').text(txt); //텍스트 넣기
+		if($(this).parents('.select_box').hasClass('selectM')){ 
+			if(txt == '샌드위치'){ //길이 선택 셀렉트박스 노출 
+				$('.selectL').show();
+			} else{
+				$('.selectL').hide();
+			}
+			$('.selectK .slct_head,.selectL .slct_head').text("종류 선택"); //장바구니, 주문하기 버튼 노출
+		}
+		if($(this).parents('.select_box').hasClass('selectM')){ //메뉴 선택시 다른 셀렉트박스 초기화
+			$('.selectK .slct_head,.selectL .slct_head').text("종류 선택");
+		}
+		if($(this).parents('.select_box').hasClass('selectL')){ //길이 선택
+			selectLength = $(this).text();
+		}
+		if($(this).parents('.select_box').hasClass('selectK')){ //종류 선택
+			selectMenuKind = $(this).text();
+		}
+		if($(this).parents('.select_box').hasClass('add')){ //빵, 야채, 소스 선택
+			var index = $(this).parents('li.active').index();
+			if($(this).parents('.select_box').hasClass('sourceBox')){
+				index = 4;
+			}
+			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html($(this).text());
+			console.log(index);
+			
+		} else if($(this).parents('.select_box').hasClass('addPrice')){
+			var index = $(this).parents('li.active').index();
+			var addListTxt = "<ul><li><span>"
+				  + $(this).text()
+				  + "</span><span class='price'>￦"
+				  + price
+				  + "</span></li><ul>";
+			if($(this).parents('.select_box').hasClass('sideDrinkBox')){
+				index = 5;
+			}
+			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html(addListTxt);
+			console.log(index);
+		}
+		$('.slct_list').hide(); //셀렉트박스 닫기
+	});
+}
+
 function subwayUtilization(){//써브웨이 이용방법
 	var stepIndex = 0;
 	var btnArr = $('#store_order .arr_controls .arr');
 	var stepNum = $('#store_order .slider_wrapper .step_content ol li');
 	var slider_img = $('#store_order .slider_wrapper .img_content ol li');
-	var slider_info = $('#store_order .info_content ol li');
+	var slider_info = $('#store_order .info_content>ol>li');
 	var spd = 1;
 	var eft = Power3.easeOut;
 
 	store_order();//써브웨이 이용방법 : 매장에서 주문하기
 
-	$('.utilization_subway_wrapper .tab ul li a').on('click', function(){//써브웨이 이용방법 : tab
+	$('.utilization_subway_wrapper .tab>ul>li>a').on('click', function(){//써브웨이 이용방법 : tab
 		if($(this).parent('li').hasClass('active')){
 			return false;
 		}else{
@@ -228,16 +444,14 @@ function subwayUtilization(){//써브웨이 이용방법
 		}
 	})
 
-
-	function store_order(){//써브웨이 이용방법 : 매장에서 주문하기 20180131
+	function store_order(){//써브웨이 이용방법 : 매장에서 주문하기 
 		var prevIndex;
-
+		
 		$(slider_img).eq(stepIndex).css({'left':'50%',marginLeft:'-585px'})
 		TweenLite.to($(slider_img).eq(stepIndex).find('.img'),spd,{ease:eft,width:700})
 		TweenLite.to($(slider_img).eq(stepIndex).next(),spd,{ease:eft,marginLeft:'-280'})
 
 		$(btnArr).on('click', function(){
-
 			if(TweenMax.isTweening(slider_img)){
 				return false;
 			}else{
@@ -257,7 +471,7 @@ function subwayUtilization(){//써브웨이 이용방법
 						TweenLite.to($(slider_img).eq(stepIndex).find('.img'),spd,{ease:eft,width:700})
 						TweenLite.to($(slider_img).eq(prevIndex).next(),spd,{ease:eft,marginLeft:'560'})
 					}
-				}else{
+				} else{
 					if(stepIndex >= 4){
 						return false;
 					}else{
