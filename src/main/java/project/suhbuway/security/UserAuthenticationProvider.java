@@ -58,7 +58,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 //		}	
 																		// 아디		비번	권한( 콜렉션<GrantedAuthority> )
 		//return new UsernamePasswordAuthenticationToken( user , null , grantedList );
-		return new UsernamePasswordAuthenticationToken(user, null);
+		return new UsernamePasswordAuthenticationToken(user, null );
 	}
 	
 	@Override

@@ -19,6 +19,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired  
 	PasswordEncoder passwordEncoder;
 	
+	/**
+	 * 회원가입
+	 */
 	@Transactional 
 	@Override	     
 	public int joinUser(User user) {
@@ -44,8 +47,17 @@ public class UserServiceImpl implements UserService {
 //			result = authoritiesDAO.insertAuthority( new Authority( member.getId(), RoleConstant.ROLE_ADMIN ) );
 //			if( result ==0 ) throw new RuntimeException("권한 부여에 오류가 발생하여 Rollback 되었습니다.--2");
 //		}
-			
 		return 0;
+	}
+	/**
+	 * ID중복체크
+	 */
+	@Override
+	public String idcheck(String id) {
+		System.out.println("서비스 id체크: " + id );
+		int count=userDAO.idcheck(id);
+		System.out.println("dao결과: " + count );
+		return (count==0) ? "ok"  : "fail"; 	
 	}
 
 }

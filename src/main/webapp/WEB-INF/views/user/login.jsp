@@ -9,22 +9,24 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		// 로그인 버튼 클릭
-		$("#frm a.btn.bgc_point.i_reg").click(function(){
-			
-/* 	        if($("#id").val() == ""){
-	            alert("로그인 아이디를 입력해주세요");
-	            $("#id").focus();
-	        }else if($("#password").val() == ""){
-	            alert("로그인 비밀번호를 입력해주세요");
-	            $("#password").focus();
-	        }else{
-	            $("#frm").attr("action", "<c:url value='/j_spring_security_check'/>");
-	            $("#frm").submit(); // 전송
-	        } */
-	        
+		$("#login").click(function(){
+ 	        if($("#userId").val() == ""){
+	            alert("아이디를 입력해주세요");
+	            $("#userId").focus();
+	            return;
+	        }else if($("#userPassword").val() == ""){
+	            alert("비밀번호를 입력해주세요");
+	            $("#userPassword").focus();
+	            return;
+	        }
 			$("#frm").submit(); // 전송
-			
+		});
+		
+		// kakao 로그인 버튼 클릭
+		$("#kakaoLogin").click(function(){
+			//$("#frm").submit(); 
 		});
 	})
 </script>
@@ -58,12 +60,12 @@
 									<tbody>
 										<tr>
 											<td><span class="form_text" style="width: 100%"> 
-											<input maxlength="20" name="id" placeholder="아이디를 입력" type="text"/>
+											<input maxlength="20" name="userId" id="userId" placeholder="아이디를 입력" type="text"/>
 											</span></td>
 										</tr>
 										<tr>
 											<td><span class="form_text" style="width: 100%"> 
-											<input maxlength="16" name="password" placeholder="비밀번호를 입력" type="password"/>
+											<input maxlength="16" name="userPassword" id="userPassword" placeholder="비밀번호를 입력" type="password"/>
 											</span></td>
 										</tr>
 									</tbody>
@@ -74,8 +76,8 @@
 									</c:if>
 							</div>
 							<div class="btns_wrapper">
-								<a class="btn bgc_point i_reg" href="#" style="width: 170px;"><span>로그인</span></a> 
-								<a class="btn bgc_point kakao" href="#" style="width: 170px;"><span>카카오 로그인</span></a>
+								<a class="btn bgc_point i_reg" href="#" style="width: 170px;" id="login" ><span>로그인</span></a> 
+								<a class="btn bgc_point kakao" href="#" style="width: 170px;" id="kakaoLogin" ><span>카카오 로그인</span></a>
 							</div>
 						</form>
 						

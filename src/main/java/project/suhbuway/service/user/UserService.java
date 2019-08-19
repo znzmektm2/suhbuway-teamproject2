@@ -9,5 +9,8 @@ public interface UserService {
 	 * */
 	int joinUser(User user);
 	
-	
+	/**
+	 * id중복체크
+	 */
+	String idcheck(String id);
 }

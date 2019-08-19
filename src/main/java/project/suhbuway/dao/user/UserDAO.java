@@ -12,4 +12,9 @@ public interface UserDAO {
 		 * ID에 해당하는 회원정보 검색
 		 * */
 		User selectUserById(String id);
+		
+		/**
+		 * ID중복체크
+		 */
+		int idcheck(String id);
 	}

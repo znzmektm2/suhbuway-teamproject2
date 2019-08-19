@@ -111,16 +111,16 @@
 					<!-- 로그인o - 인증o -->
 					<sec:authorize access="isAuthenticated()">
 					
-						<sec:authorize access="hasRole('ROLE_MEMBER')">	
-							<li><sec:authentication property="principal.name" />님 환영합니다.</li>
+<%-- 					<sec:authorize access="hasRole('ROLE_USER')">	 --%>
+							<li><sec:authentication property="principal.userName" />님 환영합니다.</li>
 							
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<li><a href="${pageContext.request.contextPath}/admin/main">관리자 페이지</a></li>
 							</sec:authorize>
 							
 							<li><a href="javascript:logout();">로그아웃</a></li>
-						</sec:authorize>
-					</sec:authorize>
+							</sec:authorize>
+<%-- 					</sec:authorize> --%>
 	            </ul>
 	        </div>
 	        <!--// util menu -->
