@@ -25,9 +25,9 @@
 	                    <div class="dp2">
 	                        <ul>
 	                            <li><a href="${pageContext.request.contextPath}/menu/sandwich">샌드위치</a></li>
-	                            <li><a href="#;">찹샐러드</a></li>
-	                            <li><a href="#;">추가토핑</a></li>
-	                            <li><a href="#;">사이드ㆍ음료</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/menu/salad">찹샐러드</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/menu/topping">추가토핑</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/menu/side">사이드ㆍ음료</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -35,7 +35,7 @@
 	                	<span class="dp1">주문하기</span>
 	                    <div class="dp2">
 	                        <ul>
-	                            <li><a href="#;">주문하기</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/order">주문하기</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -43,7 +43,7 @@
 	                	<span class="dp1">새소식</span>
 	                    <div class="dp2">
 	                        <ul>
-	                            <li><a href="#;">뉴스ㆍ공지사항</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/board/newsList">뉴스ㆍ공지사항</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -51,7 +51,7 @@
 	                	<span class="dp1">서부웨이</span>
 	                    <div class="dp2">
 	                        <ul>
-	                            <li><a href="#;">매장찾기</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/storeSearch">매장찾기</a></li>
 	                        </ul>
 	                    </div>
 	                </li>
@@ -59,35 +59,14 @@
 	                	<span class="dp1">마이페이지</span>
 	                    <div class="dp2">
 	                        <ul>
-	                            <li><a href="#;">주문내역</a></li>
-	                            <li><a href="#;">장바구니</a></li>
-	                            <li><a href="#;">포인트</a></li>
-	                            <li><a href="#;">내정보</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/orders">주문내역</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/cart">장바구니</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/qna">문의사항</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/point">포인트</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/info">내정보</a></li>
 	                        </ul>
 	                    </div> 
 	                </li>
-	                <!-- 매장관리자 -->
-	                <!-- <li>
-	                    <a href="#none" class="dp1">마이페이지</a>
-	                    <div class="dp2">
-	                        <ul>
-	                            <li><a href="#;">주문내역</a></li>
-	                            <li><a href="#;">회원리스트</a></li>
-	                            <li><a href="#;">매출액</a></li>
-	                        </ul>
-	                    </div>
-	                </li> -->
-	                <!-- 본사관리자 -->
-	                <!-- <li>
-	                    <a href="#none" class="dp1">마이페이지</a>
-	                    <div class="dp2">
-	                        <ul>
-	                        	<li><a href="#;">주문내역</a></li>
-	                            <li><a href="#;">상품리스트</a></li>
-	                            <li><a href="#;">지점별 매출액</a></li>
-	                        </ul>
-	                    </div>
-	                </li> -->
 	            </ul>
 	        </nav>
 	        <!--// gnb -->
@@ -115,7 +94,7 @@ function gnb(){//gnb
 	var spd = 0.5,
 		eft = Power4.easeOut;
 	$('#gnb >ul >li >.dp1').on('mouseenter', function(){
-		TweenLite.to($('#header1').css('overflow','inherit').addClass('open'),spd,{ease:eft,height:360})
+		TweenLite.to($('#header1').css('overflow','inherit').addClass('open'),spd,{ease:eft,height:380})
 		TweenLite.to($('.dp2'),spd,{ease:eft,top:0,opacity:1})
 	})
 

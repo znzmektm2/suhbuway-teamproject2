@@ -9,45 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="wrap"> 
+	<div id="wrap">
 		<!-- container s -->
 		<div id="container">
-
-			<div class="sub_header fixed"
-				style="position: fixed; background-color: rgb(255, 255, 255);">
-				<div class="content">
-					<a class="logo" href="/" style="opacity: 1;">HOME</a>
-					<!-- sub location -->
-					<div class="sub_loc">
-						<ul>
-							<li class="active"><a href="#">샌드위치</a></li>
-							<li><a href="/saladList">찹샐러드</a></li>
-							<li><a href="/toppingList">추가토핑</a></li>
-							<li><a href="/sideDrink">사이드ㆍ음료</a></li>
-							<li><a href="/catering">단체메뉴</a></li>
-							<li><a href="/freshInfo">신선한 재료 소개</a></li>
-						</ul>
-					</div>
-					<!--// sub location -->
-					<a class="top" href="#none" style="opacity: 1;">TOP</a>
-				</div>
-			</div>
-
 			<!-- sub content s -->
 			<div id="content1">
 				<!-- 메뉴소개 s -->
 				<div class="menu_view_wrapper">
 					<!-- 메뉴 header -->
 					<div class="hd">
-						<!-- 20180208 -->
-						<div class="category">
-							<a href="/sandwichView?param=cl06">클래식</a> <a
-								href="/sandwichView?param=fl01">프레쉬&amp;라이트</a> <a
-								class="active" href="/sandwichView?param=pm08">프리미엄</a> <a
-								href="/sandwichView?param=bf01">아침메뉴</a>
-							<button type="button">open</button>
-						</div>
-						<!--// 20180208 -->
 						<h2 class="name">${product.name}</h2>
 						<p class="eng">${product.nameEng}</p>
 						<p class="cal">${product.nutrition.calory} kcal</p>
@@ -58,7 +28,7 @@
 						<!-- 메뉴정보 -->
 						<div class="menu_info">
 							<div class="menu_img">
-								<img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich_pm10.jpg">
+								<img alt="${product.name}" src="${pageContext.request.contextPath}/resources/images/menu/${product.category}/${product.imgUrl}">
 							</div>
 							<p class="summary">${product.description}</p>
 							<div class="recipe">
@@ -101,12 +71,12 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td>187</td>
+												<td>${product.nutrition.weight}</td>
 												<td>${product.nutrition.calory}</td>
-												<td>5</td>
-												<td>12 (22%)</td>
-												<td>1 (4%)</td>
-												<td>355 (18%)</td>
+												<td>${product.nutrition.sugar}</td>
+												<td>${product.nutrition.protein}</td>
+												<td>${product.nutrition.fat}</td>
+												<td>${product.nutrition.salt}</td>
 											</tr>
 										</tbody>
 									</table>
