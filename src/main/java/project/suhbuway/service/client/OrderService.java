@@ -12,11 +12,28 @@ import project.suhbuway.dto.Product;
 public interface OrderService {
 
     /**
-     * 상품 리스트 검색
+     * 샌드위치 or 샐러드 셀렉트박스 리스트 뿌리기
      * 
-     * @param type
+     * @param menu
      * @return
      */
     public List<String> selectMenuListByMenu(String menu);
+
+    /**
+     * 메인 메뉴 및 가격 뿌리기
+     * 
+     * @param name
+     * @param category
+     * @return
+     */
+	public String selectMenuPrice(String name, String category);
+	
+	/**
+     * 기타 메뉴 및 가격 뿌리기
+     * 
+     * @param name
+     * @return
+     */
+	public String selectEtcPrice(String name);
     
 }

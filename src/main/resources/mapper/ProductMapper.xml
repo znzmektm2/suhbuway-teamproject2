@@ -48,9 +48,21 @@
 		insert into product(<include refid="productColumns" />)		
 	</insert> -->
 	
-	<!-- 셀렉트 박스에서 선택한 메뉴에 해당하는 리스트 -->
+	<!-- 카테고리로 제품이름 리스트 검색 -->
 	<select id="selectMenuListByMenu" parameterType="string" resultType="string">
 		select name	from product where category=#{_parameter}
 	</select>
+	
+	<!-- 이름으로 가격검색 -->
+	<select id="selectMenuPrice" parameterType="map" resultType="string">
+		select price from product where name=#{name} AND category=#{category}
+	</select>
+	
+	<!-- 이름으로 가격검색 -->
+	<select id="selectEtcPrice" parameterType="string" resultType="string">
+		select price from product where name=#{_parameter}
+	</select>
+	
+	
 	
 </mapper>

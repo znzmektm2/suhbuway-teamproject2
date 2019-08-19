@@ -20,4 +20,16 @@ public class OrderServiceImpl implements OrderService {
 		return list;
 	}
 
+	@Override
+	public String selectMenuPrice(String name, String category) {
+		String price = productDAO.selectMenuPrice(name, category);
+		return price;
+	}
+
+	@Override
+	public String selectEtcPrice(String name) {
+		String price = productDAO.selectEtcPrice(name);
+		return price;
+	}
+
 }
