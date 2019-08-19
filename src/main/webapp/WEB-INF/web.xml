@@ -10,6 +10,7 @@
 			/WEB-INF/spring/root-context.xml
 			/WEB-INF/spring/appServlet/mybatisTransaction-context.xml
 			/WEB-INF/spring/appServlet/security-context.xml
+			/WEB-INF/spring/appServlet/updown-context.xml
 		</param-value>
 	</context-param>
 	

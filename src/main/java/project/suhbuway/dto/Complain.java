@@ -16,6 +16,7 @@ public class Complain {
 	private int complainId;
 	private int groupNo;
 	private String userId;
+	private String title;
 	private String content;
 	private String date;
 	private boolean state;

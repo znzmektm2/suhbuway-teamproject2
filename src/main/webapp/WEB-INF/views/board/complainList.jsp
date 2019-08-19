@@ -9,10 +9,28 @@
 <title></title>
 <style type="text/css">
  th,td{padding-top: 15px; padding-bottom: 15px; text-align: center;}
+ .white {
+ 	width: 100px;
+    margin: auto;
+    }
+    .detail{
+    text-align: center;
+    display: block;
+    border: 1px solid #dddddd;
+    border-radius: 50px;
+    height: 28px;
+    line-height: 28px;
+    background-color: #fff;
+    color: #666666;
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    padding: 0 13px;
+    transition-duration: 0.3s;
+    }
 </style>
 </head>
 <body>
-	<table>
+	<table style="margin-bottom: 20px;">
 		<thead>
 			<tr>
 				<th scope="col">ID</th>
@@ -22,25 +40,38 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>ID에용</td>
-				<td>제목입니다 (글자수 30자 제한예정)</td>
-				<td>게시글날짜</td>
-				<td>처리 전</td>
-			</tr>
-			<tr>
-				<td>ID에용</td>
-				<td>제목입니당</td>
-				<td>게시글날짜</td>
-				<td>처리 전</td>
-			</tr>
-			<tr>
-				<td>ID에용</td>
-				<td>제목입니당</td>
-				<td>게시글날짜</td>
-				<td>처리 전</td>
-			</tr>
+			<c:choose>
+    <c:when test="${empty requestScope.list}">
+	<tr>
+	    <td></td>
+        <td>
+         	  등록된 상품이 없습니다.
+        </td>
+    </tr>
+    </c:when>
+    <c:otherwise>
+	<c:forEach items="${requestScope.list}" var="complain">
+		    <tr>
+		        <td>${complain.userId}</td>
+		        <td><a href="${pageContext.request.contextPath}/board/Read/${complain.complainId}">${complain.title}</a></td>
+		        <td>${complain.date}</td>
+		        <td>
+		        <c:choose>
+		         <c:when test="${complain.state==false}">처리 전</c:when>
+		         <c:otherwise>처리 완료</c:otherwise>
+		        </c:choose>
+		        </td>
+		    </tr>
+    </c:forEach>
+	</c:otherwise>
+    </c:choose>
 		</tbody>
 	</table>
+	
+	   <div class="white">
+            <ul>
+                <li class="detail"><a href="${pageContext.request.contextPath}/board/write">글쓰기</a></li><br>
+            </ul>
+        </div>
 </body>
 </html> 

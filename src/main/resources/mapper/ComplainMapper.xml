@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="complainMapper">
+	
+	<!-- ResultMaps -->
+	<resultMap type="complain" id="complainMap">
+		<id column="complain_id" property="complainId" />
+		<result column="group_no" property="groupNo" />
+		<result column="user_id" property="userId" />
+		<result column="complain_title" property="title" />
+		<result column="complain_content" property="content" />
+		<result column="complain_date" property="date" />
+		<result column="board_state" property="state" />
+	</resultMap>
+	
+<select id="selectAll" resultMap="complainMap">
+  select * from complain_board
+</select>
+
+<select id="selectByModelNum" parameterType="int" resultMap="complainMap">
+select * from complain_board
+ <where>
+   <if test="_parameter!=null">
+     complain_id=#{_parameter}
+   </if>
+ </where>
+</select>
+
+<insert id="insert" parameterType="complain">
+  insert into complain_board(complain_id,user_id,complain_title,complain_content,complain_date)
+  values (seq_complain_board.nextval,#{userId},#{title},#{content},sysdate)
+</insert>
+
+<delete id="delete" parameterType="String">
+  delete from complain_board
+   <where>
+    <if test="_parameter!=null">
+     complain_id=#{_parameter}
+    </if>
+   </where>
+</delete>
+	
+</mapper>
