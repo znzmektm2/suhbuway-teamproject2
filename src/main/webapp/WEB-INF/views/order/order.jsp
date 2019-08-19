@@ -367,7 +367,9 @@ function selectMenu() { //셀렉트박스 메뉴선택
 	$('.slct_list>ul>li>a').click(function (e) {
 		e.preventDefault(e);
 		var txt = $(this).text();
+		
 		$(this).parents('.slct_list').prev('.slct_head').text(txt); //텍스트 넣기
+		
 		if($(this).parents('.select_box').hasClass('selectM')){ 
 			if(txt == '샌드위치'){ //길이 선택 셀렉트박스 노출 
 				$('.selectL').show();
