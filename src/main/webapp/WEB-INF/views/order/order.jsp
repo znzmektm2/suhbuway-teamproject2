@@ -80,18 +80,6 @@
 										<li>
 											<a href="#" class="default">종류 선택</a>
 										</li>
-										<li>
-											<a href="#" data-val="AAPBUWI">쉬림프 아보카도</a>
-										</li>
-										<li>
-											<a href="#" data-val="AAPBUWI">에그마요</a>
-										</li>
-										<li>
-											<a href="#" data-val="AAPBUWI">쉬림프 아보카도</a>
-										</li>
-										<li>
-											<a href="#" data-val="AAPBUWI">에그마요</a>
-										</li>
 									</ul>
 								</div>
 							</div>
@@ -327,6 +315,7 @@ $(document).ready(function(){
 	subwayUtilization();
 	selectBox();
 	selectMenu();
+	aJax();
 });
 function selectBox() { //셀렉트박스 슬라이드 토글
 	$('.slct_head').click(function () {
@@ -345,6 +334,29 @@ function selectBox() { //셀렉트박스 슬라이드 토글
     });
 }
 
+function aJax(){
+	$(".slct_list>ul>li>a").click(function(){
+		var txt = $(this).attr('data-val');
+		console.log(txt);
+		$.ajax({
+			url: "menuList",
+			type :"post",
+			dataType : "json",
+			data : "menu="+txt,
+			success :function(result){
+				var str = "";
+				$.each(result, function(index,item){
+					str += "<li><a href='#'>" + item + "</a></li>";
+				});		
+				$('.selectK .slct_list>ul').append(str);
+			},
+			error : function(err){
+				console.log("오류발생 : " + err);
+			}
+		});
+	});
+	
+}
 
 function selectMenu() { //셀렉트박스 메뉴선택
 	var selectMenuKind;
@@ -355,7 +367,6 @@ function selectMenu() { //셀렉트박스 메뉴선택
 	$('.slct_list>ul>li>a').click(function (e) {
 		e.preventDefault(e);
 		var txt = $(this).text();
-		
 		$(this).parents('.slct_list').prev('.slct_head').text(txt); //텍스트 넣기
 		if($(this).parents('.select_box').hasClass('selectM')){ 
 			if(txt == '샌드위치'){ //길이 선택 셀렉트박스 노출 
@@ -380,7 +391,6 @@ function selectMenu() { //셀렉트박스 메뉴선택
 				index = 4;
 			}
 			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html($(this).text());
-			console.log(index);
 			
 		} else if($(this).parents('.select_box').hasClass('addPrice')){
 			var index = $(this).parents('li.active').index();
@@ -393,7 +403,6 @@ function selectMenu() { //셀렉트박스 메뉴선택
 				index = 5;
 			}
 			$('.board_list_wrapper table tbody tr:nth-child(1) td').eq(index).html(addListTxt);
-			console.log(index);
 		}
 		$('.slct_list').hide(); //셀렉트박스 닫기
 	});

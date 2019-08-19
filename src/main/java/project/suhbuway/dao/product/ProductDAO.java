@@ -21,4 +21,12 @@ public interface ProductDAO {
      * @return
      */
     public Product selectProductById(int id);
+    
+    /**
+     * 해당되는 menu의 메뉴리스트를 반환한다.
+     * 
+     * @param id
+     * @return
+     */
+    public List<String> selectMenuListByMenu(String menu);
 }

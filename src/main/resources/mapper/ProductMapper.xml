@@ -37,12 +37,20 @@
 		select <include refid="productColumns" />, calory
 		from product join nutrition using(product_id) where category=#{_parameter}
 	</select>
+	
 	<!-- 아이디로 제품선택 -->
 	<select id="selectProductByIdForMenu" parameterType="int" resultMap="productMap">
 		select <include refid="productColumns" />, <include refid="nutritionColumns" />
 		from product join nutrition using(product_id) where product_id=#{_parameter} 	
 	</select>
+	
 	<!-- <insert id="insertProduct" parameterType="product">
 		insert into product(<include refid="productColumns" />)		
 	</insert> -->
+	
+	<!-- 셀렉트 박스에서 선택한 메뉴에 해당하는 리스트 -->
+	<select id="selectMenuListByMenu" parameterType="string" resultType="string">
+		select name	from product where category=#{_parameter}
+	</select>
+	
 </mapper>
