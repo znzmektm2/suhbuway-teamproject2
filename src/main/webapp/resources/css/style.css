@@ -698,8 +698,8 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 #placesList .item {position:relative;border-bottom:1px solid #ddd;overflow: hidden;cursor: pointer;min-height: 65px;}
 #placesList .item span {display: block;color: #999999;font-size: 13px;line-height: 23px;}
 #placesList .item h5{color:#292929; font-size:18px; font-weight:bold; padding-bottom:14px;display:block;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding: 26px 0 17px 40px;}
+#placesList .item h5, #placesList .item .info {text-align:left;}
+#placesList .item .info{padding: 26px 20px 17px 40px;}
 #placesList .info .gray {color:#8a8a8a;}
 #placesList .info .jibun {padding-left:30px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) 0 5px no-repeat;}
 #placesList .info .tel {color:#009900;}
