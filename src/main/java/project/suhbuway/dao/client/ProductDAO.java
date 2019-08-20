@@ -1,4 +1,4 @@
-package project.suhbuway.dao.product;
+package project.suhbuway.dao.client;
 
 import java.util.List;
 

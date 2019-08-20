@@ -2,7 +2,7 @@ package project.suhbuway.service.client;
 
 import java.util.List;
 
-import project.suhbuway.dto.Product;
+import project.suhbuway.dto.OrderList;
 
 /**
  * 사이트 주문하기 과정에서 필요한 서비스
@@ -10,6 +10,13 @@ import project.suhbuway.dto.Product;
  * @author hkarling
  */
 public interface OrderService {
+
+    /**
+     * 주문내역을 불러온다.
+     * 
+     * @return
+     */
+    public List<OrderList> selectOrderList();
 
     /**
      * 샌드위치 or 샐러드 셀렉트박스 리스트 뿌리기
@@ -26,14 +33,14 @@ public interface OrderService {
      * @param category
      * @return
      */
-	public String selectMenuPrice(String name, String category);
-	
-	/**
+    public String selectMenuPrice(String name, String category);
+
+    /**
      * 기타 메뉴 및 가격 뿌리기
      * 
      * @param name
      * @return
      */
-	public String selectEtcPrice(String name);
-    
+    public String selectEtcPrice(String name);
+
 }

@@ -1,7 +1,5 @@
 package project.suhbuway.dto;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data
@@ -13,5 +11,5 @@ public class OrderItem {
     String veggies;
     String source;
     int quantity;
-    int attatch;
+    int attach;
 }
