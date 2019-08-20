@@ -12,8 +12,6 @@ public class OrderItem {
     String breadType;
     String veggies;
     String source;
-    int price;
+    int quantity;
     int attatch;
-    
-    List<OrderItem> subItems;
 }
