@@ -203,21 +203,21 @@
 					  </thead>
 					<tbody>
 						<tr>
-							<td class='menuK'><span class='default'>선택안함</span></td>
-							<td class='breadK'><span class='default'>선택안함</span></td>
-							<td class='toppingK'><span class='default'>선택안함</span></td>
-							<td class='vegetableK'><span class='default'>선택안함</span></td>
-							<td class='source'><span class='default'>기본선택</span></td>
-							<td class='sideDrinkK'><span class='default'>선택안함</span></td>
-							<td class='oPrice'><span class='orderPrice'>￦  0</span></td>
+							<td><span class='default'>선택안함</span></td>
+							<td><span class='default'>선택안함</span></td>
+							<td><span class='default'>선택안함</span></td>
+							<td><span class='default'>선택안함</span></td>
+							<td><span class='default'>기본선택</span></td>
+							<td><span class='default'>선택안함</span></td>
+							<td><span class='orderPrice'>0</span></td>
 						</tr>
 					</tbody>
 				</table>
 				<!-- 장바구니, 주문하기 버튼 -->
 				<div class="inquiry_wrapper orderBtn">
 					<div class="btns_wrapper">
-						<a class="btn bgc_point i_reg" style="width:170px"><span>장바구니</span></a>
-						<a class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
+						<a href="${pageContext.request.contextPath}/myPage/cart" class="btn bgc_point i_reg" style="width:170px"><span>장바구니</span></a>
+						<a href="${pageContext.request.contextPath}/order/payment" class="btn bgc_point i_reg od" style="width:170px"><span>결제하기</span></a>
 					</div> 
 				</div>
 				<!-- //장바구니, 주문하기 버튼 --> 
@@ -331,6 +331,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 	var defualtText1 = "<span class='default'>선택안함</span>";
 	var defualtText2 = "<span class='default'>기본선택</span>";
 	var totalPrice = 0;
+	var itemPrice = 0;
 	
 	$('.arr').click(function() {
 		addTextList = "";
@@ -408,58 +409,77 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 		}
 	
 		if(thisSelectBox.hasClass('addPrice')){ //가격 넣기
-			$.ajax({
-				url: "selectMenuPrice",
-				type :"post",
-				dataType : "json",
-				data : {
-							"name" : txt,
-							"category" : selectMenuKind
-						},
-				success :function(result){
-					var price = String(result);
-					price = price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); //콤마 찍기
-					
-					if(isTrue == true){
-						$('table tbody tr:nth-child(1)').addClass('on');
+			if(!$(this).hasClass('default')){
+				$.ajax({
+					url: "selectMenuPrice",
+					type :"post",
+					dataType : "json",
+					data : {
+								"name" : txt,
+								"category" : selectMenuKind
+							},
+					success :function(result){
+						var price = String(result);
+						price = price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); //콤마 찍기
 						
-						addTextList = "<li>"
-							+ deleteBtn
-							+ "<span>" + txt + "</span>"
-							+ "<span>" + selectLength + "</span>"
-							+ "<span class='price'>￦" + price + "</span>"
-							+ deleteA
-							+ "</li>";
-					} else{
-						addTextList += "<li>"
-							+ deleteBtn
-							+ "<span>" + txt + "</span>"
-							+ "<span class='price'>￦" + price + "</span>"
-							+ deleteA
-							+ "</li>";
+						if(isTrue == true){
+							$('table tbody tr:nth-child(1)').addClass('on');
+							
+							addTextList = "<li>"
+								+ deleteBtn
+								+ "<span>" + txt + "</span>"
+								+ "<span>" + selectLength + "</span>"
+								+ "<span class='price'>" + price + "</span>"
+								+ deleteA
+								+ "</li>";
+						} else{
+							addTextList += "<li>"
+								+ deleteBtn
+								+ "<span>" + txt + "</span>"
+								+ "<span class='price'>" + price + "</span>"
+								+ deleteA
+								+ "</li>";
+						}
+						
+						var addMenuList = "<ul>" + addTextList + "</ul>";
+						$('table tbody tr:nth-child(1) td').eq(index).empty().append(addMenuList);
+						
+						totalPrice += result;
+						var totalpriceTxt = String(totalPrice);
+						totalpriceTxt = totalpriceTxt.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+						$('.orderPrice').text(totalpriceTxt); //총가격
+						
+					},
+					error : function(err){
+						console.log("오류발생 : " + err);
 					}
-					
-					var addMenuList = "<ul>" + addTextList + "</ul>";
-					$('table tbody tr:nth-child(1) td').eq(index).empty().append(addMenuList);
-					
-					totalPrice += result;
-					var totalpriceTxt = String(totalPrice);
-					totalpriceTxt = totalpriceTxt.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-					$('.orderPrice').text("￦ " + totalpriceTxt); //총가격
-					
-				},
-				error : function(err){
-					console.log("오류발생 : " + err);
-				}
-			});
+				});
+			}
 		}
 	});
 	
 	$(".selectLength").hide(); //길이선택 셀렉트박스 숨기기
 	
-	$('body').on('click', '.deleteItem', function (e) { //추가한 메뉴아이템 각각 삭제
+	function getItemPrice(tdIndex, ItemIndex) { //가격 빼기
+		$('body').on('click', '.price', function (e) { 
+			var price = $(this).text();
+			price = parseInt(price.replace(/,/g,""));
+			itemPrice = price;
+		});
+		
+		$('tr td').eq(tdIndex).find('.price').eq(ItemIndex).trigger('click');
+		totalPrice -= itemPrice; 
+		var totalpriceTxt = String(totalPrice);
+		totalpriceTxt = totalpriceTxt.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		$('.orderPrice').text(totalpriceTxt); //총가격
+	}
+	
+	$('body').on('click', '.deleteItem', function (e) { //메뉴아이템 삭제
 		var thisParentsTd = $(this).parents('td');
 		var liLength = $(this).parent('li').siblings('li').length;
+		var tdIndex = thisParentsTd.index();
+		var ItemIndex = $(this).parent('li').index();
+		getItemPrice(tdIndex, ItemIndex) //가격 빼기
 		
 		if(liLength == 0){
 			if(thisParentsTd.index() == 4){
@@ -476,7 +496,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 		totalPrice = 0;
 		$('tr td').empty().append(defualtText1);
 		$('tr td').eq(4).empty().append(defualtText2);
-		$('tr td').eq(6).empty().html("<span class='orderPrice'>￦  0</span>");
+		$('tr td').eq(6).empty().html("<span class='orderPrice'>0</span>");
 		$('tr').removeClass('on');
 		
 		/* $('.slct_head').each(function(index, item){ 

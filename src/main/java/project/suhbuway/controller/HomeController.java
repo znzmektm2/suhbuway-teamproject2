@@ -215,5 +215,16 @@ public class HomeController {
     public String selectMenuPrice(String name, String category) {
     	return service.selectMenuPrice(name, category);
     }
+	
+	/**
+     * 결제하기
+     * 
+     * @param category
+     * @return
+     */
+    @RequestMapping("/order/payment")
+    public String payment(HttpServletRequest request) {
+		return "order/payment";
+    }
 
 }
