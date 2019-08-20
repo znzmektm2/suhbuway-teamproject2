@@ -34,7 +34,7 @@ public interface HomeService {
      */
     public List<String> selectMenuListByMenu(String menu);
 
-    /**
+    /** 
      * 메인 메뉴 및 가격 뿌리기
      * 
      * @param name

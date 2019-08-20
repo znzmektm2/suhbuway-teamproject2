@@ -57,7 +57,7 @@
 	<select id="selectMenuPrice" parameterType="map" resultType="string">
 		select price from product where name=#{name} AND category=#{category}
 	</select>
-	
+	 
 	
 	
 </mapper>
