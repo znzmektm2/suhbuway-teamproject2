@@ -1,5 +1,7 @@
 package project.suhbuway.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +22,9 @@ public class Complain {
 	private String content;
 	private String date;
 	private boolean state;
+	private String fileName;
+	private long fileSize;
+	
+	private MultipartFile file;
 
 }

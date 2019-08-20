@@ -11,13 +11,15 @@
 		<result column="complain_content" property="content" />
 		<result column="complain_date" property="date" />
 		<result column="board_state" property="state" />
+		<result column="filename" property="fileName"/>
+		<result column="filesize" property="fileSize"/>
 	</resultMap>
 	
 <select id="selectAll" resultMap="complainMap">
   select * from complain_board
 </select>
 
-<select id="selectByModelNum" parameterType="int" resultMap="complainMap">
+<select id="selectByCompainId" parameterType="int" resultMap="complainMap">
 select * from complain_board
  <where>
    <if test="_parameter!=null">
@@ -27,8 +29,8 @@ select * from complain_board
 </select>
 
 <insert id="insert" parameterType="complain">
-  insert into complain_board(complain_id,user_id,complain_title,complain_content,complain_date)
-  values (seq_complain_board.nextval,#{userId},#{title},#{content},sysdate)
+  insert into complain_board(complain_id,user_id,complain_title,complain_content,complain_date,filename,filesize)
+  values (seq_complain_board.nextval,#{userId},#{title},#{content},sysdate,#{fileName},#{fileSize})
 </insert>
 
 <delete id="delete" parameterType="String">
@@ -39,5 +41,13 @@ select * from complain_board
     </if>
    </where>
 </delete>
+
+<update id="update" parameterType="complain">
+  UPDATE COMPLAIN_BOARD
+  SET complain_title=#{title},complain_content=#{content},filename=#{fileName},filesize=#{fileSize}
+  <where>
+  complain_id=#{complainId}
+  </where>
+</update>
 	
 </mapper>

@@ -34,15 +34,24 @@ public class ComplainServiceImpl implements ComplainService {
 		Complain complain = dao.selectByCompainId(complainId);
 		if(complain.getUserId().equals(userId)) {
 			result = dao.delete(complainId);
-			if(result==0) System.out.println("���̵� ��ġ���� �ʽ��ϴ�.");
+		} else {
+			System.out.println("본인이 작성한 글이 아닙니다.");
 		}
 		return result;
 	}
 
 	@Override
 	public int update(Complain complain) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		Complain dto = dao.selectByCompainId(complain.getComplainId());
+		System.out.println(dto.getUserId());
+		System.out.println(complain.getUserId());
+		if(dto.getUserId().equals(complain.getUserId())) {
+			result = dao.update(complain);
+		} else {
+			System.out.println("본인이 작성한 글이 아닙니다.");
+		}
+		return result;
 	}
 
 	

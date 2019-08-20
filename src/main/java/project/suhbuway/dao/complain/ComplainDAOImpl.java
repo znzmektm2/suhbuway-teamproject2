@@ -22,7 +22,7 @@ public class ComplainDAOImpl implements ComplainDAO {
 
 	@Override
 	public Complain selectByCompainId(int complainId) {
-		return session.selectOne("complainMapper.selectByModelNum", complainId);
+		return session.selectOne("complainMapper.selectByCompainId", complainId);
 	}
 
 	@Override
@@ -37,8 +37,7 @@ public class ComplainDAOImpl implements ComplainDAO {
 
 	@Override
 	public int update(Complain complain) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.update("complainMapper.update", complain);
 	}
 
 
