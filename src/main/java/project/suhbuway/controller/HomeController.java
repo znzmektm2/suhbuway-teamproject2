@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.suhbuway.dto.Product;
 import project.suhbuway.service.client.HomeService;
@@ -188,6 +189,31 @@ public class HomeController {
 //	List<Product> list = service.selectProductsByCategory(category);
 //	request.setAttribute("list", list);
 	return "myPage/infoView";
+    }
+    
+    /**
+     * 샌드위치 or 샐러드 셀렉트박스 리스트 뿌리기
+     * 
+     * @param menu
+     * @return
+     */
+	@ResponseBody
+    @RequestMapping("/menuList")
+    public List<String> menuList(String menu) {
+    	return service.selectMenuListByMenu(menu);
+    }
+	
+	/**
+     * 메인 메뉴 및 가격 뿌리기
+     * 
+     * @param name
+     * @param category
+     * @return
+     */
+	@ResponseBody
+    @RequestMapping("/selectMenuPrice")
+    public String selectMenuPrice(String name, String category) {
+    	return service.selectMenuPrice(name, category);
     }
 
 }

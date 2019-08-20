@@ -330,6 +330,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 	var isTrue = false;
 	var defualtText1 = "<span class='default'>선택안함</span>";
 	var defualtText2 = "<span class='default'>기본선택</span>";
+	var totalPrice = 0;
 	
 	$('.arr').click(function() {
 		addTextList = "";
@@ -411,26 +412,41 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 				url: "selectMenuPrice",
 				type :"post",
 				dataType : "json",
-				data : "name=" + txt + "&category=" + selectMenuKind,
+				data : {
+							"name" : txt,
+							"category" : selectMenuKind
+						},
 				success :function(result){
+					var price = String(result);
+					price = price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); //콤마 찍기
+					
 					if(isTrue == true){
+						$('table tbody tr:nth-child(1)').addClass('on');
+						
 						addTextList = "<li>"
 							+ deleteBtn
 							+ "<span>" + txt + "</span>"
 							+ "<span>" + selectLength + "</span>"
-							+ "<span class='price'>￦" + result + "</span>"
+							+ "<span class='price'>￦" + price + "</span>"
 							+ deleteA
 							+ "</li>";
 					} else{
 						addTextList += "<li>"
 							+ deleteBtn
 							+ "<span>" + txt + "</span>"
-							+ "<span class='price'>￦" + result + "</span>"
+							+ "<span class='price'>￦" + price + "</span>"
 							+ deleteA
 							+ "</li>";
 					}
+					
 					var addMenuList = "<ul>" + addTextList + "</ul>";
 					$('table tbody tr:nth-child(1) td').eq(index).empty().append(addMenuList);
+					
+					totalPrice += result;
+					var totalpriceTxt = String(totalPrice);
+					totalpriceTxt = totalpriceTxt.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+					$('.orderPrice').text("￦ " + totalpriceTxt); //총가격
+					
 				},
 				error : function(err){
 					console.log("오류발생 : " + err);
@@ -442,13 +458,14 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 	$(".selectLength").hide(); //길이선택 셀렉트박스 숨기기
 	
 	$('body').on('click', '.deleteItem', function (e) { //추가한 메뉴아이템 각각 삭제
+		var thisParentsTd = $(this).parents('td');
 		var liLength = $(this).parent('li').siblings('li').length;
 		
 		if(liLength == 0){
-			if($(this).parents('td').index() == 4){
-				$(this).parents('td').empty().append(defualtText2);
+			if(thisParentsTd.index() == 4){
+				thisParentsTd.empty().append(defualtText2);
 			} else{
-				$(this).parents('td').empty().append(defualtText1);
+				thisParentsTd.empty().append(defualtText1);
 			}
 			addTextList = "";
 		}
@@ -456,8 +473,12 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 	});
 	
 	$('body').on('click', '.delete', function (e) { //행 삭제
-		$(this).parents('td').empty().append(defualtText1).siblings('td').empty().append(defualtText1);
+		totalPrice = 0;
+		$('tr td').empty().append(defualtText1);
 		$('tr td').eq(4).empty().append(defualtText2);
+		$('tr td').eq(6).empty().html("<span class='orderPrice'>￦  0</span>");
+		$('tr').removeClass('on');
+		
 		/* $('.slct_head').each(function(index, item){ 
 			var text = $(this).next('.slct_list li:nth-child(1)').children('a').text();
 			console.log(text);

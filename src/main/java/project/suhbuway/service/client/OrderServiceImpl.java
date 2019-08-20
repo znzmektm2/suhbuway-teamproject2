@@ -11,19 +11,5 @@ import project.suhbuway.dto.Product;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-	@Autowired
-    ProductDAO productDAO;
-	
-	@Override
-	public List<String> selectMenuListByMenu(String menu) {
-		List<String> list = productDAO.selectMenuListByMenu(menu);
-		return list;
-	}
-
-	@Override
-	public String selectMenuPrice(String name, String category) {
-		String price = productDAO.selectMenuPrice(name, category);
-		return price;
-	}
 
 }
