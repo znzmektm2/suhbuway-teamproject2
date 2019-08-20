@@ -43,6 +43,6 @@ public class ProductDAOImpl implements ProductDAO {
 		map.put("category", category);
 		String price = session.selectOne("productMapper.selectMenuPrice", map);
 		return price;
-	}
+	} 
 
 }
