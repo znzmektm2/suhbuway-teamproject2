@@ -45,9 +45,4 @@ public class ProductDAOImpl implements ProductDAO {
 		return price;
 	}
 
-	@Override
-	public String selectEtcPrice(String name) {
-		String result = session.selectOne("productMapper.selectEtcPrice", name);
-		return result;
-	}
 }

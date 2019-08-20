@@ -39,11 +39,4 @@ public interface ProductDAO {
      */
 	public String selectMenuPrice(String name, String category);
 
-	/**
-     * 기타메뉴에 해당되는 가격을 반환한다.
-     * 
-     * @param name
-     * @return
-     */
-	public String selectEtcPrice(String name);
 }

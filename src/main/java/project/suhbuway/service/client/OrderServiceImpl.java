@@ -26,10 +26,4 @@ public class OrderServiceImpl implements OrderService {
 		return price;
 	}
 
-	@Override
-	public String selectEtcPrice(String name) {
-		String price = productDAO.selectEtcPrice(name);
-		return price;
-	}
-
 }

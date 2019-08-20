@@ -58,11 +58,6 @@
 		select price from product where name=#{name} AND category=#{category}
 	</select>
 	
-	<!-- 이름으로 가격검색 -->
-	<select id="selectEtcPrice" parameterType="string" resultType="string">
-		select price from product where name=#{_parameter}
-	</select>
-	
 	
 	
 </mapper>

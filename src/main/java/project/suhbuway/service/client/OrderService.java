@@ -28,12 +28,4 @@ public interface OrderService {
      */
 	public String selectMenuPrice(String name, String category);
 	
-	/**
-     * 기타 메뉴 및 가격 뿌리기
-     * 
-     * @param name
-     * @return
-     */
-	public String selectEtcPrice(String name);
-    
 }

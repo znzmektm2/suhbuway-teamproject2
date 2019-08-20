@@ -44,16 +44,4 @@ public class OrderController {
     public String selectMenuPrice(String name, String category) {
     	return orderService.selectMenuPrice(name, category);
     }
-	
-	/**
-     * 기타 메뉴 및 가격 뿌리기
-     * 
-     * @param name
-     * @return
-     */
-	@ResponseBody
-    @RequestMapping("/selectEtcPrice")
-    public String selectEtcPrice(String name) {
-    	return orderService.selectEtcPrice(name);
-    }
 }
