@@ -4,6 +4,7 @@
 	<!-- #{이름}에 해당하는 값이 null인경우 NULL을 허용할수 있도록 설정 필요. -->
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 </configuration>
 
