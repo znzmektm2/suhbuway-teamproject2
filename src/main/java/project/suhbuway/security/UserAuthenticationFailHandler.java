@@ -20,6 +20,7 @@ public class UserAuthenticationFailHandler implements AuthenticationFailureHandl
 			HttpServletRequest request, 
 			HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
+		
 		// 인증에 실패했을때 해야 할 일 설정
 		request.setAttribute( "errorMessage", exception.getMessage() );
 		

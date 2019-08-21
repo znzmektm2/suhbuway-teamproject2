@@ -102,25 +102,31 @@
 	        <!-- util menu -->
 	        <div class="util_menu">
 	            <ul>
-	            	<!-- 로그인x - 인증x -->
+	            	<!-- 비로그인 -->
+	            	<c:if test="${sessionScope.kakaoToken==null}">
 	            	<sec:authorize access="isAnonymous()">
 						<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/register">회원가입</a></li>
 					</sec:authorize>
-					
-					<!-- 로그인o - 인증o -->
+					</c:if>
+					<!-- 일반 로그인 -->
 					<sec:authorize access="isAuthenticated()">
-					
-<%-- 					<sec:authorize access="hasRole('ROLE_USER')">	 --%>
-							<li><sec:authentication property="principal.userName" />님 환영합니다.</li>
-							
+							<sec:authorize access="hasRole('ROLE_USER')">
+								<li><sec:authentication property="principal.userId" />님 환영합니다.</li>
+							</sec:authorize>
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<li>admin님 환영합니다.</li>
 								<li><a href="${pageContext.request.contextPath}/admin/main">관리자 페이지</a></li>
 							</sec:authorize>
-							
 							<li><a href="javascript:logout();">로그아웃</a></li>
-							</sec:authorize>
-<%-- 					</sec:authorize> --%>
+					</sec:authorize>
+					
+					<!-- kakao 로그인 -->
+					<c:if test="${sessionScope.kakaoToken!=null}">
+						<li>${sessionScope.userId}님 환영합니다.</li>
+						<li><a href="${pageContext.request.contextPath}/kakaoLogout">로그아웃</a></li>
+					</c:if>
+					
 	            </ul>
 	        </div>
 	        <!--// util menu -->

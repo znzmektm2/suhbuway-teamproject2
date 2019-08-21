@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,6 @@
 				dataType: "text",
 				data:"${_csrf.parameterName}=${_csrf.token}&userId="+userId,	
 				success:function(data){		
-					alert("검사 통신 성공");
 					if(data=="fail"){
 					$("#idcheckspan").html("  "+ userId +"는 사용 불가능합니다.").css("color","red");
 					}else{						
@@ -50,7 +50,6 @@
 				} 
 			});//ajax
 		})//click
-		
 		
 		// # 비빌번호 일치 검사
 		$("#checkedPassword").keyup(function(){
@@ -74,42 +73,45 @@
 		
 		// # 등록하기(회원가입)
  		$("a.btn.bgc_point.i_reg").click(function(){
- 			
- 		if( checkValid()==true ) {
-			// 이메일 조합
-			var email1 = $("#email1").val(); 
-			var email2 = $("#email2").val();
-			var userEmail = email1+"@"+email2;
-			$("#userEmail").val( userEmail );
+ 			checkValid();
+ 			//if( checkValid()==true ) {
+				// 이메일 조합
+				var email1 = $("#email1").val(); 
+				var email2 = $("#email2").val();
+				var userEmail = email1+"@"+email2;
+				$("#userEmail").val( userEmail );
+				console.log("전송될 userEmail: "+ userEmail );
 		
-			$("#registerForm").submit();//전송
-		} 
-	})//click
-})
+				$("#registerForm").submit();//전송
+			//} 
+		})//click
+	})
 	// 유효성 체크
 	function checkValid() {
    		var f = window.document.registerForm;
-		
-		if ( f.userId.value == "") {
-	 	    alert( "아이디를 입력해 주세요." );
-			f.userId.focus();
-			return false;
-   	 	}
-		if ( f.userPassword.value == "" ) {
-			alert( "비밀번호를 입력해 주세요." );
-			f.userPassword.focus();
-			return false;
-		}
-		if ( f.checkedPassword.value == "" ) {
-			alert( "비밀번호 확인을 입력해 주세요." );
-			f.checkedPassword.focus();
-			return false;
-		}
-		if ( f.userName.value == "" ) {
-			alert( "이름을 입력해 주세요." );
-			f.userName.focus();
-			return false;
-		}
+   		console.log(f.userId.value)
+   		//if(f.socialType.value=="") {// 쇼셜이면
+			if ( f.userId.value == "") {
+	 		    alert( "아이디를 입력해 주세요." );
+				f.userId.focus();
+				return false;
+   	 		}
+			if ( f.userPassword.value == "" ) {
+				alert( "비밀번호를 입력해 주세요." );
+				f.userPassword.focus();
+				return false;
+			}
+			if ( f.checkedPassword.value == "" ) {
+				alert( "비밀번호 확인을 입력해 주세요." );
+				f.checkedPassword.focus();
+				return false;
+			}
+			if ( f.userName.value == "" ) {
+				alert( "이름을 입력해 주세요." );
+				f.userName.focus();
+				return false;
+			}
+   		//}
 		if ( f.userPhone.value == "" ) {
         	alert( "핸드폰번호를 입력해 주세요." );
         	f.userPhone.focus();
@@ -125,7 +127,7 @@
         	f.email2.focus();
         	return false;
     	}
-    	return true;
+    	//return true;
 	}
 </script>
 </head>
@@ -142,7 +144,7 @@
 				
 					<!-- enctype="multipart/form-data"   -->
 					<form id="registerForm" method="post" name="registerForm"  
-							 action="${pageContext.request.contextPath}/userRegister">
+							 action="${pageContext.request.contextPath}/userRegister?${_csrf.parameterName}=${_csrf.token}">
 						<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 						
@@ -158,11 +160,25 @@
 									<col width="*">
 								</colgroup>
 								<tbody>
+									<!-- 쇼셜 회원가입일 경우 -->
+									<c:if test="${requestScope.socialType!=null}">
+									<input type="hidden" name="userId" value="${userId}" /> 
+									<input type="hidden" name="userPassword" value="${userId}+${socialType}" /> 
+									<input type="hidden" name="checkedPassword" value="${userId}+${socialType}" /> 
+									<input type="hidden" name="userName" value="${requestScope.userName}" /> 
+									
+									<input type="hidden" name="socialType" value="${socialType}" /> 
+									<input type="hidden" name="socialToken" value="${socialToken}" /> 
+									
+									</c:if>
+									<!-- ======여기부터====== -->
+									<c:if test="${requestScope.socialType==null}">
 									<tr>
 										<th scope="col">아이디<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="20" name="userId" id="userId" placeholder="아이디를 입력해주세요" type="text" value="">
+												<input maxlength="20" name="userId" id="userId" placeholder="아이디를 입력해주세요" type="text" 
+												value="${userId}">
 											</span>
 											<input type="button" name="idCheck" id="idCheck" value="중복확인"><span id="idcheckspan"></span>
 										</td>
@@ -171,7 +187,8 @@
 										<th scope="col">비밀번호<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="userPassword" id="userPassword" placeholder="비밀번호를 입력해주세요" type="password" value="">
+												<input maxlength="16" name="userPassword" id="userPassword" placeholder="비밀번호를 입력해주세요" type="password" 
+												value="${userId}+${socialType}">
 											</span>
 										</td>
 									</tr>
@@ -179,7 +196,8 @@
 										<th scope="col">비밀번호 확인<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="checkedPassword" id="checkedPassword" placeholder="비밀번호를 확인해주세요"  type="password" value="">
+												<input maxlength="16" name="checkedPassword" id="checkedPassword" placeholder="비밀번호를 확인해주세요"  type="password" 
+												value="${userId}+${socialType}">
 											</span>
 											<span style="font-size:13px;" id="pwdCheck"></span>
 										</td>
@@ -188,15 +206,18 @@
 										<th scope="col">이름<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="10" name="userName" id="userName" placeholder="이름을 입력해주세요" type="text" value="">
+												<input maxlength="10" name="userName" id="userName" placeholder="이름을 입력해주세요" type="text" 
+												value="${requestScope.userName}">
 											</span>
 										</td>
 									</tr>
+									</c:if>
+									<!-- ======여기까지====== -->
 									<tr>
 										<th scope="col">연락처<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="15" name="userPhone" id="userPhone" onkeyup="subwayCommon.inputOnlyDigit(this);" placeholder="연락 가능한 전화번호를 입력해주세요" type="text" value="">
+												<input maxlength="15" name="userPhone" id="userPhone" placeholder="연락 가능한 전화번호를 입력해주세요" type="text" value="">
 											</span>
 										</td>
 									</tr>
@@ -204,11 +225,11 @@
 										<th scope="col">이메일<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:200px">
-												<input maxlength="50" name="email1" id="email1" onkeyup="subwayCommon.inputEmail(this);" placeholder="이메일" type="text" value="">
+												<input maxlength="50" name="email1" id="email1" placeholder="이메일" type="text" value="">
 											</span>
 											<span class="em">@</span>
 											<span class="form_text" style="width:200px">
-												<input maxlength="50" name="email2" id="email2" onkeypress="view.onchangeEmailDomail(); return true;" onkeyup="subwayCommon.inputEmail(this);" type="text">
+												<input maxlength="50" name="email2" id="email2" type="text">
 											</span>
 											<div class="form_select" style="width:196px; margin-left:7px;">
 												<select id="emailDomain" name="emailDomain">
@@ -233,7 +254,7 @@
 										<th scope="col">프로필</th>
 										<td>
 											<label class="form_file" style="width:466px;">
-												<input type="file" data-maxsize="2" data-maxupload="1" name="file" id="file" onchange="formFile(this); return false;" >
+												<input type="file" data-maxsize="2" data-maxupload="1" name="file" id="file" >
 												<input readonly="readonly" type="text">
 											</label>
 	
@@ -244,7 +265,7 @@
 							</table>
 						</div>
 						<div class="btns_wrapper">
-							<a class="btn bgc_white" href="#" onclick="view.cancel();return false;" style="width:126px;"><span>취소</span></a>
+							<a class="btn bgc_white" href="#"  style="width:126px;"><span>취소</span></a>
 							<a class="btn bgc_point i_reg" href="#" style="width:170px;"><span>등록하기</span></a>
 						</div>
 					</form>
@@ -256,48 +277,6 @@
 </div>
 
 <%-- <%@ include file="/footer.jsp"%> --%>
-<script>
-$(document).ready(function(){
-    mainScript();
-});
-
-function mainScript(){
-	//메인 슬라이드
-	$('.main_tap_event_wrapper').bxSlider({
-		auto : true,
-		autoStart : true,
-		stopAutoOnClick : true,
-		pause : 3000,
-		touchEnabled:false
-	});
-	
-	//메인 subway menu
-	var slider = $('.subway_menu_slider>div').bxSlider({
-		slideWidth:1200,
-		infiniteLoop:false,
-		pager:false,
-		touchEnabled:false
-	});
-	
-	$('.tab ul li span').on('click', function(){
-		var thisIndex = $(this).parent().index();
-		$(this).parent('li').addClass('active').siblings('li').removeClass('active');
-		$('.subway_menu_slider_wrapper>div').eq(thisIndex).addClass('active').siblings().removeClass('active');
-	});
-	
-	$('.subway_menu_slider ul li').on('mouseenter', function(){
-		$(this).css({'width':'350px','margin':0});
-		$(this).siblings('li').css({'margin':0});
-	})
-
-	$('.subway_menu_slider ul li').on('mouseleave', function(){
-		$(this).css({'width':'260px','marginLeft':30});
-		$(this).siblings('li').css({'marginLeft':30});
-	})
-	
-
-}
-</script>
 </body>
 </html>
 
