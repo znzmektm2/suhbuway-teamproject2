@@ -216,8 +216,8 @@
 				<!-- 장바구니, 주문하기 버튼 -->
 				<div class="inquiry_wrapper orderBtn">
 					<div class="btns_wrapper">
-						<a href="${pageContext.request.contextPath}/myPage/cart" class="btn bgc_point i_reg" style="width:170px"><span>장바구니</span></a>
-						<a href="${pageContext.request.contextPath}/order/payment" class="btn bgc_point i_reg od" style="width:170px"><span>결제하기</span></a>
+						<a href="#;" class="cart btn bgc_point i_reg" style="width:170px"><span>장바구니</span></a>
+						<a href="${pageContext.request.contextPath}/order/payment" class="payment btn bgc_point i_reg od" style="width:170px"><span>결제하기</span></a>
 					</div> 
 				</div>
 				<!-- //장바구니, 주문하기 버튼 --> 
@@ -233,6 +233,8 @@ $(document).ready(function(){
 	selectBox();
 	selectMenu();
 	menuListAJax();
+	cart();
+	payment();
 });
 
 function subwayUtilization(){//써브웨이 이용방법
@@ -254,6 +256,20 @@ function subwayUtilization(){//써브웨이 이용방법
 		TweenLite.to($(slider_img).eq(stepIndex).next(),spd,{ease:eft,marginLeft:'-280'})
 
 		$(btnArr).on('click', function(){
+			console.log("stepIndex " + stepIndex);
+			if(stepIndex == 0){
+				if(!$('.info_content>ol>li').eq(0).hasClass('on')){
+					alert('메뉴를 선택해 주세요.');
+					return false;  
+				}
+			}
+			if(stepIndex == 1){
+				if(!$('.info_content>ol>li').eq(1).hasClass('on')){
+					alert('빵 종류를 선택해 주세요.');
+					return false;  
+				}
+			}
+			
 			if(TweenMax.isTweening(slider_img)){
 				return false;
 			}else{
@@ -327,9 +343,11 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 	var addTextList = "";
 	var deleteBtn = "";
 	var deleteA = "";
-	var isTrue = false;
 	var defualtText1 = "<span class='default'>선택안함</span>";
 	var defualtText2 = "<span class='default'>기본선택</span>";
+	var menuPrice = 0;
+	var toppingPrice = 0;
+	var sideDrinkPrice = 0;
 	var totalPrice = 0;
 	var itemPrice = 0;
 	
@@ -338,7 +356,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 	});
 	
 	$('body').on('click', '.slct_list>ul>li>a', function (e) {
-		
+		console.log(selectMenuKind);
 		e.preventDefault(e);
 		var txt = $(this).text();
 		var index = $(this).parents('li.active').index();
@@ -358,58 +376,79 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 				selectLength = "";
 			}
 			$('.selectMenuName .slct_head,.selectLength .slct_head').text("종류 선택"); //메뉴 선택시 다른 셀렉트박스 초기화
+			if($(this).hasClass('default')){
+				$('.info_content>ol>li:first-child').removeClass('on');
+				$('.selectMenuName .slct_list ul li:first-child').nextAll().remove();
+			}
 		}
 		
 		if(thisSelectBox.hasClass('selectLength')){ //길이 선택
 			selectLength = $(this).text();
+		} else{
+			selectLength = "";
 		}
 		
 		if(thisSelectBox.hasClass('selectMenuName')){ //종류 선택
 			selectMenuName = $(this).text();
 			deleteBtn = "<span class='delete'>삭제</span>";
 			deleteA = "";
-			isTrue = true;
+			
+			if($(this).parents('.selectMenuName').siblings('.selectMenuKind').find('.slct_head').text() == '샌드위치'){
+				selectMenuKind = 'sandwich';
+			} else{
+				selectMenuKind = 'salad';
+			}
+			$('table tbody tr:nth-child(1)').addClass('on');
+			if(!$(this).hasClass('default')){
+				$(this).parents('.selectMenuName').parents('li').addClass('on');
+			} else{
+				$(this).parents('.selectMenuName').parents('li').removeClass('on');
+			}
 		} else {
 			deleteBtn = "";
 			deleteA = "<span class='deleteItem'>삭제</span>";
-			isTrue = false;
 		}
 		
-		if(!$(this).hasClass('default')){
-			if(thisSelectBox.hasClass('bread')){ //빵 선택 및 추가
-				var addBread = "<ul><li><span>" + txt + "</span><span class='deleteItem'>삭제</span></li></ul>";
+	
+		if(thisSelectBox.hasClass('bread')){ //빵 선택 및 추가
+			if(!$(this).hasClass('default')){
+				var addBread = "<ul><li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li></ul>";
 				$('table tbody tr:nth-child(1) td').eq(index).empty().append(addBread);
+				$(this).parents('.bread').parents('li').addClass('on');
+			} else{
+				$(this).parents('.bread').parents('li').removeClass('on');
 			}
 		}
-		
+			
 		if(thisSelectBox.hasClass('topping')){ //토핑선택
 			selectMenuKind = "topping";
 		}
-
+			
 		if(!$(this).hasClass('default')){
 			if(thisSelectBox.hasClass('vegetable')){ //야채 선택 및 추가
-				addVegetable += "<li><span>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
+				addVegetable += "<li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
 				var addMenuList = "<ul>" + addVegetable + "</ul>";
-				
 				$('table tbody tr:nth-child(1) td').eq(index).empty().append(addMenuList);
 			}
+		}
 			
+		if(!$(this).hasClass('default')){
 			if(thisSelectBox.hasClass('sourceBox')){ //소스 선택 및 추가
 				index = 4;
-				addSourceBox += "<li><span>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
+				addSourceBox += "<li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
 				var addMenuList = "<ul>" + addSourceBox + "</ul>";
 				
 				$('table tbody tr:nth-child(1) td').eq(index).empty().append(addMenuList);
 			} 
 		}
-		
+			
 		if(thisSelectBox.hasClass('sideDrink')){ //사이드 선택
 			index = 5;
 			selectMenuKind = "side";
 		}
-	
-		if(thisSelectBox.hasClass('addPrice')){ //가격 넣기
-			if(!$(this).hasClass('default')){
+			
+		if(!$(this).hasClass('default')){
+			if(thisSelectBox.hasClass('addPrice')){ //가격 넣기
 				$.ajax({
 					url: "selectMenuPrice",
 					type :"post",
@@ -422,29 +461,38 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 						var price = String(result);
 						price = price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); //콤마 찍기
 						
-						if(isTrue == true){
-							$('table tbody tr:nth-child(1)').addClass('on');
-							
+						if(thisSelectBox.hasClass('selectMenuName')){
+							var memoryPrice = price;
 							addTextList = "<li>"
 								+ deleteBtn
-								+ "<span>" + txt + "</span>"
-								+ "<span>" + selectLength + "</span>"
+								+ "<span class='itemName'>" + txt + " " + selectLength + "</span>"
 								+ "<span class='price'>" + price + "</span>"
 								+ deleteA
 								+ "</li>";
+							price
 						} else{
 							addTextList += "<li>"
 								+ deleteBtn
-								+ "<span>" + txt + "</span>"
+								+ "<span class='itemName'>" + txt + " " + selectLength + "</span>"
 								+ "<span class='price'>" + price + "</span>"
 								+ deleteA
 								+ "</li>";
 						}
 						
+						if(thisSelectBox.hasClass('selectMenuName')){
+							menuPrice = result;
+						}
+						if(thisSelectBox.hasClass('topping')){
+							toppingPrice += result;
+						}
+						if(thisSelectBox.hasClass('sideDrink')){
+							sideDrinkPrice += result;
+						}
+
 						var addMenuList = "<ul>" + addTextList + "</ul>";
 						$('table tbody tr:nth-child(1) td').eq(index).empty().append(addMenuList);
 						
-						totalPrice += result;
+						totalPrice = menuPrice + toppingPrice + sideDrinkPrice;
 						var totalpriceTxt = String(totalPrice);
 						totalpriceTxt = totalpriceTxt.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 						$('.orderPrice').text(totalpriceTxt); //총가격
@@ -498,14 +546,14 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 		$('tr td').eq(4).empty().append(defualtText2);
 		$('tr td').eq(6).empty().html("<span class='orderPrice'>0</span>");
 		$('tr').removeClass('on');
+		$('.info_content>ol>li').removeClass('on');
 		
-		$('.slct_head').each(function(index, item){ 
-			var text = $(this).next('.slct_list').find('li:nth-child(1)').text();
-			console.log('아아:'+text);
+		$('.slct_head').each(function(index, item){ //셀렉트박스 초기화
+			var text = $(this).next('.slct_list').find('li:first-child a').text();
+			console.log(text);
 			$(this).text(text);
 		});
 	});
-	
 	
 }
 
@@ -529,6 +577,71 @@ function menuListAJax(){ //샌드위치 or 샐러드 셀렉트박스 리스트 �
 			}
 		});
 	});
+}
+
+function cart() {
+	$('.cart').click(function () {
+		if(!$('.info_content>ol>li').eq(0).hasClass('on')){
+			alert('메뉴를 선택해주세요.');
+			return false;
+		} else if(!$('.info_content>ol>li').eq(1).hasClass('on')){
+			alert('빵종류를 선택해주세요.');
+			return false;
+		} else{
+			var result = confirm('장바구니 페이지로 이동하시겠습니까?');
+			if(result){
+				window.location.href = "myPage/cart";
+			}
+		}
+		
+	})
+}
+
+function payment() {
+	/* $(".payment").click(function(){ 
+		
+		var td = $('tr td');
+		var menu = td.eq(0).find('.itemName').text();
+		var menuPrice = td.eq(0).find('.itemName').price();
+		var bread = td.eq(1).find('.itemName').text();
+		var topping =;
+		
+		for(var i=0; i<td.eq(2).find('li').length; i++){
+			
+		}
+		var toppingPrice = td.eq(2).find('.itemName').price();
+		var vegetable = td.eq(3).find('.itemName').text();
+		var source = td.eq(4).find('.itemName').text();
+		var side = td.eq(5).find('.itemName').text();
+		var sidePrice = td.eq(5).find('.itemName').price();
+		var drink = ;
+		var drinkPrice = td.eq(5).find('.itemName').price();
+
+		$.ajax({
+			url: "menuList",
+			type :"post",
+			dataType : "json",
+			data : {
+				menu : ,
+				menuPrice : ,
+				bread : ,
+				topping : ,
+				toppingPrice : ,
+				vegetable : ,
+				source : ,
+				side : ,
+				sidePrice : ,
+				drink : ,
+				drinkPrice : 
+			}
+			success :function(result){
+				
+			},
+			error : function(err){
+				console.log("오류발생 : " + err); 
+			}
+		});
+	}); */
 }
 </script>
 </body>

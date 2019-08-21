@@ -100,8 +100,8 @@
 										<th scope="col">프로필</th>
 										<td>
 											<label class="form_file" style="width:466px;">
-												<input data-maxsize="2" data-maxupload="1" id="file" name="file" onchange="formFile(this); return false;" type="file">
-												<input readonly="readonly" type="text">
+												<input data-maxsize="2" data-maxupload="1" id="file" name="file" type="file">
+												<input readonly="readonly" type="text" id="fileName">
 											</label>
 	
 											<span class="file_note">※ 등록 가능 확장자 : jpg, gif, png / 최대 2MB</span>
@@ -160,6 +160,11 @@ function mainScript(){
 		$(this).siblings('li').css({'marginLeft':30});
 	})
 	
+	$('#file').change(function(){
+		var fileValue = $("#file").val().split("\\");
+		var fileName = fileValue[fileValue.length-1]; // 파일명
+		$('#fileName').val(fileName);
+	})
 
 }
 </script>
