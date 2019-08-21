@@ -1,4 +1,4 @@
-package project.suhbuway.dao.product;
+package project.suhbuway.dao.client;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +43,11 @@ public class ProductDAOImpl implements ProductDAO {
 		map.put("category", category);
 		String price = session.selectOne("productMapper.selectMenuPrice", map);
 		return price;
-	}  
+	}
 
+	@Override
+	public String selectEtcPrice(String name) {
+		String result = session.selectOne("productMapper.selectEtcPrice", name);
+		return result;
+	}
 }

@@ -525,7 +525,7 @@ function menuListAJax(){ //샌드위치 or 샐러드 셀렉트박스 리스트 �
 				$('.selectMenuName .slct_list>ul').append(str);
 			},
 			error : function(err){
-				console.log("오류발생 : " + err);
+				console.log("오류발생 : " + err); 
 			}
 		});
 	});

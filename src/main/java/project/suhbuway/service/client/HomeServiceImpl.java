@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.suhbuway.dao.product.ProductDAO;
+import project.suhbuway.dao.client.ProductDAO;
 import project.suhbuway.dto.Product;
 
 @Service
@@ -31,7 +31,7 @@ public class HomeServiceImpl implements HomeService {
 	public List<String> selectMenuListByMenu(String menu) {
 		List<String> list = productDAO.selectMenuListByMenu(menu);
 		return list;
-	}
+	} 
 
 	@Override
 	public String selectMenuPrice(String name, String category) {

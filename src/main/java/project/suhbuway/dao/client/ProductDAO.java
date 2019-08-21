@@ -1,4 +1,4 @@
-package project.suhbuway.dao.product;
+package project.suhbuway.dao.client;
 
 import java.util.List;
 
@@ -38,5 +38,12 @@ public interface ProductDAO {
      * @return
      */
 	public String selectMenuPrice(String name, String category);
- 
+
+	/**
+     * 기타메뉴에 해당되는 가격을 반환한다.
+     * 
+     * @param name
+     * @return
+     */
+	public String selectEtcPrice(String name);
 }
