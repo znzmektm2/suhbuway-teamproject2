@@ -59,6 +59,19 @@ public class HomeController {
     }
 
     /**
+     * 주문하기
+     * 
+     * @param request
+     * @return
+     */
+    @RequestMapping("/order")
+    public String order(HttpServletRequest request) {
+	List<Product> list = service.selectAll();
+	request.setAttribute("list", list);
+	return "order/order";
+    }
+
+    /**
      * 뉴스ㆍ공지사항
      * 
      * @param request

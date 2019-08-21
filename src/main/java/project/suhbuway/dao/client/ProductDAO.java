@@ -21,7 +21,7 @@ public interface ProductDAO {
      * @return
      */
     public Product selectProductById(int id);
-    
+
     /**
      * 해당되는 menu의 메뉴리스트를 반환한다.
      * 
@@ -37,13 +37,20 @@ public interface ProductDAO {
      * @param category
      * @return
      */
-	public String selectMenuPrice(String name, String category);
+    public String selectMenuPrice(String name, String category);
 
-	/**
+    /**
      * 기타메뉴에 해당되는 가격을 반환한다.
      * 
      * @param name
      * @return
      */
-	public String selectEtcPrice(String name);
+    public String selectEtcPrice(String name);
+
+    /**
+     * 전체검색(메뉴, 가격 ,카테고리)
+     * 
+     * @return
+     */
+    public List<Product> selectAll();
 }

@@ -105,12 +105,14 @@
 								<span class="slct_head">추가토핑 선택</span>
 								<div class="slct_list">
 									<ul>
-										<li><a href="#" class="default">추가토핑 선택</a><li>
-											<a href="#" data-val="sandwich">베이컨 비츠</a>
-										</li>
-										<li>
-											<a href="#" data-val="sandwich">쉬림프 더블업</a>
-										</li>
+										<li><a href="#" class="default">추가토핑 선택</a>
+										<c:forEach items="${requestScope.list}" var="product">
+											<c:if test="${product.category == 'topping'}">
+												<li>
+													<a href="#">${product.name}</a>
+												</li>
+											</c:if>
+										</c:forEach>
 									</ul>
 								</div>
 							</div>
@@ -119,16 +121,26 @@
 							<strong>야채&amp;소스 선택</strong>
 							<p class="txt1">나만의 스타일을 완성하는 단계!<br>원하지 않는 야채는 빼세요. <br>오늘의 기분에 맞는 소스를 선택해주세요. </p>
 							<div class="select_box vegetable">
-								<span class="slct_head">뺄 야채 선택</span>
+								<span class="slct_head">야채 선택</span>
 								<div class="slct_list">
 									<ul>
-										<li><a href="#" class="default">뺄 야채 선택</a></li>
-										<li>
-											<a href="#" data-val="sandwich">양상추</a>
-										</li>
-										<li>
-											<a href="#" data-val="sandwich">토마토</a>
-										</li>
+										<li><a href="#" class="default">야채 선택</a></li>
+										<c:forEach items="${requestScope.list}" var="product">
+											<c:if test="${product.category == 'topping'}">
+												<li>
+													<a href="#">${product.name}</a>
+												</li>
+											</c:if>
+										</c:forEach>
+										<li><a href="#">양상추</a></li>
+										<li><a href="#">토마토</a></li>
+										<li><a href="#">오이</a></li>
+										<li><a href="#">피망</a></li>
+										<li><a href="#">양파</a></li>
+										<li><a href="#">피클</a></li>
+										<li><a href="#">올리브</a></li>
+										<li><a href="#">할라피뇨</a></li>
+										<li><a href="#">아보카도</a></li>
 									</ul>
 								</div>
 							</div>
@@ -137,12 +149,22 @@
 								<div class="slct_list">
 									<ul>
 										<li><a href="#" class="default">소스 선택</a></li>
-										<li>
-											<a href="#" data-val="sandwich">스위트 어니언</a>
-										</li>
-										<li>
-											<a href="#" data-val="sandwich">마요네즈</a>
-										</li>
+										<li><a href="#">랜치드레싱</a></li>
+										<li><a href="#">마요네즈</a></li>
+										<li><a href="#">스위트 어니언</a></li>
+										<li><a href="#">허니 머스터드</a></li>
+										<li><a href="#">스위트 칠리</a></li>
+										<li><a href="#">핫 칠리</a></li>
+										<li><a href="#">사우스 웨스트</a></li>
+										<li><a href="#">머스타드</a></li>
+										<li><a href="#">홀스래디쉬</a></li>
+										<li><a href="#">사우전 아일랜드</a></li>
+										<li><a href="#">이탈리안 드레싱</a></li>
+										<li><a href="#">올리브 오일</a></li>
+										<li><a href="#">레드와인 식초</a></li>
+										<li><a href="#">식초</a></li>
+										<li><a href="#">후추</a></li>
+										<li><a href="#">스모크 바비큐</a></li>
 									</ul>
 								</div>
 							</div>
@@ -195,7 +217,7 @@
 							<th scope="col">메뉴</th>
 							<th scope="col">빵</th>
 							<th scope="col">추가토핑</th>
-							<th scope="col">뺄 야채종류</th>
+							<th scope="col">야채종류</th>
 							<th scope="col">소스종류</th>
 							<th scope="col">사이드메뉴&amp;음료</th>
 							<th scope="col">금액</th>
@@ -217,7 +239,6 @@
 				<div class="inquiry_wrapper orderBtn">
 					<div class="btns_wrapper">
 						<a href="#;" class="cart btn bgc_point i_reg" style="width:170px"><span>장바구니</span></a>
-						<a href="${pageContext.request.contextPath}/order/payment" class="payment btn bgc_point i_reg od" style="width:170px"><span>결제하기</span></a>
 					</div> 
 				</div>
 				<!-- //장바구니, 주문하기 버튼 --> 
@@ -234,7 +255,6 @@ $(document).ready(function(){
 	selectMenu();
 	menuListAJax();
 	cart();
-	payment();
 });
 
 function subwayUtilization(){//써브웨이 이용방법
@@ -256,7 +276,6 @@ function subwayUtilization(){//써브웨이 이용방법
 		TweenLite.to($(slider_img).eq(stepIndex).next(),spd,{ease:eft,marginLeft:'-280'})
 
 		$(btnArr).on('click', function(){
-			console.log("stepIndex " + stepIndex);
 			if(stepIndex == 0){
 				if(!$('.info_content>ol>li').eq(0).hasClass('on')){
 					alert('메뉴를 선택해 주세요.');
@@ -356,7 +375,6 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 	});
 	
 	$('body').on('click', '.slct_list>ul>li>a', function (e) {
-		console.log(selectMenuKind);
 		e.preventDefault(e);
 		var txt = $(this).text();
 		var index = $(this).parents('li.active').index();
@@ -373,9 +391,9 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 				$('.selectLength').show();
 			} else{
 				$('.selectLength').hide();
-				selectLength = "";
 			}
-			$('.selectMenuName .slct_head,.selectLength .slct_head').text("종류 선택"); //메뉴 선택시 다른 셀렉트박스 초기화
+			$('.selectMenuName .slct_head').text("종류 선택");
+			$('.selectLength .slct_head').text("길이 선택");
 			if($(this).hasClass('default')){
 				$('.info_content>ol>li:first-child').removeClass('on');
 				$('.selectMenuName .slct_list ul li:first-child').nextAll().remove();
@@ -384,8 +402,6 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 		
 		if(thisSelectBox.hasClass('selectLength')){ //길이 선택
 			selectLength = $(this).text();
-		} else{
-			selectLength = "";
 		}
 		
 		if(thisSelectBox.hasClass('selectMenuName')){ //종류 선택
@@ -397,6 +413,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 				selectMenuKind = 'sandwich';
 			} else{
 				selectMenuKind = 'salad';
+				selectLength = "";
 			}
 			$('table tbody tr:nth-child(1)').addClass('on');
 			if(!$(this).hasClass('default')){
@@ -422,6 +439,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 			
 		if(thisSelectBox.hasClass('topping')){ //토핑선택
 			selectMenuKind = "topping";
+			selectLength = "";
 		}
 			
 		if(!$(this).hasClass('default')){
@@ -445,6 +463,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 		if(thisSelectBox.hasClass('sideDrink')){ //사이드 선택
 			index = 5;
 			selectMenuKind = "side";
+			selectLength = "";
 		}
 			
 		if(!$(this).hasClass('default')){
@@ -465,7 +484,8 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 							var memoryPrice = price;
 							addTextList = "<li>"
 								+ deleteBtn
-								+ "<span class='itemName'>" + txt + " " + selectLength + "</span>"
+								+ "<span class='itemName'>" + txt + "</span>"
+								+ "<span class='breadLegnth'>" + selectLength + "</span>"
 								+ "<span class='price'>" + price + "</span>"
 								+ deleteA
 								+ "</li>";
@@ -473,7 +493,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 						} else{
 							addTextList += "<li>"
 								+ deleteBtn
-								+ "<span class='itemName'>" + txt + " " + selectLength + "</span>"
+								+ "<span class='itemName'>" + txt + "</span>"
 								+ "<span class='price'>" + price + "</span>"
 								+ deleteA
 								+ "</li>";
@@ -550,7 +570,6 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 		
 		$('.slct_head').each(function(index, item){ //셀렉트박스 초기화
 			var text = $(this).next('.slct_list').find('li:first-child a').text();
-			console.log(text);
 			$(this).text(text);
 		});
 	});
@@ -593,55 +612,7 @@ function cart() {
 				window.location.href = "myPage/cart";
 			}
 		}
-		
 	})
-}
-
-function payment() {
-	/* $(".payment").click(function(){ 
-		
-		var td = $('tr td');
-		var menu = td.eq(0).find('.itemName').text();
-		var menuPrice = td.eq(0).find('.itemName').price();
-		var bread = td.eq(1).find('.itemName').text();
-		var topping =;
-		
-		for(var i=0; i<td.eq(2).find('li').length; i++){
-			
-		}
-		var toppingPrice = td.eq(2).find('.itemName').price();
-		var vegetable = td.eq(3).find('.itemName').text();
-		var source = td.eq(4).find('.itemName').text();
-		var side = td.eq(5).find('.itemName').text();
-		var sidePrice = td.eq(5).find('.itemName').price();
-		var drink = ;
-		var drinkPrice = td.eq(5).find('.itemName').price();
-
-		$.ajax({
-			url: "menuList",
-			type :"post",
-			dataType : "json",
-			data : {
-				menu : ,
-				menuPrice : ,
-				bread : ,
-				topping : ,
-				toppingPrice : ,
-				vegetable : ,
-				source : ,
-				side : ,
-				sidePrice : ,
-				drink : ,
-				drinkPrice : 
-			}
-			success :function(result){
-				
-			},
-			error : function(err){
-				console.log("오류발생 : " + err); 
-			}
-		});
-	}); */
 }
 </script>
 </body>
