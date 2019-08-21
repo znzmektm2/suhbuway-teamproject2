@@ -15,7 +15,7 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 
-	<!-- oracle라이브러리 다운로드 위치 설정 -->
+	<!-- oracle라이브러리 다운로드 위치 설정 --> 
 	<repositories>
 		<repository>
 			<id>codelds</id>
@@ -233,6 +233,20 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>3.0.5</version>
 		</dependency>
+
+		<!-- 구글 클라우드 스토리지 연동 -->
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-storage</artifactId>
+			<version>1.61.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.8</version>
+		</dependency> 
 
 		<!-- Test -->
 		<dependency>

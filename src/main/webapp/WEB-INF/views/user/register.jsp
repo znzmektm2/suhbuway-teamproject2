@@ -132,8 +132,6 @@
 </script>
 </head>
 <body>
-<%-- <%@ include file="/header.jsp"%> --%>
-
 <div class="contentWrap">
 	<div class="bg_type01" id="container">
 		<!-- sub content s -->
@@ -254,8 +252,8 @@
 										<th scope="col">프로필</th>
 										<td>
 											<label class="form_file" style="width:466px;">
-												<input type="file" data-maxsize="2" data-maxupload="1" name="file" id="file" >
-												<input readonly="readonly" type="text">
+												<input data-maxsize="2" data-maxupload="1" id="file" name="file" type="file">
+												<input readonly="readonly" type="text" id="fileName">
 											</label>
 	
 											<span class="file_note">※ 등록 가능 확장자 : jpg, gif, png / 최대 2MB</span>
@@ -275,8 +273,6 @@
 		<!--// sub content e -->
 	</div>
 </div>
-
-<%-- <%@ include file="/footer.jsp"%> --%>
 </body>
 </html>
 

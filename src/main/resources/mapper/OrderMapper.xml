@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderMapper">
+
+	<sql id="orderListColumns">
+		ORDER_ID,USER_ID,STORE_ID,TOTAL,ORDER_STATE,REGDATE
+	</sql>
+	<sql id="orderItemColumns">
+		ITEM_ID,ORDER_ID,PRODUCT_ID,BREAD_TYPE,VEGGIES,SOURCE,QUANTITY,ATTACH
+	</sql>
+
+	<resultMap type="orderList" id="orderListMap">
+		<id column="ORDER_ID" property="orderId" />
+		<result column="USER_ID" property="userId" />
+		<result column="STORE_ID" property="storeId" />
+		<result column="TOTAL" property="total" />
+		<result column="ORDER_STATE" property="orderState" />
+		<result column="REGDATE" property="regdate" />
+		<collection column="ORDER_ID" property="orderItems" javaType="java.util.ArrayList" ofType="orderItem"
+			select="getOrderItems" />
+	</resultMap>
+
+	<select id="selectOrderList" resultMap="orderListMap">
+		SELECT
+		<include refid="orderListColumns" />
+		FROM ORDER_LIST ORDER BY REGDATE DESC
+	</select>
+
+	<select id="getOrderItems" resultType="orderItem">
+		SELECT
+		<include refid="orderItemColumns" />
+		FROM ORDER_ITEM
+	</select>
+</mapper>
+
+<!-- List<OrderItem> orderItems; -->
