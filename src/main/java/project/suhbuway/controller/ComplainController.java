@@ -115,6 +115,22 @@ public class ComplainController {
 		File file = new File(path+"/"+fileName);//파일을 찾아서 file이란 변수에 넣어준다
 		return new ModelAndView("downLoadView", "fileName",file);
 	}
+	
+	/*
+	 * 관리자 답변 폼
+	 * */
+	@RequestMapping("/board/replyForm")
+	public ModelAndView replyForm(int complainId) {
+		return new ModelAndView("board/complainReply","complainId",complainId);
+	}
 		
+	/*
+	 * 관리자 답변
+	 * */
+	@RequestMapping("/board/reply")
+	public String reply(Complain complain) {
+		service.replyUpdate(complain);
+		return "redirect:complainList";
+	}
 	
 }

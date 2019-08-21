@@ -9,28 +9,33 @@ import project.suhbuway.dto.Complain;
 @Service
 public interface ComplainService {
 	/**
-	  * ·¹ÄÚµå ÀüÃ¼ °Ë»ö
+	  * ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½Ã¼ ï¿½Ë»ï¿½
 	  * */
 	  List<Complain> selectAll();
 	  
 	  /**
-		  * °Ô½ÃÆÇ ¹øÈ£·Î °Ë»ö
+		  * ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ë»ï¿½
 		  * */
 	  Complain selectByCompainId(int complainId);
 	  
 	/**
-	 * ·¹ÄÚµå »ğÀÔ
+	 * ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * */
 	  int insert(Complain complain);
 	  
 	  /**
-	   * À¯Àú°¡ »èÁ¦¹öÆ°À» ´­·µÀ» ¶§ »èÁ¦
+	   * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	   * */
 	   int delete(String userId, int complainId);
 	  
 	   /**
-	    * ¸ğµ¨¹øÈ£¿¡ ÇØ´çÇÏ´Â ·¹ÄÚµå ¼öÁ¤
+	    * ï¿½ğµ¨¹ï¿½È£ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
 	    * */
 	   int update(Complain complain);
+	   
+	   /*
+	    * ê´€ë¦¬ì ë‹µë³€
+	    * */
+	   int replyUpdate(Complain complain);
 	
 }

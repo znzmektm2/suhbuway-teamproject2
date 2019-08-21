@@ -13,6 +13,9 @@
 		<result column="board_state" property="state" />
 		<result column="filename" property="fileName"/>
 		<result column="filesize" property="fileSize"/>
+		<result column="store_id" property="storeId"/>
+		<result column="store_title" property="storeTitle"/>
+		<result column="store_content" property="storeContent"/>
 	</resultMap>
 	
 <select id="selectAll" resultMap="complainMap">
@@ -45,6 +48,14 @@ select * from complain_board
 <update id="update" parameterType="complain">
   UPDATE COMPLAIN_BOARD
   SET complain_title=#{title},complain_content=#{content},filename=#{fileName},filesize=#{fileSize}
+  <where>
+  complain_id=#{complainId}
+  </where>
+</update>
+
+<update id="replyUpdate" parameterType="complain">
+  UPDATE COMPLAIN_BOARD
+  SET store_title=#{storeTitle},store_content=#{storeContent},board_state=1
   <where>
   complain_id=#{complainId}
   </where>

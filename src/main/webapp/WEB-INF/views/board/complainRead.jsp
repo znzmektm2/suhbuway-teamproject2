@@ -131,15 +131,24 @@ $(function () {
 	var id = "<sec:authentication property="principal.userId" />"
 	var id2 = "${complain.userId}"
 	var file = "${complain.fileName}"
+	var replyTitle = "${complain.storeTitle}"
 	
 	if(id==id2) {
-		$("input[type=button]").show();
+		$("#update").show();
+		$("#delete").show();
 	} else {
-		$("input[type=button]").hide();
+		$("#update").hide();
+		$("#delete").hide();
 	}
 	
 	if(file=="") {
 		$(".atch_file_area").hide();
+	}
+	
+	if(replyTitle=="") {
+		$("#replyContent").hide();
+	} else {
+		$("#replyContent").show();
 	}
 	
 })
@@ -153,6 +162,11 @@ function sendUpdate(){
 function sendDelete(){
 		document.requestForm.action="${pageContext.request.contextPath}/board/delete";
 		document.requestForm.submit();
+}
+
+function replyForm(){
+		document.requestReplyForm.action="${pageContext.request.contextPath}/board/replyForm";
+		document.requestReplyForm.submit();
 }
 
 function oCLShow(attachLayer) {
@@ -195,14 +209,29 @@ function oCLHide(attachLayer) {
 		</div>
 		<span class="main" style="font-size:25px;">${complain.content}</span><br><br>
 		
+		<!-- 매장 답변 -->
+		  <div id="replyContent">
+		  <br><br>
+			<span class="title" style="font-size:40px;">${complain.storeTitle}</span><br>
+		    <%-- <span class="user">작성자 : ${complain.storeId}</span><br> --%>
+			<span class="main" style="font-size:25px;">${complain.storeContent}</span><br><br>
+		 </div>
+		
 		<!-- 수정시 필요한 데이터들을 hidden으로 숨겨놓고 폼 데이터로 보내준다. -->
 			<form name="requestForm" method=post action="">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 				<input type=hidden name="complainId" value="${complain.complainId}">
 				<input type=hidden name="userId" value="<sec:authentication property="principal.userId" />">
-				<input type=button value="수정하기" onClick="sendUpdate()">
-				<input type=button value="삭제하기" onClick="sendDelete()">
+				<input type=button id="update" value="수정하기" onClick="sendUpdate()">
+				<input type=button id="delete" value="삭제하기" onClick="sendDelete()">
 			</form>
+			
+		<!-- 관리자 답변에 필요한 데이터 보내기 -->
+		<form name="requestReplyForm" method="post" action="">
+		  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+		  <input type=hidden name="complainId" value="${complain.complainId}">
+		  <input type="button" id="reply" value="답변달기" onClick="replyForm()">
+		</form>
 			
 	</div>
 	<div class="btn_list"><a href="${pageContext.request.contextPath}/board/complainList">목록보기</a></div><br>

@@ -54,6 +54,11 @@ public class ComplainServiceImpl implements ComplainService {
 		return result;
 	}
 
+	@Override
+	public int replyUpdate(Complain complain) {
+		return dao.replyUpdate(complain);
+	}
+
 	
 
 }

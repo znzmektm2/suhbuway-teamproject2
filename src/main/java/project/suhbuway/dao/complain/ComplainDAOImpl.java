@@ -40,6 +40,11 @@ public class ComplainDAOImpl implements ComplainDAO {
 		return session.update("complainMapper.update", complain);
 	}
 
+	@Override
+	public int replyUpdate(Complain complain) {
+		return session.update("complainMapper.replyUpdate", complain);
+	}
+
 
 
 }

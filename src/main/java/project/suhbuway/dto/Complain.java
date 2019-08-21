@@ -6,13 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Complain {
 	
 	private int complainId;
@@ -24,6 +23,9 @@ public class Complain {
 	private boolean state;
 	private String fileName;
 	private long fileSize;
+	private String storeId;
+	private String storeTitle;
+	private String storeContent;
 	
 	private MultipartFile file;
 
