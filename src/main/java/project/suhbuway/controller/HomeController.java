@@ -44,6 +44,7 @@ public class HomeController {
     public String menu(@PathVariable String category, HttpServletRequest request) {
 	List<Product> list = service.selectProductsByCategory(category);
 	request.setAttribute("list", list);
+	System.out.println(list);
 	return "menu/menuList";
     }
 

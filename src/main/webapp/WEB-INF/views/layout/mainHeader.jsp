@@ -141,7 +141,60 @@ function gnb(){//gnb
 		}})
 		TweenLite.to($('.dp2'),spd,{ease:eft,top:-20,opacity:0})
 	})
+	
+	var url = this.location.href.split("/");
+	var title = url[url.length-1];
+	var topText = "";
+	var visual = title;
+	var gnbIndex = 0;
+	var subIndex = 0;
+	if(title == 'sandwich'){
+		gnbIndex = 0;
+		subIndex = 0;
+		topText = "전세계 넘버원 브랜드 Subway!<br>50년 전통의 세계 최고의 샌드위치를 맛보세요!";
+	} else if(title == 'salad'){
+		subIndex = 1;
+		topText = "양은 더 많이! 칼로리는 더 적게!<br>신선한 야채와 다양한 소스로 가볍게 찹샐러드를 즐겨보세요!";
+	} else if(title == 'topping'){
+		subIndex = 2;
+		topText = "다양한 추가토핑을 추가해<br>나만의 써브웨이 레시피를 만들어보세요.";
+	} else if(title == 'side'){
+		subIndex = 3;
+		visual = 'sides_drink';
+		topText = "바삭하고 쫀득한 달콤한 쿠키와 간편하고 든든한 수프,<br>커피와 음료까지 함께 즐길 수 있습니다.";
+	} else if(title == 'order'){
+		gnbIndex = 1;
+	} else if(title == 'newsList'){
+		gnbIndex = 2;
+	} else if(title == 'storeSearch'){
+		gnbIndex = 3;
+	} else if(title == 'orders'){
+		subIndex = 0;
+		gnbIndex = 4;
+	} else if(title == 'cart'){
+		subIndex = 1;
+		gnbIndex = 4;
+	} else if(title == 'qna'){
+		subIndex = 2;
+		gnbIndex = 4;
+	} else if(title == 'point'){
+		subIndex = 3;
+		gnbIndex = 4;
+	} else if(title == 'info'){
+		subIndex = 4;
+		gnbIndex = 4;
+	}
+	$('.topTitle').html(title);
+	$('.visual').addClass(visual); 
+	$('.topText').html(topText);
+	$('#container').addClass(title+"Container");
+	$('#gnb>ul>li').eq(gnbIndex).find('.dp2>ul>li').eq(subIndex).find('a').addClass('active');
+	$('.sub_loc>ul>li').eq(subIndex).addClass("active");
+	$('.sub>ul>li').removeClass("active").eq(subIndex).find('a').addClass("active");
+	console.log(subIndex);
 }
+
+
 
 function bodyScroll(){//body scroll
 	var header = $('#header1');
