@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderMapper">
 
-	<sql id="orderListColumns">
+	<!-- <sql id="orderListColumns">
 		ORDER_ID,USER_ID,STORE_ID,TOTAL,ORDER_STATE,REGDATE
 	</sql>
 	<sql id="orderItemColumns">
@@ -31,7 +31,7 @@
 	<select id="selectAll" resultMap="OrderListMap">
 		SELECT <include refid="orderListColumns" />,<include refid="orderItemColumns" />
 		FROM ORDER_LIST JOIN ORDER_ITEM USING(ORDER_ID)
-	</select>
+	</select> -->
 </mapper>
 
 <!-- List<OrderItem> orderItems; -->
