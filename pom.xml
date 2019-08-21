@@ -15,7 +15,7 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 
-	<!-- oracle라이브러리 다운로드 위치 설정 -->
+	<!-- oracle라이브러리 다운로드 위치 설정 --> 
 	<repositories>
 		<repository>
 			<id>codelds</id>

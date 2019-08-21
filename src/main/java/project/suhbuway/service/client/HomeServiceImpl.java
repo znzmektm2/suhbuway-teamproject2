@@ -26,4 +26,16 @@ public class HomeServiceImpl implements HomeService {
 	Product product = productDAO.selectProductById(id);
 	return product;
     }
+    
+    @Override
+	public List<String> selectMenuListByMenu(String menu) {
+		List<String> list = productDAO.selectMenuListByMenu(menu);
+		return list;
+	} 
+
+	@Override
+	public String selectMenuPrice(String name, String category) {
+		String price = productDAO.selectMenuPrice(name, category);
+		return price;
+	}
 }

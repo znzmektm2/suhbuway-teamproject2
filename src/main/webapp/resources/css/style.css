@@ -640,10 +640,13 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 .board_list_wrapper.step1 table span{padding:0 2px;font-size: 14px;line-height: 20px;color: #313131;display: inline-block;vertical-align: middle;}
 .board_list_wrapper.step1 table td .default{color:#999;}
 .board_list_wrapper.step1 table span.price{margin-left:3px;color:#d92820;}
+.board_list_wrapper.step1 table span.price:before{content:"￦";}
 .board_list_wrapper.step1 table span.delete{position: absolute;top: 5px;left: 10px;width:15px;height:15px;background:url(../images/common/ico_close_gray_sm.png) no-repeat;text-indent:-9999px;cursor: pointer;}
 .board_list_wrapper.step1 table span.orderPrice{padding: 0 2px;font-size:20px;color:#999;font-weight:bold;}
+.board_list_wrapper.step1 table span.orderPrice:before{content:"￦ ";}
 .board_list_wrapper.step1 table tr.on span.orderPrice{color:#d92820;}
 .board_list_wrapper.step1 table a{display:inline-block;margin-left:7px;min-width:45px; height:20px; font-size:11px;background: #fed03b; color:#000; line-height:20px; text-align:center; border:0;border-radius: 15px;vertical-align: middle;}
+.board_list_wrapper.step1 table .deleteItem{display:inline-block;margin-left:7px;min-width:45px; height:20px; font-size:11px;background: #fed03b; color:#000; line-height:20px; text-align:center; border:0;border-radius: 15px;vertical-align: middle;cursor:pointer;}
 .btn.bgc_point.od{background: #d92820;} 
 .orderBtn{width:auto;border:none;background: none;}
 .orderBtn .btns_wrapper{border:none;}
