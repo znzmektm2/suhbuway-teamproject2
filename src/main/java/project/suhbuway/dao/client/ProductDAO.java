@@ -46,4 +46,11 @@ public interface ProductDAO {
      * @return
      */
 	public String selectEtcPrice(String name);
+	
+	/**
+     * 전체검색(메뉴, 가격 ,카테고리)
+     * 
+     * @return
+     */
+	public List<Product> selectAll();
 }

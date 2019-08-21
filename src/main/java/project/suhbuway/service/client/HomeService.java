@@ -42,4 +42,13 @@ public interface HomeService {
      * @return
      */
 	public String selectMenuPrice(String name, String category);
+	
+	/** 
+     * 전체검색(메뉴, 가격 ,카테고리)
+     * 
+     * @param name
+     * @param category
+     * @return
+     */
+	public List<Product> selectAll();
 }

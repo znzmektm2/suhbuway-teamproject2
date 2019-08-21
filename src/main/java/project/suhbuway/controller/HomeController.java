@@ -66,8 +66,8 @@ public class HomeController {
      */
     @RequestMapping("/order")
     public String order(HttpServletRequest request) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
+	List<Product> list = service.selectAll();
+	request.setAttribute("list", list);
 	return "order/order";
     }
     

@@ -50,4 +50,12 @@ public class ProductDAOImpl implements ProductDAO {
 		String result = session.selectOne("productMapper.selectEtcPrice", name);
 		return result;
 	}
+
+	@Override
+	public List<Product> selectAll() {
+		List<Product> list = session.selectList("productMapper.selectAll");
+		for (Product pro : list)
+			System.out.println(pro);
+		return list;
+	}
 }
