@@ -119,7 +119,7 @@
 						</li>
 						<li>
 							<strong>야채&amp;소스 선택</strong>
-							<p class="txt1">나만의 스타일을 완성하는 단계!<br>원하지 않는 야채는 빼세요. <br>오늘의 기분에 맞는 소스를 선택해주세요. </p>
+							<p class="txt1">나만의 스타일을 완성하는 단계!<br>하지 않는 야채는 빼고 좋아하는 야채는 더하세요.<br>오늘의 기분에 맞는 소스를 선택해주세요. </p>
 							<div class="select_box vegetable">
 								<span class="slct_head">야채 선택</span>
 								<div class="slct_list">
