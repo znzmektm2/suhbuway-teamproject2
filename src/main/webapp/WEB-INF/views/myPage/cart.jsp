@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<script>
+	var dd = sessionStorage.getItem('saveItems');
+	console.log(dd);
+	var obj = JSON.parse(dd);
+	console.log(obj);
+</script>
 </head>
 <body>	
 	<div class="cart">
