@@ -12,7 +12,7 @@ public class OrderList {
     String storeId;
     int total;
     char orderState;
-    int regdate;
+    String regdate;
 
     List<OrderItem> orderItems;
 }

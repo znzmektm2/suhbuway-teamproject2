@@ -2,6 +2,8 @@ package project.suhbuway.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +21,41 @@ public class OrderController {
     OrderService orderService;
 
     /**
+     * 주문하기
+     * 
+     * @param request
+     * @return
+     */
+    @RequestMapping("/order")
+    public String order(HttpServletRequest request) {
+//	List<Product> list = service.selectProductsByCategory(category);
+//	request.setAttribute("list", list);
+	return "order/order";
+    }
+
+    /**
+     * 결제하기
+     * 
+     * @param category
+     * @return
+     */
+    @RequestMapping("/order/payment")
+    public String payment(HttpServletRequest request) {
+	return "order/payment";
+    }
+    
+    /**
      * 고객이 받은 주문을 저장합니다.
      * 
      * @return
      */
-    @RequestMapping("/createOrder")
-    public String createOrder() {
+    @RequestMapping("/insertOrder")
+    public String insertOrder() {
+	
 	orderService.selectOrderList();
-	return null;
+	return "order/complete";
     }
+    
+    
+    
 }

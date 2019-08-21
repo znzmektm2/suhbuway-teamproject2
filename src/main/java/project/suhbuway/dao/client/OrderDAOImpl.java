@@ -16,8 +16,9 @@ public class OrderDAOImpl implements OrderDAO {
     
     @Override
     public List<OrderList> selectOrderLists() {
-	List<OrderList> list = session.selectList("OrderMapper.selectAll");
-	
+	List<OrderList> list = session.selectList("orderMapper.selectOrderList");
+	for(OrderList item: list)
+	    System.out.println(item);
 	return list;
     }
     

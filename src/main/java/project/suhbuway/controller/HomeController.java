@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.suhbuway.dto.Product;
 import project.suhbuway.service.client.HomeService;
- 
+
 /**
  * 일반적인 사이트 네비게이션 관련 매핑들은 이곳으로..
  */
@@ -57,20 +57,7 @@ public class HomeController {
 	request.setAttribute("product", product);
 	return "menu/menuListView";
     }
-    
-    /**
-     * 주문하기
-     * 
-     * @param request
-     * @return
-     */
-    @RequestMapping("/order")
-    public String order(HttpServletRequest request) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
-	return "order/order";
-    }
-    
+
     /**
      * 뉴스ㆍ공지사항
      * 
@@ -83,7 +70,7 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "board/newsList";
     }
-    
+
     /**
      * 뉴스ㆍ공지사항 상세페이지
      * 
@@ -97,7 +84,7 @@ public class HomeController {
 //	request.setAttribute("product", product);
 	return "board/newsView";
     }
-    
+
     /**
      * 매장찾기
      * 
@@ -111,7 +98,7 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "storeSearch/storeSearch";
     }
-    
+
     /**
      * 마이페이지 주문내역
      * 
@@ -124,7 +111,7 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "myPage/orders";
     }
-    
+
     /**
      * 마이페이지 장바구니
      * 
@@ -137,7 +124,7 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "myPage/cart";
     }
-    
+
     /**
      * 마이페이지 문의사항
      * 
@@ -150,7 +137,7 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "myPage/qna";
     }
-    
+
     /**
      * 마이페이지 포인트
      * 
@@ -163,7 +150,7 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "myPage/point";
     }
-    
+
     /**
      * 마이페이지 내정보
      * 
@@ -176,11 +163,11 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "myPage/info";
     }
-    
+
     /**
      * 마이페이지 내정보 상세페이지
      * 
-    * @param category
+     * @param category
      * @param request
      * @return
      */
@@ -190,41 +177,30 @@ public class HomeController {
 //	request.setAttribute("list", list);
 	return "myPage/infoView";
     }
-    
+
     /**
      * 샌드위치 or 샐러드 셀렉트박스 리스트 뿌리기
      * 
      * @param menu
      * @return
      */
-	@ResponseBody
+    @ResponseBody
     @RequestMapping("/menuList")
     public List<String> menuList(String menu) {
-    	return service.selectMenuListByMenu(menu);
+	return service.selectMenuListByMenu(menu);
     }
-	
-	/**
+
+    /**
      * 메인 메뉴 및 가격 뿌리기
      * 
      * @param name
      * @param category
      * @return
      */
-	@ResponseBody
+    @ResponseBody
     @RequestMapping("/selectMenuPrice")
     public String selectMenuPrice(String name, String category) {
-    	return service.selectMenuPrice(name, category);
-    }
-	
-	/**
-     * 결제하기
-     * 
-     * @param category
-     * @return
-     */
-    @RequestMapping("/order/payment")
-    public String payment(HttpServletRequest request) {
-		return "order/payment";
+	return service.selectMenuPrice(name, category);
     }
 
 }

@@ -499,11 +499,11 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 		$('tr td').eq(6).empty().html("<span class='orderPrice'>0</span>");
 		$('tr').removeClass('on');
 		
-		/* $('.slct_head').each(function(index, item){ 
-			var text = $(this).next('.slct_list li:nth-child(1)').children('a').text();
-			console.log(text);
+		$('.slct_head').each(function(index, item){ 
+			var text = $(this).next('.slct_list').find('li:nth-child(1)').text();
+			console.log('아아:'+text);
 			$(this).text(text);
-		}); */
+		});
 	});
 	
 	
