@@ -102,10 +102,10 @@ public class HomeController {
     	
     	try {
 			Document doc = Jsoup.connect(url).get();
-			Elements el = doc.select(".title");
-			System.out.println("size" + el.size());
-			System.out.println("text" + el.text());
-			System.out.println("html" + el.html());
+			Elements el = doc.select("tbody");
+			System.out.println("size " + el.size());
+			System.out.println("text " + el.text());
+			System.out.println("html " + el.html());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
