@@ -105,14 +105,7 @@
 								<span class="slct_head">추가토핑 선택</span>
 								<div class="slct_list">
 									<ul>
-										<li><a href="#" class="default">추가토핑 선택</a>
-										<c:forEach items="${requestScope.list}" var="product">
-											<c:if test="${product.category == 'topping'}">
-												<li>
-													<a href="#">${product.name}</a>
-												</li>
-											</c:if>
-										</c:forEach>
+										<li><a href="#" class="default">추가토핑 선택</a></li>
 									</ul>
 								</div>
 							</div>
@@ -124,14 +117,6 @@
 								<span class="slct_head">야채 선택</span>
 								<div class="slct_list">
 									<ul>
-										<li><a href="#" class="default">야채 선택</a></li>
-										<c:forEach items="${requestScope.list}" var="product">
-											<c:if test="${product.category == 'topping'}">
-												<li>
-													<a href="#">${product.name}</a>
-												</li>
-											</c:if>
-										</c:forEach>
 										<li><a href="#">양상추</a></li>
 										<li><a href="#">토마토</a></li>
 										<li><a href="#">오이</a></li>
@@ -177,12 +162,6 @@
 								<div class="slct_list">
 									<ul>
 										<li><a href="#" class="default">사이드메뉴 선택</a></li>
-										<li>
-											<a href="#" data-val="sandwich">웨지 포테이토</a>
-										</li>
-										<li>
-											<a href="#" data-val="sandwich">더블 초코칩 쿠키</a>
-										</li>
 									</ul>
 								</div>
 							</div>
@@ -191,12 +170,6 @@
 								<div class="slct_list">
 									<ul>
 										<li><a href="#" class="default">음료 선택</a></li>
-										<li>
-											<a href="#" data-val="sandwich">탄산음료</a>
-										</li>
-										<li>
-											<a href="#" data-val="sandwich">커피</a>
-										</li>
 									</ul>
 								</div>
 							</div>
@@ -253,9 +226,16 @@ $(document).ready(function(){
 	subwayUtilization();
 	selectBox();
 	selectMenu();
+	addToppingList();
+	addSideList();
+	addDrinkList();
 	menuListAJax();
 	cart();
 });
+
+/** DB에서 가져온 product 목록들입니다. */
+var list = ${list}; 
+
 
 function subwayUtilization(){//써브웨이 이용방법
 	var stepIndex = 0;
@@ -441,7 +421,7 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 			selectMenuKind = "topping";
 			selectLength = "";
 		}
-			
+		
 		if(!$(this).hasClass('default')){
 			if(thisSelectBox.hasClass('vegetable')){ //야채 선택 및 추가
 				addVegetable += "<li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
@@ -573,7 +553,39 @@ function selectMenu() { //셀렉트박스 메뉴선택시 이벤트
 			$(this).text(text);
 		});
 	});
-	
+}
+
+function addToppingList() {
+	var str = "";
+	$.each(list, function(index, item) {
+		if (item.category == "topping")
+			str += "<li><a data-val=" + item.productId + " href='#'>"
+				+ item.name
+				+ "</a></li>";
+	});
+	$(str).insertAfter('.topping .slct_list>ul>li:first-child');
+}
+
+function addSideList() {
+	var str = "";
+	$.each(list, function(index, item) {
+		if (item.category == "side")
+			str += "<li><a data-val=" + item.productId + " href='#'>"
+				+ item.name
+				+ "</a></li>";
+	});
+	$(str).insertAfter('.side+.slct_list>ul>li:first-child');
+}
+
+function addDrinkList() {
+	var str = "";
+	$.each(list, function(index, item) {
+		if (item.category == "drink")
+			str += "<li><a data-val=" + item.productId + " href='#'>"
+				+ item.name
+				+ "</a></li>";
+	});
+	$(str).insertAfter('.drink+.slct_list>ul>li:first-child');
 }
 
 function menuListAJax(){ //샌드위치 or 샐러드 셀렉트박스 리스트 뿌리기
