@@ -1,5 +1,7 @@
 package project.suhbuway.service.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,14 @@ public class UserServiceImpl implements UserService {
 	PasswordEncoder passwordEncoder;
 	
 	/**
+	 * 전체검색
+	 */
+	@Override
+	public List<User> selectAll() {
+		return userDAO.selectAll();
+	}
+	
+	/**
 	 * 회원가입
 	 */
 	@Transactional 
@@ -27,9 +37,10 @@ public class UserServiceImpl implements UserService {
 	public int joinUser(User user) {
 		
 		// encode(): 패스워드(평문) -> 암호화해서 저장
-		String pwd = passwordEncoder.encode( user.getUserPassword() );
-		user.setUserPassword(pwd);
-		
+		if( user.getUserPassword() != null ) {
+			String pwd = passwordEncoder.encode( user.getUserPassword() );
+			user.setUserPassword(pwd);
+		}
 		// 회원가입
 		int result = userDAO.insertUser(user);
 		if( result==0 ) throw new RuntimeException("가입되지 않았습니다.");
@@ -54,10 +65,26 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public String idcheck(String id) {
-		System.out.println("서비스 id체크: " + id );
+		//System.out.println("서비스 id체크: " + id );
 		int count=userDAO.idcheck(id);
-		System.out.println("dao결과: " + count );
 		return (count==0) ? "ok"  : "fail"; 	
 	}
+
+	/**
+	 * id로 검색
+	 */
+	@Override
+	public User selectUserById(String id) {
+		return userDAO.selectUserById(id);
+	}
+
+	/**
+	 * SocialToken 변경될경우
+	 */
+	@Override
+	public int updateBySocialToken(String id,String socialToken) {
+		return userDAO.updateBySocialToken(id,socialToken);
+	}
+	
 
 }

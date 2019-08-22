@@ -12,7 +12,9 @@
 		
 		// 로그인 버튼 클릭
 		$("#login").click(function(){
- 	        if($("#userId").val() == ""){
+ 	        
+			// 유효성 체크
+			if($("#userId").val() == ""){
 	            alert("아이디를 입력해주세요");
 	            $("#userId").focus();
 	            return;
@@ -21,19 +23,41 @@
 	            $("#userPassword").focus();
 	            return;
 	        }
-			$("#frm").submit(); // 전송
-		});
-		
-		// kakao 로그인 버튼 클릭
-		$("#kakaoLogin").click(function(){
-			//$("#frm").submit(); 
+			// admin 이면 
+			if($("#userId").val() == "admin"){
+				$("#frm").submit(); // 전송
+			
+			// admin 아니면
+			}else {
+				// 카카오 ID 로그인인지 여부 확인
+	 	        var userId=$("#userId").val();
+	 	        var result="";
+	 	        $.ajax({
+					type:"POST",
+					url:"${pageContext.request.contextPath}/socialCheckAjax",		
+					dataType: "text",
+					data:"${_csrf.parameterName}=${_csrf.token}&userId="+userId,	 
+					success:function(data){
+						result=data;
+						if(data=="fail"){// 존재할때
+							alert("kakaoID로 로그인 불가능합니다.");  
+						}else if (data=="ok") {// 존재안할때						
+							alert("로그인 성공"); 	
+							$("#frm").submit(); // 전송
+						}
+					} ,
+					error: function( error ) {
+						alert("ID 또는 비밀번호가 틀립니다.");
+						console.log( "아이디체크 검색오류" );
+					}
+				});//ajax
+			}
 		});
 	})
 </script>
 </head>
 
 <body>
-	<%-- <%@ include file="/header.jsp"%> --%>
 	<div class="contentWrap">
 		<div class="bg_type01 login" id="container">
 			<div class="titWrap">
@@ -60,7 +84,7 @@
 									<tbody>
 										<tr>
 											<td><span class="form_text" style="width: 100%"> 
-											<input maxlength="20" name="userId" id="userId" placeholder="아이디를 입력" type="text"/>
+											<input maxlength="30" name="userId" id="userId" placeholder="아이디를 입력" type="text"/>
 											</span></td>
 										</tr>
 										<tr>
@@ -77,7 +101,11 @@
 							</div>
 							<div class="btns_wrapper">
 								<a class="btn bgc_point i_reg" href="#" style="width: 170px;" id="login" ><span>로그인</span></a> 
+<<<<<<< HEAD
 								<a class="btn bgc_point kakao" href="#" style="width: 170px;" id="kakaoLogin" ><span>카카오 로그인</span></a>
+=======
+								<a class="btn bgc_point kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=fc703eb6c92f8e680a4d2922d4000a47&redirect_uri=http://localhost:8000/controller/kakaoLogin&response_type=code" style="width: 170px;" id="kakaoLogin" ><span>카카오 로그인</span></a>
+>>>>>>> refs/remotes/cam/dev
 							</div>
 						</form>
 						
@@ -94,7 +122,6 @@
 			<!--// sub content e -->
 		</div>
 	</div>
-	<%-- <%@ include file="/footer.jsp"%> --%>
 </body>
 </html>
 

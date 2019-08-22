@@ -31,9 +31,15 @@
 	                    <div class="dp2">
 	                        <ul>
 	                            <li><a href="${pageContext.request.contextPath}/menu/sandwich">샌드위치</a></li>
+<<<<<<< HEAD
 	                            <li><a href="#;">찹샐러드</a></li>
 	                            <li><a href="#;">추가토핑</a></li>
 	                            <li><a href="#;">사이드ㆍ음료</a></li>
+=======
+	                            <li><a href="${pageContext.request.contextPath}/menu/salad">찹샐러드</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/menu/topping">추가토핑</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/menu/side">사이드ㆍ음료</a></li>
+>>>>>>> refs/remotes/cam/dev
 	                        </ul>
 	                    </div>
 	                </li>
@@ -41,7 +47,11 @@
 	                	<span class="dp1">주문하기</span>
 	                    <div class="dp2">
 	                        <ul>
+<<<<<<< HEAD
 	                            <li><a href="#;">주문하기</a></li>
+=======
+	                            <li><a href="${pageContext.request.contextPath}/order">주문하기</a></li>
+>>>>>>> refs/remotes/cam/dev
 	                        </ul>
 	                    </div>
 	                </li>
@@ -49,8 +59,12 @@
 	                	<span class="dp1">새소식</span>
 	                    <div class="dp2">
 	                        <ul>
+<<<<<<< HEAD
 	                            <li><a href="${pageContext.request.contextPath}/board/notice">뉴스ㆍ공지사항</a></li>
 	                            <li><a href="${pageContext.request.contextPath}/board/complainList">문의사항</a></li>
+=======
+	                            <li><a href="${pageContext.request.contextPath}/board/newsList">뉴스ㆍ공지사항</a></li>
+>>>>>>> refs/remotes/cam/dev
 	                        </ul>
 	                    </div>
 	                </li>
@@ -58,7 +72,11 @@
 	                	<span class="dp1">서부웨이</span>
 	                    <div class="dp2">
 	                        <ul>
+<<<<<<< HEAD
 	                            <li><a href="#;">매장찾기</a></li>
+=======
+	                            <li><a href="${pageContext.request.contextPath}/storeSearch">매장찾기</a></li>
+>>>>>>> refs/remotes/cam/dev
 	                        </ul>
 	                    </div>
 	                </li>
@@ -66,35 +84,21 @@
 	                	<span class="dp1">마이페이지</span>
 	                    <div class="dp2">
 	                        <ul>
+<<<<<<< HEAD
 	                            <li><a href="#;">주문내역</a></li>
 	                            <li><a href="#;">장바구니</a></li>
 	                            <li><a href="#;">포인트</a></li>
 	                            <li><a href="#;">내정보</a></li>
+=======
+	                            <li><a href="${pageContext.request.contextPath}/myPage/orders">주문내역</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/cart">장바구니</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/qna">문의사항</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/point">포인트</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myPage/info">내정보</a></li>
+>>>>>>> refs/remotes/cam/dev
 	                        </ul>
 	                    </div> 
 	                </li>
-	                <!-- 매장관리자 -->
-	                <!-- <li>
-	                    <a href="#none" class="dp1">마이페이지</a>
-	                    <div class="dp2">
-	                        <ul>
-	                            <li><a href="#;">주문내역</a></li>
-	                            <li><a href="#;">회원리스트</a></li>
-	                            <li><a href="#;">매출액</a></li>
-	                        </ul>
-	                    </div>
-	                </li> -->
-	                <!-- 본사관리자 -->
-	                <!-- <li>
-	                    <a href="#none" class="dp1">마이페이지</a>
-	                    <div class="dp2">
-	                        <ul>
-	                        	<li><a href="#;">주문내역</a></li>
-	                            <li><a href="#;">상품리스트</a></li>
-	                            <li><a href="#;">지점별 매출액</a></li>
-	                        </ul>
-	                    </div>
-	                </li> -->
 	            </ul>
 	        </nav>
 	        <!--// gnb -->
@@ -102,25 +106,31 @@
 	        <!-- util menu -->
 	        <div class="util_menu">
 	            <ul>
-	            	<!-- 로그인x - 인증x -->
+	            	<!-- 비로그인 -->
+	            	<c:if test="${sessionScope.kakaoToken==null}">
 	            	<sec:authorize access="isAnonymous()">
 						<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/register">회원가입</a></li>
 					</sec:authorize>
-					
-					<!-- 로그인o - 인증o -->
+					</c:if>
+					<!-- 일반 로그인 -->
 					<sec:authorize access="isAuthenticated()">
-					
-<%-- 					<sec:authorize access="hasRole('ROLE_USER')">	 --%>
-							<li><sec:authentication property="principal.userName" />님 환영합니다.</li>
-							
+							<sec:authorize access="hasRole('ROLE_USER')">
+								<li><sec:authentication property="principal.userId" />님 환영합니다.</li>
+							</sec:authorize>
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<li>admin님 환영합니다.</li>
 								<li><a href="${pageContext.request.contextPath}/admin/main">관리자 페이지</a></li>
 							</sec:authorize>
-							
 							<li><a href="javascript:logout();">로그아웃</a></li>
-							</sec:authorize>
-<%-- 					</sec:authorize> --%>
+					</sec:authorize>
+					
+					<!-- kakao 로그인 -->
+					<c:if test="${sessionScope.kakaoToken!=null}">
+						<li>${sessionScope.userId}님 환영합니다.</li>
+						<li><a href="${pageContext.request.contextPath}/kakaoLogout">로그아웃</a></li>
+					</c:if>
+					
 	            </ul>
 	        </div>
 	        <!--// util menu -->
@@ -147,7 +157,7 @@ function gnb(){//gnb
 	var spd = 0.5,
 		eft = Power4.easeOut;
 	$('#gnb >ul >li >.dp1').on('mouseenter', function(){
-		TweenLite.to($('#header1').css('overflow','inherit').addClass('open'),spd,{ease:eft,height:360})
+		TweenLite.to($('#header1').css('overflow','inherit').addClass('open'),spd,{ease:eft,height:380})
 		TweenLite.to($('.dp2'),spd,{ease:eft,top:0,opacity:1})
 	})
 

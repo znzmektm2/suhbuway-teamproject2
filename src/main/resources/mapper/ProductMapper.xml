@@ -32,12 +32,41 @@
 	</resultMap>
 	
 	<!-- query들 -->
+	<!-- 카테고리별로 제품선택 -->
 	<select id="selectProductsByCategory" parameterType="string" resultMap="productMap">
 		select <include refid="productColumns" />
 		from product where category=#{_parameter}
 	</select>
+<<<<<<< HEAD
 	<select id="selectProductByIdForMenu" parameterType="string" resultMap="productMap">
+=======
+	
+	<!-- 아이디로 제품선택 -->
+	<select id="selectProductByIdForMenu" parameterType="int" resultMap="productMap">
+>>>>>>> refs/remotes/cam/dev
 		select <include refid="productColumns" />, <include refid="nutritionColumns" />
 		from product join nutrition using(product_id) where product_id=${_parameter} 	
 	</select>
+	
+	<!-- <insert id="insertProduct" parameterType="product">
+		insert into product(<include refid="productColumns" />)		
+	</insert> -->
+	
+	<!-- 카테고리로 제품이름 리스트 검색 -->
+	<select id="selectMenuListByMenu" parameterType="string" resultType="string">
+		select name	from product where category=#{_parameter}
+	</select>
+	
+	<!-- 이름으로 가격검색 -->
+	<select id="selectMenuPrice" parameterType="map" resultType="string">
+		select price from product where name=#{name} AND category=#{category}
+	</select>
+	
+	<!-- 전체검색(메뉴, 가격 ,카테고리) -->
+	<select id="selectAll" resultMap="productMap">
+		select <include refid="productColumns" /> from product
+	</select>
+	 
+	
+	
 </mapper>
