@@ -197,7 +197,7 @@ em{font-style:normal;}
 #container.bg_type01 .sub_header{background:#f6f6f6; border-bottom:0}
 #container.bg_type01 #content{padding-top:59px;}
 #content{padding-top:170px; position:relative;overflow:hidden;z-index:3;}
-#content h2.subTitle{text-align:center; font-size:40px; color:#292929; font-weight:300; letter-spacing:-0.07em; padding:134px 0 80px;}
+#content h2.subTitle{text-align:center; font-size:40px; color:#292929; font-weight:300; letter-spacing:-0.07em; padding:60px 0 40px;}
 #content h2.subTitle > span{margin-bottom:-20px;display: block;color: #666;font-weight:normal;font-size:16px;letter-spacing: -0.025em}
 h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05em; padding-bottom:38px;}
 
@@ -407,7 +407,7 @@ h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05
 /* 메뉴소개 ::: 메뉴 목록 */
 .menu_list_wrapper{background-color:#f2f2f2;}
 .menu_list_wrapper .visual{margin-bottom:60px;height:380px; text-align: center; color:#fff; overflow:hidden; position:relative;}
-.menu_list_wrapper .visual h2{font-family:font_sw; font-size:70px; font-weight:bold; color:#fff; padding:104px 0 21px 0; position:relative; z-index:9; opacity:0; top:100px;}
+.menu_list_wrapper .visual h2{text-transform:capitalize;font-family:font_sw; font-size:70px; font-weight:bold; color:#fff; padding:104px 0 21px 0; position:relative; z-index:9; opacity:0; top:100px;}
 .menu_list_wrapper .visual p{font-size:16px; line-height:26px; letter-spacing:-0.04em; position:relative; z-index:9; opacity:0; top:100px;}
 .menu_list_wrapper .visual.sandwich{background-color:#e85a1c;}
 .menu_list_wrapper .visual.sandwich .img01{background:url(../images/menu/img_visual_sandwich.jpg) 50% 0 no-repeat; position:absolute; left:0; width:100%; top:50%; height:380px; opacity:0}

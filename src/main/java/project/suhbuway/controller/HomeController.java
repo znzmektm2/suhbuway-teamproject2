@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import project.suhbuway.dto.Product;
 import project.suhbuway.service.client.HomeService;
 
@@ -41,6 +44,7 @@ public class HomeController {
     public String menu(@PathVariable String category, HttpServletRequest request) {
 	List<Product> list = service.selectProductsByCategory(category);
 	request.setAttribute("list", list);
+	System.out.println(list);
 	return "menu/menuList";
     }
 
@@ -56,6 +60,27 @@ public class HomeController {
 	Product product = service.selectProductById(Integer.parseInt(id));
 	request.setAttribute("product", product);
 	return "menu/menuListView";
+    }
+
+    /**
+     * 주문하기
+     * 
+     * @param request
+     * @return
+     */
+    @RequestMapping("/order")
+    public String order(HttpServletRequest request) {
+	List<Product> list = service.selectAll();
+
+	String jsonList = null;
+	try {
+	    jsonList = new ObjectMapper().writeValueAsString(list);
+	} catch (JsonProcessingException e) {
+	    e.printStackTrace();
+	}
+	System.out.println(jsonList);
+	request.setAttribute("list", jsonList);
+	return "order/order";
     }
 
     /**

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,11 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/TweenMax.min.js"></script>
+<script>
+	function logout() {
+		document.getElementById("logoutForm").submit();
+	}
+</script>
 </head>
 <body>
 <header>
@@ -74,13 +80,44 @@
 	        <!-- util menu -->
 	        <div class="util_menu">
 	            <ul>
-	                <li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
-	                <li><a href="${pageContext.request.contextPath}/user/register">회원가입</a></li>
+	            	<!-- 비로그인 -->
+	            	<c:if test="${sessionScope.kakaoToken==null}">
+	            	<sec:authorize access="isAnonymous()">
+						<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/register">회원가입</a></li>
+					</sec:authorize>
+					</c:if>
+					<!-- 일반 로그인 -->
+					<sec:authorize access="isAuthenticated()">
+							<sec:authorize access="hasRole('ROLE_USER')">
+								<li><sec:authentication property="principal.userId" />님 환영합니다.</li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<li>admin님 환영합니다.</li>
+								<li><a href="${pageContext.request.contextPath}/admin/main">관리자 페이지</a></li>
+							</sec:authorize>
+							<li><a href="javascript:logout();">로그아웃</a></li>
+					</sec:authorize>
+					
+					<!-- kakao 로그인 -->
+					<c:if test="${sessionScope.kakaoToken!=null}">
+						<li>${sessionScope.userId}님 환영합니다.</li>
+						<li><a href="${pageContext.request.contextPath}/kakaoLogout">로그아웃</a></li>
+					</c:if>
+					
 	            </ul>
 	        </div>
 	        <!--// util menu -->
 	    </div>
 	</div>
+	
+	<!-- logout위한 form -->
+	<form id="logoutForm" 
+				action="${pageContext.request.contextPath}/user/logout"
+				method="post" style="display: none">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	</form>
+	
 </header>
 <script>
 $(document).ready(function(){
@@ -104,7 +141,59 @@ function gnb(){//gnb
 		}})
 		TweenLite.to($('.dp2'),spd,{ease:eft,top:-20,opacity:0})
 	})
+	
+	var url = this.location.href.split("/");
+	var title = url[url.length-1];
+	var topText = "";
+	var visual = title;
+	var gnbIndex = 0;
+	var subIndex = 0;
+	if(title == 'sandwich'){
+		gnbIndex = 0;
+		subIndex = 0;
+		topText = "전세계 넘버원 브랜드 Subway!<br>50년 전통의 세계 최고의 샌드위치를 맛보세요!";
+	} else if(title == 'salad'){
+		subIndex = 1;
+		topText = "양은 더 많이! 칼로리는 더 적게!<br>신선한 야채와 다양한 소스로 가볍게 찹샐러드를 즐겨보세요!";
+	} else if(title == 'topping'){
+		subIndex = 2;
+		topText = "다양한 추가토핑을 추가해<br>나만의 써브웨이 레시피를 만들어보세요.";
+	} else if(title == 'side'){
+		subIndex = 3;
+		visual = 'sides_drink';
+		topText = "바삭하고 쫀득한 달콤한 쿠키와 간편하고 든든한 수프,<br>커피와 음료까지 함께 즐길 수 있습니다.";
+	} else if(title == 'order'){
+		gnbIndex = 1;
+	} else if(title == 'newsList'){
+		gnbIndex = 2;
+	} else if(title == 'storeSearch'){
+		gnbIndex = 3;
+	} else if(title == 'orders'){
+		subIndex = 0;
+		gnbIndex = 4;
+	} else if(title == 'cart'){
+		subIndex = 1;
+		gnbIndex = 4;
+	} else if(title == 'qna'){
+		subIndex = 2;
+		gnbIndex = 4;
+	} else if(title == 'point'){
+		subIndex = 3;
+		gnbIndex = 4;
+	} else if(title == 'info'){
+		subIndex = 4;
+		gnbIndex = 4;
+	}
+	$('.topTitle').html(title);
+	$('.visual').addClass(visual); 
+	$('.topText').html(topText);
+	$('#container').addClass(title+"Container");
+	$('#gnb>ul>li').eq(gnbIndex).find('.dp2>ul>li').eq(subIndex).find('a').addClass('active');
+	$('.sub_loc>ul>li').eq(subIndex).addClass("active");
+	$('.sub>ul>li').removeClass("active").eq(subIndex).find('a').addClass("active");
 }
+
+
 
 function bodyScroll(){//body scroll
 	var header = $('#header1');

@@ -21,19 +21,6 @@ public class OrderController {
     OrderService orderService;
 
     /**
-     * 주문하기
-     * 
-     * @param request
-     * @return
-     */
-    @RequestMapping("/order")
-    public String order(HttpServletRequest request) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
-	return "order/order";
-    }
-
-    /**
      * 결제하기
      * 
      * @param category
@@ -55,7 +42,4 @@ public class OrderController {
 	orderService.selectOrderList();
 	return "order/complete";
     }
-    
-    
-    
 }
