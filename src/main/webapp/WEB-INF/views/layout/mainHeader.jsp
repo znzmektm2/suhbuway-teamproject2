@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<script>
+	function logout() {
+		document.getElementById("logoutForm").submit();
+	}
+</script>
 <header>
 	<div id="header1" class="open">
 	    <div class="content">
@@ -62,13 +67,44 @@
 	        <!-- util menu -->
 	        <div class="util_menu">
 	            <ul>
-	                <li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
-	                <li><a href="${pageContext.request.contextPath}/user/register">회원가입</a></li>
+	            	<!-- 비로그인 -->
+	            	<c:if test="${sessionScope.kakaoToken==null}">
+	            	<sec:authorize access="isAnonymous()">
+						<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/register">회원가입</a></li>
+					</sec:authorize>
+					</c:if>
+					<!-- 일반 로그인 -->
+					<sec:authorize access="isAuthenticated()">
+							<sec:authorize access="hasRole('ROLE_USER')">
+								<li><sec:authentication property="principal.userId" />님 환영합니다.</li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<li>admin님 환영합니다.</li>
+								<li><a href="${pageContext.request.contextPath}/admin/main">관리자 페이지</a></li>
+							</sec:authorize>
+							<li><a href="javascript:logout();">로그아웃</a></li>
+					</sec:authorize>
+					
+					<!-- kakao 로그인 -->
+					<c:if test="${sessionScope.kakaoToken!=null}">
+						<li>${sessionScope.userId}님 환영합니다.</li>
+						<li><a href="${pageContext.request.contextPath}/kakaoLogout">로그아웃</a></li>
+					</c:if>
+					
 	            </ul>
 	        </div>
 	        <!--// util menu -->
 	    </div>
 	</div>
+	
+	<!-- logout위한 form -->
+	<form id="logoutForm" 
+				action="${pageContext.request.contextPath}/user/logout"
+				method="post" style="display: none">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	</form>
+	
 </header>
 <script>
 $(document).ready(function(){
