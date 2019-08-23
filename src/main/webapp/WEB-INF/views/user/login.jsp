@@ -101,11 +101,7 @@
 							</div>
 							<div class="btns_wrapper">
 								<a class="btn bgc_point i_reg" href="#" style="width: 170px;" id="login" ><span>로그인</span></a> 
-<<<<<<< HEAD
-								<a class="btn bgc_point kakao" href="#" style="width: 170px;" id="kakaoLogin" ><span>카카오 로그인</span></a>
-=======
 								<a class="btn bgc_point kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=fc703eb6c92f8e680a4d2922d4000a47&redirect_uri=http://localhost:8000/controller/kakaoLogin&response_type=code" style="width: 170px;" id="kakaoLogin" ><span>카카오 로그인</span></a>
->>>>>>> refs/remotes/cam/dev
 							</div>
 						</form>
 						

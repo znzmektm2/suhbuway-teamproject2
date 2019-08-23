@@ -37,13 +37,9 @@
 		select <include refid="productColumns" />
 		from product where category=#{_parameter}
 	</select>
-<<<<<<< HEAD
-	<select id="selectProductByIdForMenu" parameterType="string" resultMap="productMap">
-=======
-	
+		
 	<!-- 아이디로 제품선택 -->
 	<select id="selectProductByIdForMenu" parameterType="int" resultMap="productMap">
->>>>>>> refs/remotes/cam/dev
 		select <include refid="productColumns" />, <include refid="nutritionColumns" />
 		from product join nutrition using(product_id) where product_id=${_parameter} 	
 	</select>

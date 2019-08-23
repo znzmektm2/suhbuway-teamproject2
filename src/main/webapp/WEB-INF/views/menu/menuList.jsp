@@ -49,19 +49,11 @@
 								<span class="new">NEW</span>
 							</div>
 							<!--// label -->
-<<<<<<< HEAD
-							<div class="img"><img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich_pm10.jpg"></div>
-							<strong class="tit">${list.name}</strong>
-							<span class="eng">${list.nameEng}</span>
-							<span class="cal">${list.nutrition.calory} kcal</span>
-							<span class="price">￦  <fmt:formatNumber value="${list.price}"/></span>
-=======
 							<div class="img"><img alt="${item.name}" src="${pageContext.request.contextPath}/resources/images/menu/${item.category}/${item.imgUrl}"></div>
 							<strong class="tit">${item.name}</strong>
 							<span class="eng">${item.nameEng}</span>
 							<span class="cal">${item.nutrition.calory} kcal</span>
 							<span class="price">￦  <fmt:formatNumber value="${item.price}"/></span>
->>>>>>> refs/remotes/cam/dev
 							<div class="summary">
 								<p>${item.description}</p>
 							</div>
