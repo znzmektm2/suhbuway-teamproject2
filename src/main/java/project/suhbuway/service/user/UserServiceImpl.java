@@ -3,6 +3,7 @@ package project.suhbuway.service.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,6 +86,38 @@ public class UserServiceImpl implements UserService {
 	public int updateBySocialToken(String id,String socialToken) {
 		return userDAO.updateBySocialToken(id,socialToken);
 	}
-	
+
+	/**
+	 * 비밀번호 일치 확인
+	 */
+	@Override
+	public boolean selectByUserPassword(String id, String passowrd) {
+		
+		// 입력된 비번 복호화
+		
+		// DB 비번
+		User dbuser = this.selectUserById(id);
+		dbuser.getUserPassword();
+		
+		// 비밀번호 비교	     // 암호안된거 암호된거
+		boolean result = passwordEncoder.matches(passowrd, dbuser.getUserPassword() );
+		System.out.println(" 서비스 result: " + result );
+		
+		return result;
+	}
+	/**
+	 * 회원정보 수정
+	 */
+	@Override
+	public int userUpdate(User user) {
+		
+		// encode(): 패스워드(평문) -> 암호화해서 저장
+		if( user.getUserPassword() != null ) {
+			String pwd = passwordEncoder.encode( user.getUserPassword() );
+			user.setUserPassword(pwd);
+		}
+		
+		return userDAO.userUpdate(user);
+	}
 
 }

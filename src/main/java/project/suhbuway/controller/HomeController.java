@@ -3,7 +3,6 @@ package project.suhbuway.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.lang.model.element.Element;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jsoup.Jsoup;
@@ -11,7 +10,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,11 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import project.suhbuway.dto.Product;
+import project.suhbuway.dto.User;
 import project.suhbuway.service.client.HomeService;
+import project.suhbuway.service.user.UserService;
 
 /**
  * 일반적인 사이트 네비게이션 관련 매핑들은 이곳으로..
@@ -34,6 +31,9 @@ public class HomeController {
 
     @Autowired
     HomeService service;
+    
+    @Autowired
+    UserService userService;
 
     /**
      * 초기페이지로 이동합니다.
@@ -217,10 +217,26 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/myPage/{category}/infoView")
-    public String infoView(@PathVariable String category, HttpServletRequest request) {
+    public ModelAndView infoView(@PathVariable String category, HttpServletRequest request) {
 //	List<Product> list = service.selectProductsByCategory(category);
 //	request.setAttribute("list", list);
-	return "myPage/infoView";
+    	ModelAndView mv = new ModelAndView();
+    	
+    	String userId = (String)request.getParameter("userId");
+    	// user이면
+    	if( category.equals("info") ) {
+    		User user = userService.selectUserById(userId);
+    		String [] userEmail = user.getUserEmail().split("@");
+    		String email1 = userEmail[0];
+    		String email2 = userEmail[1];
+    		
+    		mv.addObject("user", user );
+    		mv.addObject("email1", email1 );
+    		mv.addObject("email2", email2 );
+    		mv.setViewName("myPage/infoView");
+    	}
+    	
+	return mv;
     }
 
     /**

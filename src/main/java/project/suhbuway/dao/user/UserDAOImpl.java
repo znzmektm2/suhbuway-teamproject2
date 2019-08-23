@@ -58,5 +58,13 @@ public class UserDAOImpl implements UserDAO {
 		map.put("socialToken",socialToken);
 		return session.update("userMapper.updateBySocialToken",map);
 	}
+	
+	/**
+	 * 회원정보 수정
+	 */
+	@Override
+	public int userUpdate(User user) {
+		return session.update("userMapper.updateUser",user);
+	}
 
 }
