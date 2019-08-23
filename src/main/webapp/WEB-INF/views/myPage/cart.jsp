@@ -152,7 +152,7 @@ $(function() {
 				</div>
 				<div class="inquiry_wrapper orderBtn">
 					<div class="btns_wrapper">
-						<a class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
+						<a href="${pageContext.request.contextPath}/order/payment" class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
 					</div> 
 				</div>
 			</div>

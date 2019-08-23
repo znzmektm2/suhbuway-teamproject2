@@ -1,14 +1,24 @@
 package project.suhbuway.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.lang.model.element.Element;
 import javax.servlet.http.HttpServletRequest;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,9 +101,20 @@ public class HomeController {
      */
     @RequestMapping("/board/newsList")
     public String newList(HttpServletRequest request) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
-	return "board/newsList";
+    	String result = "";
+    	String url = "http://subway.co.kr/newsList?page=12";
+    	
+    	try {
+			Document doc = Jsoup.connect(url).get();
+			Elements el = doc.select("tbody");
+			System.out.println("size " + el.size());
+			System.out.println("text " + el.text());
+			System.out.println("html " + el.html());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    return "board/newsList";
     }
 
     /**
@@ -225,7 +246,7 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/selectMenuPrice")
     public String selectMenuPrice(String name, String category) {
-	return service.selectMenuPrice(name, category);
+    	return service.selectMenuPrice(name, category);
     }
 
 }

@@ -42,4 +42,14 @@ public class OrderController {
 	orderService.selectOrderList();
 	return "order/complete";
     }
+    
+    /**
+     * 결제완료
+     * 
+     * @return
+     */
+    @RequestMapping("/order/completeOrder")
+    public String completeOrder(HttpServletRequest request) {
+		return "order/completeOrder";
+    }
 }

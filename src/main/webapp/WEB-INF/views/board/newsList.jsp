@@ -7,8 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+   $(function(){
+	   $("#test").click(function(){
+		   $.ajax({
+				url: "http://192.168.0.169:8888/pagingTest",
+				type :"post",
+				dataType : "text",//json
+				//data : "menu=" + txt,
+				success :function(result){
+					alert(result)
+				},
+				error : function(err){
+					console.log("오류발생 : " + err); 
+				}
+			});
+	   })
+   })
+</script>
 </head>
 <body>
+<a href="#" id="test">tetdddd</a> <hr>
 	<h2 class="subTitle">뉴스ㆍ공지사항</h2>
 
 	<!-- 뉴스ㆍ공지사항 list s -->
