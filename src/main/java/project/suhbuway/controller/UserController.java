@@ -1,8 +1,8 @@
 package project.suhbuway.controller;
 
-import java.util.Iterator;
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,6 +29,7 @@ import project.suhbuway.service.user.UserService;
 public class UserController {
 	//@Autowired
 	private KakaoAccessToken kakao = new KakaoAccessToken();
+	private String path ="C:\\Users\\Lenovo\\Desktop\\save"; // 프로필 사진 저장 경로
 	
 	@Autowired
 	private UserService service;
@@ -79,19 +81,21 @@ public class UserController {
 	 *  회원가입하기
 	 */
 	@RequestMapping("/userRegister")
-	public String register( User user ) {
-		
-		// 프로필 파일 경로 설정
-		
-		// 이름
-		//System.out.println("회원가입 file 이름: " + user.getFile().getName() );
-		//System.out.println("회원가입 file 이름: " + user.getFile().getSize() );
-		
-		// 해당 컬럼에 추가해주기 setPro~~(get )
+	public String register( User user ) throws IOException {
+		MultipartFile file = user.getFile(); // user로 들어온 file을 꺼내서 file변수에 저장.
+		System.out.println(file.getName());
+		 if(file.getSize() > 0) {//파일이 첨부되었다면
+		 String fName = file.getOriginalFilename();
+		 long fSize = file.getSize();
+		 user.setUserProfileImg(fName);//dto에 프로필이미지 저장
+		 user.setUserProfileSize(fSize);//dto에 파일사이즈 저장
+		 
+		 file.transferTo(new File(path +"/"+ fName));//파일 저장
+		 }
 		
 		// 수정된 user를 회원가입에 넣기
 		service.joinUser(user);
-		return "index";  
+		return "index";
 	}
 
 	/**
@@ -154,9 +158,6 @@ public class UserController {
         return "redirect:/";
     }
 	
-	/**
-	 * 비밀번호 확인
-	 */
 	@RequestMapping("/PasswordCheckAjax")
 	@ResponseBody
 	public String PasswordCheckAjax( String userId, String userPassword ) {

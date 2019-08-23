@@ -29,9 +29,9 @@
 <!-- 일반 회원 회원가입 -->
 <insert id="insertUser" parameterType="user">
 	insert into userdb(USER_ID,USER_NAME,USER_PASSWORD,USER_phone,
-	USER_email,USER_profile_img,SOCIAL_TYPE,SOCIAL_TOKEN,REG_DATE,mileage,rating)
+	USER_email,USER_profile_img,SOCIAL_TYPE,SOCIAL_TOKEN,REG_DATE,mileage,rating,USER_profile_size)
 	values(#{userId},#{userName},#{userPassword},#{userPhone},#{userEmail},
-	#{userProfileImg},#{socialType},#{socialToken},sysdate,10000,'bronze')
+	#{userProfileImg},#{socialType},#{socialToken},sysdate,10000,'bronze',#{userProfileSize})
 </insert>
 
 <!-- ID중복체크 -->

@@ -71,7 +71,6 @@ public class HomeController {
 	request.setAttribute("product", product);
 	return "menu/menuListView";
     }
-
     /**
      * 주문하기
      * 
@@ -264,5 +263,4 @@ public class HomeController {
     public String selectMenuPrice(String name, String category) {
     	return service.selectMenuPrice(name, category);
     }
-
 }

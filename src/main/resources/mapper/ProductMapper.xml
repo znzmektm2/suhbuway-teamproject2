@@ -34,14 +34,14 @@
 	<!-- query들 -->
 	<!-- 카테고리별로 제품선택 -->
 	<select id="selectProductsByCategory" parameterType="string" resultMap="productMap">
-		select <include refid="productColumns" />, calory
-		from product join nutrition using(product_id) where category=#{_parameter}
+		select <include refid="productColumns" />
+		from product where category=#{_parameter}
 	</select>
-	
+		
 	<!-- 아이디로 제품선택 -->
 	<select id="selectProductByIdForMenu" parameterType="int" resultMap="productMap">
 		select <include refid="productColumns" />, <include refid="nutritionColumns" />
-		from product join nutrition using(product_id) where product_id=#{_parameter} 	
+		from product join nutrition using(product_id) where product_id=${_parameter} 	
 	</select>
 	
 	<!-- <insert id="insertProduct" parameterType="product">

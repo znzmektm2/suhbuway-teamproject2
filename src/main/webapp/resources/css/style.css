@@ -70,7 +70,7 @@ em{font-style:normal;}
 #gnb{text-align:center; position:absolute; left:0; width:100%; top:98px; text-align:center;}
 #gnb >ul{display:inline-block;}
 #gnb >ul >li{float:left; width:180px; position:relative;}
-#gnb >ul >li span.dp1{font-size:18px; color:#292929; font-weight:bold; letter-spacing:-0.04em; position:relative; z-index:3; padding:20px; display:block;cursor: default;}
+#gnb >ul >li span.dp1{font-size:18px; color:#292929; font-weight:bold; letter-spacing:-0.04em; position:relative; z-index:3; padding:20px; display:block;cursor: pointer;}
 #gnb .dp2{position:absolute; left:0; top:-20px; width:100%; padding-top:87px; z-index:2;}
 #gnb .dp2 ul li a{font-size:15px; color:#666666; padding:8px 0 9px; display:block; letter-spacing:-0.05em}
 #gnb .dp2 ul li a:hover,
@@ -201,6 +201,7 @@ em{font-style:normal;}
 #content h2.subTitle{text-align:center; font-size:40px; color:#292929; font-weight:300; letter-spacing:-0.07em; padding:60px 0;}
 #content h2.subTitle > span{margin-bottom:-20px;display: block;color: #666;font-weight:normal;font-size:16px;letter-spacing: -0.025em}
 h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05em; padding-bottom:38px;}
+
 
 /* 로그인 */
 #container.bg_type01.login{background:url(../images/bg_group_menu_slider.jpg) 0 0 no-repeat;}
@@ -582,6 +583,7 @@ h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05
 width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;background-size: 12px 12px;}
 .star span.on{background: url(../images/ico_star_big.png) no-repeat;background-size: 12px 12px;}
 .num{display:inline-block;color: #ff4f02;font-size: 14px;font-weight: 500;}
+
 
 /* 써브웨이 이용방법 ::: 매장에서 주문하기 */
 #store_order{background-color:#f6f6f6; padding-top:60px;}

@@ -10,7 +10,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){ 
+	$(function(){
 		
 		// # 아이디 길이 검사
 		var idState = false;
@@ -149,6 +149,15 @@
     	}
     	//return true;
 	}
+
+	/* 프로필 사진 이름으로 표시하기 위한 함수 */
+	function formFile(fis) {
+		var str=fis.value;
+		var strFileName=str.lastIndexOf('\\');
+		var result = str.substring(strFileName+1);
+		$("#userProfileImg").val(result);
+	}
+	
 </script>
 </head>
 <body>
@@ -159,12 +168,10 @@
 			<div class="inquiry_wrapper">
 				<h2 class="subTitle">회원가입</h2>
 				<div class="content">
-				
-					<!-- enctype="multipart/form-data"   -->
-					<form id="registerForm" method="post" name="registerForm"  
+					<form id="registerForm" method="post" name="registerForm" enctype="multipart/form-data"
 							 action="${pageContext.request.contextPath}/userRegister?${_csrf.parameterName}=${_csrf.token}">
 						<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+						<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" > --%>
 						
 						<h3 class="h_title">정보입력</h3>
 	
@@ -270,11 +277,10 @@
 										<th scope="col">프로필</th>
 										<td>
 											<label class="form_file" style="width:466px;">
-												<input data-maxsize="2" data-maxupload="1" id="file" name="file" type="file">
-												<input readonly="readonly" type="text" id="fileName">
+												<input maxlength="60" size="40" id="file" name="file" type="file" onchange="formFile(this); return false;">
+												<input readonly="readonly" type="text" id="userProfileImg">
 											</label>
-	
-											<span class="file_note">※ 등록 가능 확장자 : jpg, gif, png / 최대 2MB</span>
+											<span class="file_note">※ 등록 가능 확장자 : jpg, gif, png</span>
 										</td>
 									</tr>
 								</tbody>
