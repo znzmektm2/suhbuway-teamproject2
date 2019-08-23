@@ -19,8 +19,6 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public List<Product> selectProductsByCategory(String category) {
 	List<Product> list = session.selectList("productMapper.selectProductsByCategory", category);
-	for (Product pro : list)
-	    System.out.println(pro);
 	return list;
     }
 
@@ -54,8 +52,6 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public List<Product> selectAll() {
 	List<Product> list = session.selectList("productMapper.selectAll");
-	for (Product pro : list)
-	    System.out.println(pro);
 	return list;
     }
 }

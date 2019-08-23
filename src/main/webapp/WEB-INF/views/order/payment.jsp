@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h2 class="subTitle">결제하기</h2>
-	<div class="board_list_wrapper step1">
+	<div class="board_list_wrapper step1"> 
 		<table>
 			<thead>
 				<tr>
@@ -35,28 +35,72 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="total">
-			<span>총 결제금액</span>
-			<span class="price">￦ 9,900</span>
-		</div>
-		<div class="selectStore">
-			<h3>매장선택</h3>
-			판교 <input type="radio">
-			강남 <input type="radio">
-		</div>
-		<div class="payment"> 
-			<h3>결제하기</h3>
-			보유포인트 <input type="text"><input type="button" value="충전하기"><br>
-			사용포인트 <input type="text">
-		</div>
+		<h3 class="h_title">정보입력</h3>
+		<!-- board list s -->
+		<table class="payInfoTable">
+			<caption>회원가입 테이블</caption>
+			<colgroup>
+				<col width="130px">
+				<col width="*">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="col">매장선택<span class="ess"></span></th>
+					<td>
+						<div class="select_box selectMenuKind">
+							<span class="slct_head">매장 선택</span>
+							<div class="slct_list">
+								<ul>
+									<li><a href="#" class="default">매장 선택</a></li>
+									<li><a href="#" data-val="sandwich">판교</a></li>
+									<li><a href="#" data-val="salad">강남</a></li>
+								</ul>
+							</div> 
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="col">결제하기<span class="ess"></span></th>
+					<td>
+						<ul>
+							<li>보유포인트 <input type="text" value="10,000" readonly><a href="#">충전하기</a></li>
+							<li>사용포인트 <input type="text"></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th scope="col">총 결제금액<span class="ess"></span></th>
+					<td><span class="price"> 9,900</span></td>
+				</tr>
+			</tbody>
+		</table>
 		<div class="inquiry_wrapper orderBtn">
 			<div class="btns_wrapper">
-				<a class="btn bgc_point i_reg od" style="width:170px"><span>결제하기</span></a>
+				<a href="${pageContext.request.contextPath}/order/completeOrder" class="btn bgc_point i_reg od" style="width:170px"><span>결제하기</span></a>
 			</div> 
 		</div>
 	</div>
 <script> 
+$(document).ready(function(){
+	selectBox();
+});
 
+function selectBox() {
+	$('.slct_head').click(function () {
+		if(!$(this).parent().hasClass('on')){
+			$(this).parent().addClass('on').children('.slct_list').stop().slideDown('fast');
+		} else{
+			$(this).parent().removeClass('on').children('.slct_list').hide();
+		}
+		$(this).parent().siblings().removeClass('on').children('.slct_list').hide();
+	});
+	
+	$(document).on("click", function(event){ //바깥 클릭시 셀렉트박스 닫기
+        if(!$(event.target).closest(".slct_head").length){
+            $(".slct_list").hide();
+        }
+    });
+}
 </script>
 </body>
 </html>

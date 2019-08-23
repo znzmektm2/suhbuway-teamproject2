@@ -7,10 +7,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <script>
-	var dd = sessionStorage.getItem('saveItems');
-	console.log(dd);
-	var obj = JSON.parse(dd);
+$(function() {
+	var obj = JSON.parse(sessionStorage.getItem('menuItem'));
 	console.log(obj);
+
+	function attachItems() {
+		$.each(obj, function(index, item) {
+			console.log(item);
+			var topping = "";
+			var side = "";
+			$.each(item.subMenu, function (ind, ite) {
+				if(ite.category == "topping"){
+					topping += ite.name + ",";
+				} else {
+					side += ite.name + ",";
+				}
+			});
+			var itemInfo = "<tr>"
+					+ "<td><span class=\"delete\">삭제</span><span>" + item.product.name + "</span></td>" // 메뉴
+					+ "<td>"+ item.breadType + "</td>" // 빵
+					+ "<td>"+ topping.slice(0,-1) + "</td>" // 추가토핑
+					+ "<td>"+ item.veggies.join() + "</td>" // 야채종류
+					+ "<td>"+ item.source.join() + "</td>" // 소스종류
+					+ "<td>"+ side.slice(0,-1) + "</td>" // 사이드 메뉴 & 음료
+					+ "<td>"+ item.price + "</td>" // 금액
+					+ "</tr>"
+			console.log(itemInfo)
+			$('tbody').append(itemInfo);
+		})
+	}
+	attachItems();
+})
 </script>
 </head>
 <body>	
@@ -125,7 +152,7 @@
 				</div>
 				<div class="inquiry_wrapper orderBtn">
 					<div class="btns_wrapper">
-						<a class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
+						<a href="${pageContext.request.contextPath}/order/payment" class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
 					</div> 
 				</div>
 			</div>

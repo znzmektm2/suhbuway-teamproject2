@@ -12,44 +12,34 @@
    <definition extends="mainLayout" name="user/*">
       <put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp" />
    </definition>
+   <definition extends="mainLayout" name="myPage/*">
+      <put-attribute name="content" value="/WEB-INF/views/myPage/{1}.jsp" />
+   </definition>
+   <definition extends="mainLayout" name="order/*">
+      <put-attribute name="content" value="/WEB-INF/views/order/{1}.jsp" />
+   </definition>
    <definition extends="mainLayout" name="board/*">
-		<put-attribute name="content" value="/WEB-INF/views/board/{1}.jsp" />
-	</definition>
-
-	<definition extends="mainLayout" name="index">
-		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
-	</definition>
-	<definition extends="mainLayout" name="user/*">
-		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp" />
-	</definition>
-	<definition extends="mainLayout" name="myPage/*">
-		<put-attribute name="content" value="/WEB-INF/views/myPage/{1}.jsp" />
-	</definition>
-		
-	<!-- <definition name="subLayout" template="/WEB-INF/views/layout/subLayout.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/layout/mainHeader.jsp" />
-		<put-attribute name="subMenu" value="/WEB-INF/views/layout/subMenu.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/layout/mainFooter.jsp" />
-	</definition>
-	<definition extends="subLayout" name="menu/*">
-		<put-attribute name="subContent" value="/WEB-INF/views/menu/{1}.jsp" />
-	</definition>
-	<definition extends="subLayout" name="order/*">
-		<put-attribute name="subContent" value="/WEB-INF/views/order/{1}.jsp" />
-	</definition>
-	<definition extends="subLayout" name="board/*">
-		<put-attribute name="subContent" value="/WEB-INF/views/board/{1}.jsp" />
-	</definition>
-	<definition extends="subLayout" name="storeSearch/*">
-		<put-attribute name="subContent" value="/WEB-INF/views/storeSearch/{1}.jsp" />
-	</definition> -->
-	
-	<definition name="myPageLayout" template="/WEB-INF/views/layout/myPageLayout.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/layout/mainHeader.jsp" />
-		<put-attribute name="sub" value="/WEB-INF/views/layout/sub.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/layout/mainFooter.jsp" />
-	</definition>
-	<definition extends="myPageLayout" name="myPage/*">
-		<put-attribute name="myPageContent" value="/WEB-INF/views/myPage/{1}.jsp" />
-	</definition>
+      <put-attribute name="content" value="/WEB-INF/views/board/{1}.jsp" />
+   </definition>
+   <definition extends="mainLayout" name="storeSearch/*">
+      <put-attribute name="content" value="/WEB-INF/views/storeSearch/{1}.jsp" />
+   </definition>
+   
+   <definition name="subLayout" template="/WEB-INF/views/layout/subLayout.jsp">
+      <put-attribute name="header" value="/WEB-INF/views/layout/mainHeader.jsp" />
+      <put-attribute name="subMenu" value="/WEB-INF/views/layout/subMenu.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/layout/mainFooter.jsp" />
+   </definition>
+   <definition extends="subLayout" name="menu/*">
+      <put-attribute name="subContent" value="/WEB-INF/views/menu/{1}.jsp" />
+   </definition>
+   
+   <definition name="myPageLayout" template="/WEB-INF/views/layout/myPageLayout.jsp">
+      <put-attribute name="header" value="/WEB-INF/views/layout/mainHeader.jsp" />
+      <put-attribute name="sub" value="/WEB-INF/views/layout/sub.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/layout/mainFooter.jsp" />
+   </definition>
+   <definition extends="myPageLayout" name="myPage/*">
+      <put-attribute name="myPageContent" value="/WEB-INF/views/myPage/{1}.jsp" />
+   </definition>
 </tiles-definitions>

@@ -1,24 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title> 
-<link href="${pageContext.request.contextPath}/resources/images/suhbuway_favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-<link rel="StyleSheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/TweenMax.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <script>
 	function logout() {
 		document.getElementById("logoutForm").submit();
 	}
 </script>
-</head>
-<body>
 <header>
 	<div id="header1" class="open">
 	    <div class="content">
@@ -123,6 +110,7 @@
 <script>
 $(document).ready(function(){
 	gnb();
+	menuActive();
 	if($('.sub_header').length >0){
 		bodyScroll();//body scroll
 	}
@@ -142,6 +130,48 @@ function gnb(){//gnb
 		}})
 		TweenLite.to($('.dp2'),spd,{ease:eft,top:-20,opacity:0})
 	})
+}
+
+function menuActive() {
+	var url = this.location.href.split("/");
+	var title = url[url.length-1];
+	var gnbLi = $('#gnb>ul>li');
+	var dp2Li = $('.dp2>ul>li');
+	var topText = "";
+	var visual = title;
+	
+	for(var i=0; i<gnbLi.length; i++){ //메뉴 active 추가 및 상단 타이틀 넣기
+		for(var j=0; j<gnbLi.eq(i).find(dp2Li).length; j++){
+			var url2 = gnbLi.eq(i).find(dp2Li).eq(j).find('a').attr('href').split("/");
+			var checkUrl = url2[url2.length-1]; 
+			
+			if(title==checkUrl){
+				gnbLi.eq(i).find(dp2Li).eq(j).find('a').addClass('active');
+				$('.sub>ul>li>a').removeClass("active");
+				$('.sub>ul>li').eq(j).find('a').addClass("active");
+				$('.sub_loc>ul>li').removeClass("active").eq(j).addClass("active");
+			}
+			if(i==0){
+				if(j==0){
+					topText = "전세계 넘버원 브랜드 Subway!<br>50년 전통의 세계 최고의 샌드위치를 맛보세요!";
+				} else if(j==1){
+					topText = "양은 더 많이! 칼로리는 더 적게!<br>신선한 야채와 다양한 소스로 가볍게 찹샐러드를 즐겨보세요!";
+				} else if(j==2){
+					topText = "다양한 추가토핑을 추가해<br>나만의 써브웨이 레시피를 만들어보세요.";
+				} else if(j==3){
+					topText = "바삭하고 쫀득한 달콤한 쿠키와 간편하고 든든한 수프,<br>커피와 음료까지 함께 즐길 수 있습니다.";
+				}
+			}
+			if(title == 'side'){
+				visual = 'sides_drink';
+			}
+			
+		}
+	}
+	$('.topTitle').html(title);
+	$('.topText').html(topText);
+	$('.visual').addClass(visual); 
+	$('#container').addClass(title+"Container");
 }
 
 function bodyScroll(){//body scroll
@@ -180,5 +210,3 @@ function bodyScroll(){//body scroll
 	})
 }
 </script>
-
-

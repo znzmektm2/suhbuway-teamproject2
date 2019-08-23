@@ -5,10 +5,10 @@
 		<!-- sub location -->
 		<div class="sub_loc">
 			<ul>
-				<li class="active"><a href="#">샌드위치</a></li>
-				<li><a href="/saladList">찹샐러드</a></li>
-				<li><a href="/toppingList">추가토핑</a></li>
-				<li><a href="/sideDrink">사이드ㆍ음료</a></li>
+				<li><a href="${pageContext.request.contextPath}/menu/sandwich">샌드위치</a></li>
+				<li><a href="${pageContext.request.contextPath}/menu/salad">찹샐러드</a></li>
+				<li><a href="${pageContext.request.contextPath}/menu/topping">추가토핑</a></li>
+				<li><a href="${pageContext.request.contextPath}/menu/side">사이드ㆍ음료</a></li>
 			</ul>
 		</div>
 		<!--// sub location -->
