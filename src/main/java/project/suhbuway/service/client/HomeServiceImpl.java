@@ -38,4 +38,10 @@ public class HomeServiceImpl implements HomeService {
 		String price = productDAO.selectMenuPrice(name, category);
 		return price;
 	}
+
+	@Override
+	public List<Product> selectAll() {
+		List<Product> list = productDAO.selectAll();
+		return list;
+	}
 }

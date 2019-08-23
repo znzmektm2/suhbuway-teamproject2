@@ -57,6 +57,11 @@
 	<select id="selectMenuPrice" parameterType="map" resultType="string">
 		select price from product where name=#{name} AND category=#{category}
 	</select>
+	
+	<!-- 전체검색(메뉴, 가격 ,카테고리) -->
+	<select id="selectAll" resultMap="productMap">
+		select <include refid="productColumns" /> from product
+	</select>
 	 
 	
 	

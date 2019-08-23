@@ -34,6 +34,7 @@ html,body{background-color:#fff;}
 h1,h2,h3,h4,h5,h6{font-weight:normal}
 body{font-size:16px; color:#666666; font-family:font_ns, sans-serif;}
 input{vertical-align:middle;  font-family:font_ns, sans-serif;}
+input:focus{outline:none;}
 select{
     -webkit-appearance: none; /* 화살표 없애기 for chrome*/
     -moz-appearance: none;    /* 화살표 없애기 for firefox*/
@@ -197,7 +198,7 @@ em{font-style:normal;}
 #container.bg_type01 .sub_header{background:#f6f6f6; border-bottom:0}
 #container.bg_type01 #content{padding-top:59px;}
 #content{padding-top:170px; position:relative;overflow:hidden;z-index:3;}
-#content h2.subTitle{text-align:center; font-size:40px; color:#292929; font-weight:300; letter-spacing:-0.07em; padding:134px 0 80px;}
+#content h2.subTitle{text-align:center; font-size:40px; color:#292929; font-weight:300; letter-spacing:-0.07em; padding:60px 0;}
 #content h2.subTitle > span{margin-bottom:-20px;display: block;color: #666;font-weight:normal;font-size:16px;letter-spacing: -0.025em}
 h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05em; padding-bottom:38px;}
 
@@ -407,7 +408,7 @@ h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05
 /* 메뉴소개 ::: 메뉴 목록 */
 .menu_list_wrapper{background-color:#f2f2f2;}
 .menu_list_wrapper .visual{margin-bottom:60px;height:380px; text-align: center; color:#fff; overflow:hidden; position:relative;}
-.menu_list_wrapper .visual h2{font-family:font_sw; font-size:70px; font-weight:bold; color:#fff; padding:104px 0 21px 0; position:relative; z-index:9; opacity:0; top:100px;}
+.menu_list_wrapper .visual h2{text-transform:capitalize;font-family:font_sw; font-size:70px; font-weight:bold; color:#fff; padding:104px 0 21px 0; position:relative; z-index:9; opacity:0; top:100px;}
 .menu_list_wrapper .visual p{font-size:16px; line-height:26px; letter-spacing:-0.04em; position:relative; z-index:9; opacity:0; top:100px;}
 .menu_list_wrapper .visual.sandwich{background-color:#e85a1c;}
 .menu_list_wrapper .visual.sandwich .img01{background:url(../images/menu/img_visual_sandwich.jpg) 50% 0 no-repeat; position:absolute; left:0; width:100%; top:50%; height:380px; opacity:0}
@@ -491,7 +492,7 @@ h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05
 
 /* board list */
 .board_list_wrapper{position:relative; overflow:hidden; padding-bottom:127px;}
-.board_list_wrapper .board_total{color:#999999; letter-spacing:-0.045em; float:left; margin:17px 0;}
+.board_list_wrapper .board_total{color:#999999; letter-spacing:-0.045em; float:left; margin-bottom:17px;}
 .board_list_wrapper .board_total strong{font-weight:bold; color:#009223; display:inline-block; margin:0 0 0 3px;}
 .board_list_wrapper .cont_right{float:right; margin-bottom:10px;}
 .board_list_wrapper .cont_right .form_search{width:224px; display:inline-block; vertical-align:middle;}
@@ -685,7 +686,7 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 /* 매장찾기 */
 .map_wrap, .map_wrap * {margin:0;padding:0;font-size:14px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:760px;}
+.map_wrap {position:relative;width:100%;height:780px;}
 #map{position:relative;overflow:hidden;width:100%;height:100%;}
 #menu_wrap {position:absolute; left:20px; top:80px; z-index:3; width:340px; height:658px; padding:0 29px; background-color:#fff; border:1px solid #dddddd;}
 #menu_wrap h2{color:#292929; font-size:28px; font-weight:bold; text-align:center; padding:34px 0 17px 0}
@@ -776,3 +777,41 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 .myPage .orders .board_list_wrapper.step1 table span.state.on{color:#d92820;}
 .menuImg{display:block!important;}
 .menuImg img{width:100px;}
+
+/* errorWrap */
+.errorWrap{padding:80px 0;text-align: center;}
+.errorWrap h2.whoops{margin-bottom:10px;font-size: 50px;color:#ffc20d;}
+.errorWrap h2{text-align: center;font-size: 30px;line-height:1.5;font-weight: 800;color: #333;}
+.errorWrap p{margin-top:20px;font-size: 15px;line-height: 25px;}
+.errorWrap p.txt{font-weight:bold;}
+.errorWrap .errorBtn{margin-top:50px;text-align:center;}
+.errorWrap a{margin: 0 4px;width:170px;font-size:18px; font-weight:bold; text-align:center; display:inline-block;background-color: #009223;color: #fff;vertical-align:middle; border-radius:30px; transition-duration:0.2s;}
+.errorWrap a:last-child{background-color: #666;}
+.errorWrap a span{height: 50px;line-height: 50px;letter-spacing: -0.03em;}
+.errorWrap .copy{padding: 20px 0;font-size: 13px;color:#999;}
+
+/* 결제하기 */
+.board_list_wrapper.step1 .h_title{margin-top:50px;padding-bottom: 25px;} 
+.board_list_wrapper.step1 .contBox{margin-top:20px;}
+.board_list_wrapper.step1 .contBox h3{margin-bottom:10px;color: #292929;font-size: 18px;font-weight: bold;}
+.board_list_wrapper.step1 .payInfoTable{border-top: 2px solid #666;}
+.board_list_wrapper.step1 .payInfoTable th{color: #666666;border-bottom: 1px solid #ddd;}
+.board_list_wrapper.step1 .payInfoTable td{padding:10px 20px;text-align: left;}
+.board_list_wrapper.step1 .payInfoTable span{text-align:left;padding: 0 10px;font-size: 13px;line-height: 30px;color: #413e3d;}
+.board_list_wrapper.step1 .select_box{margin:0;}
+.board_list_wrapper.step1 .select_box .slct_list{overflow-y:auto;}
+.board_list_wrapper.step1 .select_box .slct_list ul li{padding:0;}
+.board_list_wrapper.step1 .select_box .slct_list ul li a{margin:0;min-width:auto;height:auto;background: none;text-align:left;border-radius:0;}
+.board_list_wrapper.step1 .select_box .slct_list ul li a:hover{background: #f9f9f9;}
+.board_list_wrapper.step1 .payInfoTable ul li{font-size:13px;line-height:30px;}
+.board_list_wrapper.step1 .payInfoTable ul li input{padding: 0 10px;width: 228px;margin-left: 10px;border: 2px solid #ddd;position: relative;display: inline-block;line-height: 30px;box-sizing: border-box;}
+.board_list_wrapper.step1 .payInfoTable ul li a{display:inline-block;margin-left:10px;padding:0 14px;height:auto;min-width:auto;border: 2px solid #ddd;font-size:13px;line-height: 30px;background: none;border-radius: 17px;transition-duration: 0.3s;}
+.board_list_wrapper.step1 .payInfoTable ul li a:hover{border-color: #aaa}
+.board_list_wrapper.step1 .payInfoTable .price{font-size: 22px;font-weight: bold;}
+.paymentContainer .inquiry_wrapper{padding-bottom:0;}
+
+/* 주문하기 */
+.completeOrderContainer .num{margin-top:15px;}
+.completeOrderContainer .errorWrap{padding:70px 0 90px;}
+.completeOrderContainer .errorWrap a{background-color: #009223;}
+
