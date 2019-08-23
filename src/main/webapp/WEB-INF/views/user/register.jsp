@@ -25,6 +25,17 @@
 			}//else
 		});//keyup
 		
+		// # 연락처 길이 검사
+		var phoneState = false;
+		$("#userPhone").keyup(function(){
+			var userPhone=$(this).val().trim();
+			if( userPhone.length>10 ){ // 10글자 이상이면
+				alert("연락처는 10글자 이하로 입력해주세요.");
+				$("#userPhone").val("");
+				return;
+			} 
+		});//keyup
+		
 		// # 아이디 일치 검사
 		$("#idCheck").click(function(){
 			if( idState== false ) {
@@ -73,8 +84,8 @@
 		
 		// # 등록하기(회원가입)
  		$("a.btn.bgc_point.i_reg").click(function(){
- 			checkValid();
- 			//if( checkValid()==true ) {
+ 			//checkValid();
+ 			if( checkValid()==true ) {
 				// 이메일 조합
 				var email1 = $("#email1").val(); 
 				var email2 = $("#email2").val();
@@ -83,7 +94,16 @@
 				console.log("전송될 userEmail: "+ userEmail );
 		
 				$("#registerForm").submit();//전송
-			//} 
+			} 
+		})//click
+		
+		// # 취소
+		$("a.btn.bgc_white").click(function(){
+			$("#idcheckspan").html("");
+			$("#pwdCheck").text("");
+			$( "#registerForm" ).each( function () {
+	            this.reset();
+	        });
 		})//click
 	})
 	// 유효성 체크
@@ -185,8 +205,7 @@
 										<th scope="col">비밀번호<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="userPassword" id="userPassword" placeholder="비밀번호를 입력해주세요" type="password" 
-												value="${userId}+${socialType}">
+												<input maxlength="16" name="userPassword" id="userPassword" placeholder="비밀번호를 입력해주세요" type="password"  >
 											</span>
 										</td>
 									</tr>
@@ -194,8 +213,7 @@
 										<th scope="col">비밀번호 확인<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="checkedPassword" id="checkedPassword" placeholder="비밀번호를 확인해주세요"  type="password" 
-												value="${userId}+${socialType}">
+												<input maxlength="16" name="checkedPassword" id="checkedPassword" placeholder="비밀번호를 확인해주세요"  type="password" >
 											</span>
 											<span style="font-size:13px;" id="pwdCheck"></span>
 										</td>

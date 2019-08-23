@@ -155,9 +155,42 @@ public class UserController {
     }
 	
 	/**
-	 *  마이페이지폼
+	 * 비밀번호 확인
 	 */
-	@RequestMapping("/user/myPage")
-	public void myPage() {}
-
+	@RequestMapping("/PasswordCheckAjax")
+	@ResponseBody
+	public String PasswordCheckAjax( String userId, String userPassword ) {
+		// 입력된 비밀번호와  db비번 확인
+		
+		boolean result = service.selectByUserPassword( userId, userPassword);
+		String state= result ? "ok" : "fail";
+		
+		return state;
+	}
+	
+	/**
+	 * 회원정보 수정
+	 */
+	@RequestMapping("/user/userUpdate")
+	public String userUpdate( User user ) {
+		int result = service.userUpdate(user);
+		String url="myPage/infol";
+		if( result==0 ) {
+			url="err/updateFail";
+		}
+		return "redirect:/myPage/info?msg=ok";
+	}
+	
+	/**
+	 * 회원탈퇴
+	 */
+	@RequestMapping("/user/userDeleteAjax")
+	@ResponseBody
+	public String userDeleteAjax( String userId ) {
+		System.out.println("회원정보 ID: " + userId );
+		System.out.println("삭제할 회원 정보");
+		//String result = service.userDelete(userId);
+		//System.out.println("삭제 결과 : " + result );
+		return "";
+	}
 }
