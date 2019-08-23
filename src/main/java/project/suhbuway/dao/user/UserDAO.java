@@ -30,4 +30,11 @@ public interface UserDAO {
 	 * SocialToken 변경될경우
 	 */
 	int updateBySocialToken(String id, String socialToken);
+	
+	
+	/**
+	 * 회원정보 수정
+	 */
+	int userUpdate(User user);
+	
 }
