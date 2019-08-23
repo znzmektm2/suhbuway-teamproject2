@@ -112,7 +112,7 @@
                             <span class="slct_head">뺄 야채 선택</span>
                             <div class="slct_list">
                                 <ul>
-                                    <li><a href="#" class="default">뺄 야채 선택</a></li>
+                                    <li><a href="#" class="default">야채 선택</a></li>
                                     <li><a href="#" data-val="sandwich">양상추</a></li>
                                     <li><a href="#" data-val="sandwich">토마토</a></li>
                                 </ul>
@@ -172,7 +172,7 @@
                         <td><span class='default'>선택안함</span></td>
                         <td><span class='default'>선택안함</span></td>
                         <td><span class='default'>선택안함</span></td>
-                        <td><span class='default'>기본선택</span></td>
+                        <td><span class='default'>선택안함</span></td>
                         <td><span class='default'>선택안함</span></td>
                         <td><span class='orderPrice'>0</span></td>
                     </tr>
@@ -212,9 +212,10 @@ var list = ${requestScope.list};
 var menuItem = {
     product : "",
     breadType : "",
-    veggies : "",
-    source : "",
-    subMenu : []
+    veggies : [],
+    source : [],
+    subMenu : [],
+    price : 0
 };
 
 /** 써브웨이 이용방법 */
@@ -317,19 +318,16 @@ function selectBox() {
     });
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------------------------------------------------
 // 셀렉트 박스 내 메뉴 선택 시 이벤트들
 $(function() {
     var selectMenuKind = "";
     var selectLength = "";
-    var selectMenuName = "";
     var deleteBtn = "<span class='delete'>삭제</span>";
     var deleteA = "";
     var defualtText = "<span class='default'>선택안함</span>";
 
-    var columnIndex = 0; // 몇번째 칸에 넣을지 구분하는 인덱스
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //-----------------------------------------------------------------------------------------------------------------
     // 스텝 1-1 : 메뉴 선택 시
     $('.selectMenuKind').on('click','.slct_list>ul>li>a', function (e) {
         e.preventDefault(); // 화면 갱신 막기
@@ -351,8 +349,7 @@ $(function() {
             $('.selectMenuName .slct_list ul li:first-child').nextAll().remove();
         }
     });
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //-----------------------------------------------------------------------------------------------------------------
     // 스텝 1-2 : 샌드위치의 길이 선택 시
     $('.selectLength').on('click','.slct_list>ul>li>a', function(e) {
         e.preventDefault(); // 화면 갱신 막기
@@ -360,18 +357,24 @@ $(function() {
 
         selectLength = $(this).text();
     });
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //-----------------------------------------------------------------------------------------------------------------
     // 스텝 1-3 : 메뉴 선택 시
     $('.selectMenuName').on('click','.slct_list>ul>li>a', function(e) {
         e.preventDefault(); // 화면 갱신 막기
         $(this).parents('.slct_list').prev('.slct_head').text($(this).text()); // 선택한 텍스트 셀렉트박스에 넣기
-        selectMenuName = $(this).text();
+        //selectMenuName = $(this).text();
+        $('table tbody tr:nth-child(1)').addClass('on');
+        if (!$(this).hasClass('default')) {
+            $(this).parents('.selectMenuName').parents('li').addClass('on');
+        } else {
+            $(this).parents('.selectMenuName').parents('li').removeClass('on');
+        }
+
         var addMainMenu = "";
         var _this = $(this);
         $.each(list, function(index, item) {
             if (item.productId == _this.attr('data-val')) {
-                addMainMenu = "<li>" + deleteBtn + "<span class='itemName'>" + item.name
+                addMainMenu = "<li data-val='" + _this.attr('data-val') + "'>" + deleteBtn + "<span class='itemName'>" + item.name
                     + " " + selectLength + "</span>" + "<span class='price'>" + item.price
                     + "</span>" + deleteA + "</li>";
                 menuItem.product = item; // 메뉴에 저장
@@ -379,13 +382,13 @@ $(function() {
                 return false;
             }
         });
-        $('table tbody tr:nth-child(1) td').eq(columnIndex).children('.default').remove();
-        $('table tbody tr:nth-child(1) td').eq(columnIndex).append("<ul>" + addMainMenu + "</ul>");
+        $('table tbody tr:nth-child(1) td').eq(0).children('.default').remove();
+        $('table tbody tr:nth-child(1) td').eq(0).empty().append("<ul>" + addMainMenu + "</ul>");
+        displayPrice()
     });
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // 스텝 1-extra : 메뉴 삭제
-    $('table tbody tr:nth-child(1) td').eq(columnIndex).on('click', function() {
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 1-4 : 주 메뉴 삭제
+    $('table tbody tr:nth-child(1) td').eq(0).on('click','.delete', function() {
         $('tr td').empty().append(defualtText);
         $('tr td').eq(6).empty().html("<span class='orderPrice'>0</span>");
         $('tr').removeClass('on');
@@ -400,270 +403,477 @@ $(function() {
 
         /* menuItem 저장항목 삭제 */
         menuItem.product = "";
+        menuItem.breadType = "";
+        menuItem.veggies = [];
+        menuItem.subMenu = [];
+        menuItem.source = [];
         console.log(menuItem);
+        displayPrice()
     });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 2-1 : 빵 선택 시
+    $('.bread').on('click','.slct_list>ul>li>a', function(e) {
+        e.preventDefault(); // 화면 갱신 막기
+        $(this).parents('.slct_list').prev('.slct_head').text($(this).text()); // 선택한 텍스트 셀렉트박스에 넣기
+        if (!$(this).hasClass('default')) {
+            var addBread = "<ul><li data-val=" + $(this).attr('data-val') + "><span class='itemName'>"
+                + $(this).text() + "</span><span class='deleteItem'>삭제</span></li></ul>";
+            $('table tbody tr:nth-child(1) td').eq(1).empty().append(addBread);
 
+            $(this).parents('.bread').parents('li').addClass('on');
 
-});
-
-/** 셀렉트박스 메뉴선택 시 이벤트 */
-function selectMenu() {
-    var selectMenuKind = "";
-    var selectLength = "";
-    var selectMenuName = "";
-    var addVegetable = "";
-    var addSourceBox = "";
-    var addTextList = "";
-    var deleteBtn = "";
-    var deleteA = "";
-    var defualtText1 = "<span class='default'>선택안함</span>";
-    var defualtText2 = "<span class='default'>기본선택</span>";
-    var totalPrice = 0;
-    var itemPrice = 0;
-
-    $('.arr').click(function() {
-        addTextList = "";
-    });
-
-    $('body').on('click','.slct_list>ul>li>a',function(e) {
-        console.log(selectMenuKind);
-        e.preventDefault(e);
-
-        var txt = $(this).text();
-        var index = $(this).parents('li.active').index();
-        var thisSelectBox = $(this).parents('.select_box');
-
-        /** 선택한 텍스트 셀렉트박스에 넣기 */
-        $(this).parents('.slct_list').prev('.slct_head').text(txt);
-
-        /** 메뉴 선택 */
-        if (thisSelectBox.hasClass('selectMenuKind')) {
-            selectMenuKind = $(this).attr('data-val');
-            deleteBtn = "<span class='delete'>삭제</span>";
-            deleteA = "";
-
-            /** 샌드위치 길이를 선택하는 셀렉트 박스 노출 여부 */
-            if (txt == '샌드위치') {
-                $('.selectLength').show();
-            } else {
-                $('.selectLength').hide();
-                selectLength = "";
-            }
-            
-            /** 메뉴 선택시 다른 셀렉트박스 초기화 */
-            $('.selectMenuName .slct_head,.selectLength .slct_head').text("종류 선택");
-            if ($(this).hasClass('default')) {
-                $('.info_content>ol>li:first-child').removeClass('on');
-                $('.selectMenuName .slct_list ul li:first-child').nextAll().remove();
-            }
-        }
-
-        /** 길이 선택시 변수에 담는다. */
-        if (thisSelectBox.hasClass('selectLength')) {
-            selectLength = $(this).text();
+            menuItem.breadType = $(this).text(); // menuItem에 빵 추가
+            console.log(menuItem);
         } else {
-            selectLength = "";
-        }
-
-        /** 종류 선택 */
-        if (thisSelectBox.hasClass('selectMenuName')) {
-            selectMenuName = $(this).text();
-            deleteBtn = "<span class='delete'>삭제</span>";
-            deleteA = "";
-
-            if ($(this).parents('.selectMenuName').siblings('.selectMenuKind').find('.slct_head').text() == '샌드위치') {
-                selectMenuKind = 'sandwich';
-            } else {
-                selectMenuKind = 'salad';
-            }
-            $('table tbody tr:nth-child(1)').addClass('on');
-            if (!$(this).hasClass('default')) {
-                $(this).parents('.selectMenuName').parents('li').addClass('on');
-            } else {
-                $(this).parents('.selectMenuName').parents('li').removeClass('on');
-            }
-        } else {
-            deleteBtn = "";
-            deleteA = "<span class='deleteItem'>삭제</span>";
-        }
-
-        /** 빵 선택 및 추가 */
-        if (thisSelectBox.hasClass('bread')) {
-            if (!$(this).hasClass('default')) {
-                var addBread = "<ul><li data-val="
-                        + $(this).attr('data-val')
-                        + "><span class='itemName'>"
-                        + txt
-                        + "</span><span class='deleteItem'>삭제</span></li></ul>";
-                $('table tbody tr:nth-child(1) td').eq(index).empty().append(addBread);
-                $(this).parents('.bread').parents('li').addClass('on');
-
-                /** menuItem에 빵 추가 */
-                menuItem.breadType = txt;
-                console.log(menuItem);
-            } else {
-                $(this).parents('.bread').parents('li').removeClass('on');
-            }
-        }
-
-        /** 토핑 선택 */
-        if (thisSelectBox.hasClass('topping')) {
-            selectMenuKind = "topping";
-        }
-
-        /** 야채 선택 및 추가 */
-        if (!$(this).hasClass('default')) {
-            if (thisSelectBox.hasClass('vegetable')) {
-                addVegetable += "<li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
-
-                menuItem.veggies += txt + ";"; // 메뉴에 저장 
-
-                /* 선택된 야채를 표에 넣어준다. */
-                $('table tbody tr:nth-child(1) td').eq(index).empty().append("<ul>" + addVegetable + "</ul>");
-            }
-        }
-
-        /** 소스 선택 및 추가 */
-        if (!$(this).hasClass('default')) {
-            if (thisSelectBox.hasClass('sourceBox')) {
-                index = 4;
-                addSourceBox += "<li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
-                
-                menuItem.source += txt + ";"; // 메뉴에 저장 
-
-                /* 선택된 소스를 표에 넣어준다. */                
-                $('table tbody tr:nth-child(1) td').eq(index).empty().append("<ul>" + addSourceBox + "</ul>");
-            }
-        }
-
-        /** 사이드 메뉴 선택 */
-        if (thisSelectBox.hasClass('sideDrink')) {
-            index = 5;
-            selectMenuKind = "side";
-        }
-
-        if (!$(this).hasClass('default')) {
-            var _this = $(this);
-            if (thisSelectBox.hasClass('addPrice')) { //가격 넣기
-
-                /** 샌드위치나 샐러드를 선택시 표에 등록하는 항목 */
-                if (thisSelectBox.hasClass('selectMenuName')) {
-                    $.each(list,function(index,item) {
-                        if (item.productId == _this.attr('data-val')) {
-                            addTextList = "<li>" + deleteBtn + "<span class='itemName'>" + item.name + " "
-                                + selectLength
-                                + "</span>"
-                                + "<span class='price'>"
-                                + item.price
-                                + "</span>"
-                                + deleteA
-                                + "</li>";
-                            menuItem.product = item; // 메뉴에 저장
-                        }
-                    });
-                }
-                /** 토핑을 등록 한다. */
-                else {
-                	$.each(list,function(index,item) {
-                        if (item.productId == _this.attr('data-val')) {
-                        	console.log(item);
-                            addTextList = "<li>" + deleteBtn + "<span class='itemName'>" + item.name + " "
-                                    + selectLength
-                                    + "</span>"
-                                    + "<span class='price'>"
-                                    + item.price
-                                    + "</span>"
-                                    + deleteA
-                                    + "</li>";
-                            menuItem.subMenu.push(item); // 메뉴에 저장 
-                        }
-                    });
-                }
-                var addMenuList = "<ul>" + addTextList + "</ul>";
-                $('table tbody tr:nth-child(1) td').eq(index).children('.default').remove();
-                $('table tbody tr:nth-child(1) td').eq(index).append(addMenuList);
-                
-                console.log(menuItem); // 메뉴 찍어봅니다.
-            }
+            $(this).parents('.bread').parents('li').removeClass('on');
         }
     });
-
-    $(".selectLength").hide(); //길이선택 셀렉트박스 숨기기
-
-    function getItemPrice(tdIndex, ItemIndex) { //가격 빼기
-        $('body').on('click', '.price', function(e) {
-            var price = $(this).text();
-            price = parseInt(price.replace(/,/g, ""));
-            itemPrice = price;
-        });
-
-        $('tr td').eq(tdIndex).find('.price').eq(ItemIndex).trigger(
-                'click');
-        totalPrice -= itemPrice;
-        var totalpriceTxt = String(totalPrice);
-        totalpriceTxt = totalpriceTxt.replace(
-                /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-        $('.orderPrice').text(totalpriceTxt); //총가격
-    }
-
-    /** 빵 삭제 */
-    $('body').on('click', '.deleteItem', function(e) {
-        var thisParentsTd = $(this).parents('td');
-        var liLength = $(this).parent('li').siblings('li').length;
-        var tdIndex = thisParentsTd.index();
-        var ItemIndex = $(this).parent('li').index();
-        getItemPrice(tdIndex, ItemIndex) //가격 빼기
-
-        if (liLength == 0) {
-            if (thisParentsTd.index() == 4) {
-                thisParentsTd.empty().append(defualtText2);
-            } else {
-                thisParentsTd.empty().append(defualtText1);
-            }
-            addTextList = "";
-        }
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 2-2 : 빵 삭제 시
+    $('table tbody tr:nth-child(1) td').eq(1).on('click','.deleteItem', function() {
+        $(this).parents('td').empty().append(defualtText);
 
         /* menuItem 저장항목 삭제 */
         menuItem.breadType = "";
         console.log(menuItem);
     });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 3-1 : 추가 토핑 추가 시
+    $('.topping').on('click','.slct_list>ul>li>a', function(e) {
+        e.preventDefault(); // 화면 갱신 막기
+        $(this).parents('.slct_list').prev('.slct_head').text($(this).text()); // 선택한 텍스트 셀렉트박스에 넣기
+        if (!$(this).hasClass('default')) {
+            $(this).parents('.topping').parents('li').addClass('on');
+            var addMainMenu = "";
+            var _this = $(this);
+            var flagNotExistInMenuItem = true; // 메뉴리스트에 있는지 체크
+            $.each(list, function (index, item) {
+                if (item.productId == _this.attr('data-val')) {
+                    //console.log(item);
+                    addMainMenu = "<li data-val='" + _this.attr('data-val') + "'>" + deleteBtn + "<span class='itemName'>"
+                        + item.name + "</span>" + "<span class='price'>" + item.price + "</span>"
+                        + deleteA + "</li>";
+                    if(menuItem.subMenu.find(item => item.productId == _this.attr('data-val')) != undefined ){
+                        flagNotExistInMenuItem = false;
+                    } else {
+                        menuItem.subMenu.push(item); // 메뉴에 저장
+                    }
+                }
+            });
+            // 표에 아이템을 넣는다.
+            var insertColumn = $('table tbody tr:nth-child(1) td').eq(2);
+            if(flagNotExistInMenuItem){
+                insertColumn.children('.default').remove(); // '선택 안함' 지우기
+                if (insertColumn.children('ul').length){ // ul이 있는지 확인
+                    insertColumn.children('ul').append(addMainMenu);
+                } else {
+                    insertColumn.append("<ul>" + addMainMenu + "</ul>");
+                }
+            }
+            console.log(menuItem); // 메뉴 찍어봅니다.
+        } else {
+            $(this).parents('.topping').parents('li').removeClass('on');
+        }
+        displayPrice()
+    });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 3-2 : 토핑 삭제 시
+    $('table tbody tr:nth-child(1) td').eq(2).on('click','.delete', function() {
+        var ul = $(this).parents('ul');
+        var productId = $(this).parents('li').attr('data-val');
+        $(this).parents('li').remove();
+        if(!ul.children('li').length) {// 목록이 다 지워졌다면.
+            ul.parents('td').empty().append(defualtText);
+        }
+        /* subMenu 저장항목 삭제 */
+        var some = menuItem.subMenu.find(item => item.productId == $(this).parents('li').attr('data-val'));
+        menuItem.subMenu.splice(menuItem.subMenu.indexOf(some), 1);
+        console.log(menuItem);
+        displayPrice()
+    });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 4-1 : 야채 추가 시
+    $('.vegetable').on('click','.slct_list>ul>li>a', function(e) {
+        e.preventDefault(); // 화면 갱신 막기
+        $(this).parents('.slct_list').prev('.slct_head').text($(this).text()); // 선택한 텍스트 셀렉트박스에 넣기
+        if (!$(this).hasClass('default')) {
+            $(this).parents('.vegetable').parents('li').addClass('on');
 
-    /** 주 메뉴 아이템 삭제 */
-    $('body').on('click','.delete',function(e) {
-        totalPrice = 0;
-        $('tr td').empty().append(defualtText1);
-        $('tr td').eq(4).empty().append(defualtText2);
-        $('tr td').eq(6).empty().html("<span class='orderPrice'>0</span>");
-        $('tr').removeClass('on');
-        $('.info_content>ol>li').removeClass('on');
-        
-        /* 셀렉트박스 초기화 */
-        $('.slct_head').each(function(index, item) { 
-            var text = $(this).next('.slct_list').find('li:first-child a').text();
-            console.log(text);
-            $(this).text(text);
-        });
-        
-        /* menuItem 저장항목 삭제 */
-        menuItem.product = "";
+            if(menuItem.veggies.indexOf($(this).text()) == -1){ // menuItem의 veggies에 항목이 있는지 체크한다.
+
+                // 선택된 야채를 표에 넣어준다.
+                var addVegetable = "<li><span class='itemName'>" + $(this).text() + "</span><span class='deleteItem'>삭제</span></li>";
+                var insertColumn = $('table tbody tr:nth-child(1) td').eq(3);
+                insertColumn.children('.default').remove(); // '선택 안함' 지우기
+                if (insertColumn.children('ul').length){ // ul이 있는지 확인
+                    insertColumn.children('ul').append(addVegetable);
+                } else {
+                    insertColumn.append("<ul>" + addVegetable + "</ul>");
+                }
+
+                // 메뉴에 저장
+                menuItem.veggies.push($(this).text());
+                console.log(menuItem);
+            }
+        } else {
+            $(this).parents('.vegetable').parents('li').removeClass('on');
+        }
+    });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 4-2 : 야채 삭제 시
+    $('table tbody tr:nth-child(1) td').eq(3).on('click','.deleteItem', function() {
+        var ul = $(this).parents('ul');
+        var itemName = $(this).prev('.itemName').text(); // 이름 저장해두고
+        $(this).parents('li').remove(); // 항목삭제
+        if(!ul.children('li').length) { // 목록이 다 지워졌다면.
+            ul.parents('td').empty().append(defualtText);
+        }
+        /* veggies 저장항목 삭제 */
+        menuItem.veggies.splice(itemName, 1);
         console.log(menuItem);
     });
-}
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 5-1 : 소스 추가 시
+    $('.sourceBox').on('click','.slct_list>ul>li>a', function(e) {
+        e.preventDefault(); // 화면 갱신 막기
+        $(this).parents('.slct_list').prev('.slct_head').text($(this).text()); // 선택한 텍스트 셀렉트박스에 넣기
+        if (!$(this).hasClass('default')) {
+            $(this).parents('.sourceBox').parents('li').addClass('on');
 
-/** 샌드위치 or 샐러드 셀렉트박스 리스트 뿌리기 */
-function menuList() {
-    $(".selectMenuKind .slct_list>ul>li>a").on('click',function() {
-        var txt = $(this).attr('data-val');
-        var str = "";
-        $.each(list,function(index, item) {
-            if (item.category == txt)
-            str += "<li><a data-val=" + item.productId + " href='#'>" + item.name + "</a></li>";
-        });
-        $('.selectMenuName .slct_list>ul').append(str);
+            if(menuItem.source.indexOf($(this).text()) == -1){ // menuItem의 veggies에 항목이 있는지 체크한다.
+
+                // 선택된 야채를 표에 넣어준다.
+                var addVegetable = "<li><span class='itemName'>" + $(this).text() + "</span><span class='deleteItem'>삭제</span></li>";
+                var insertColumn = $('table tbody tr:nth-child(1) td').eq(4);
+                insertColumn.children('.default').remove(); // '선택 안함' 지우기
+                if (insertColumn.children('ul').length){ // ul이 있는지 확인
+                    insertColumn.children('ul').append(addVegetable);
+                } else {
+                    insertColumn.append("<ul>" + addVegetable + "</ul>");
+                }
+
+                // 메뉴에 저장
+                menuItem.source.push($(this).text());
+                console.log(menuItem);
+            }
+        } else {
+            $(this).parents('.sourceBox').parents('li').removeClass('on');
+        }
     });
-}
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 5-2 : 소스 삭제 시
+    $('table tbody tr:nth-child(1) td').eq(4).on('click','.deleteItem', function() {
+        var ul = $(this).parents('ul');
+        var itemName = $(this).prev('.itemName').text(); // 이름 저장해두고
+        $(this).parents('li').remove(); // 항목삭제
+        if(!ul.children('li').length) {// 목록이 다 지워졌다면.
+            ul.parents('td').empty().append(defualtText);
+        }
+        /* veggies 저장항목 삭제 */
+        menuItem.source.splice(itemName, 1);
+        console.log(menuItem);
+    });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 6-1 : 사이드/음료 선택 시
+    $('.sideDrink').on('click','.slct_list>ul>li>a', function(e) {
+        e.preventDefault(); // 화면 갱신 막기
+        $(this).parents('.slct_list').prev('.slct_head').text($(this).text()); // 선택한 텍스트 셀렉트박스에 넣기
+        if (!$(this).hasClass('default')) {
+            $(this).parents('.sideDrink').parents('li').addClass('on');
 
-/* menuItem을 sessionStorage에 담고 장바구니 페이지로 이동 */ 
+            var item = list.find(x => x.productId == $(this).attr('data-val'));
+
+            if(menuItem.subMenu.find(x => x.productId == $(this).attr('data-val')) == undefined ){
+                menuItem.subMenu.push(item); // menuItem.subMenu에 저장
+                var menu = "<li data-val='" + item.productId + "'>" + deleteBtn + "<span class='itemName'>"
+                    + item.name + "</span>" + "<span class='price'>" + item.price + "</span>"
+                    + deleteA + "</li>";
+                var insertColumn = $('table tbody tr:nth-child(1) td').eq(5);
+                insertColumn.children('.default').remove(); // '선택 안함' 지우기
+                if (insertColumn.children('ul').length){ // ul이 있는지 확인
+                    insertColumn.children('ul').append(menu);
+                } else {
+                    insertColumn.append("<ul>" + menu + "</ul>");
+                }
+            }
+            console.log(menuItem)
+        } else {
+            $(this).parents('.sideDrink').parents('li').removeClass('on');
+        }
+        displayPrice()
+    });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 스텝 6-2 : 사이드/음료 삭제 시
+    $('table tbody tr:nth-child(1) td').eq(5).on('click','.delete', function() {
+        var ul = $(this).parents('ul');
+        var productId = $(this).parents('li').attr('data-val');
+        $(this).parents('li').remove();
+        if(!ul.children('li').length) {// 목록이 다 지워졌다면.
+            ul.parents('td').empty().append(defualtText);
+        }
+        /* subMenu 저장항목 삭제 */
+        var some = menuItem.subMenu.find(item => item.productId == $(this).parents('li').attr('data-val'));
+        menuItem.subMenu.splice(menuItem.subMenu.indexOf(some), 1);
+        console.log(menuItem);
+        displayPrice()
+    });
+    //-----------------------------------------------------------------------------------------------------------------
+    // 가격 표시
+    function displayPrice() {
+        var price = menuItem.product.price
+        $.each(menuItem.subMenu, function(index, item){
+            price += item.price;
+        })
+        console.log(price);
+        menuItem.price = price;
+        $('table tbody tr:nth-child(1) td').eq(6).children('.orderPrice').text(price);
+    }
+});
+
+// /** 셀렉트박스 메뉴선택 시 이벤트 */
+// function selectMenu() {
+//     var selectMenuKind = "";
+//     var selectLength = "";
+//     var selectMenuName = "";
+//     var addVegetable = "";
+//     var addSourceBox = "";
+//     var addTextList = "";
+//     var deleteBtn = "";
+//     var deleteA = "";
+//     var defualtText1 = "<span class='default'>선택안함</span>";
+//     var defualtText2 = "<span class='default'>기본선택</span>";
+//     var totalPrice = 0;
+//     var itemPrice = 0;
+//
+//     $('.arr').click(function() {
+//         addTextList = "";
+//     });
+//
+//     $('body').on('click','.slct_list>ul>li>a',function(e) {
+//         console.log(selectMenuKind);
+//         e.preventDefault(e);
+//
+//         var txt = $(this).text();
+//         var index = $(this).parents('li.active').index();
+//         var thisSelectBox = $(this).parents('.select_box');
+//
+//         /** 선택한 텍스트 셀렉트박스에 넣기 */
+//         $(this).parents('.slct_list').prev('.slct_head').text(txt);
+//
+//         /** 메뉴 선택 */
+//         if (thisSelectBox.hasClass('selectMenuKind')) {
+//             selectMenuKind = $(this).attr('data-val');
+//             deleteBtn = "<span class='delete'>삭제</span>";
+//             deleteA = "";
+//
+//             /** 샌드위치 길이를 선택하는 셀렉트 박스 노출 여부 */
+//             if (txt == '샌드위치') {
+//                 $('.selectLength').show();
+//             } else {
+//                 $('.selectLength').hide();
+//                 selectLength = "";
+//             }
+//
+//             /** 메뉴 선택시 다른 셀렉트박스 초기화 */
+//             $('.selectMenuName .slct_head,.selectLength .slct_head').text("종류 선택");
+//             if ($(this).hasClass('default')) {
+//                 $('.info_content>ol>li:first-child').removeClass('on');
+//                 $('.selectMenuName .slct_list ul li:first-child').nextAll().remove();
+//             }
+//         }
+//
+//         /** 길이 선택시 변수에 담는다. */
+//         if (thisSelectBox.hasClass('selectLength')) {
+//             selectLength = $(this).text();
+//         } else {
+//             selectLength = "";
+//         }
+//
+//         /** 종류 선택 */
+//         if (thisSelectBox.hasClass('selectMenuName')) {
+//             selectMenuName = $(this).text();
+//             deleteBtn = "<span class='delete'>삭제</span>";
+//             deleteA = "";
+//
+//             if ($(this).parents('.selectMenuName').siblings('.selectMenuKind').find('.slct_head').text() == '샌드위치') {
+//                 selectMenuKind = 'sandwich';
+//             } else {
+//                 selectMenuKind = 'salad';
+//             }
+//             $('table tbody tr:nth-child(1)').addClass('on');
+//             if (!$(this).hasClass('default')) {
+//                 $(this).parents('.selectMenuName').parents('li').addClass('on');
+//             } else {
+//                 $(this).parents('.selectMenuName').parents('li').removeClass('on');
+//             }
+//         } else {
+//             deleteBtn = "";
+//             deleteA = "<span class='deleteItem'>삭제</span>";
+//         }
+//
+//         /** 빵 선택 및 추가 */
+//         if (thisSelectBox.hasClass('bread')) {
+//             if (!$(this).hasClass('default')) {
+//                 var addBread = "<ul><li data-val="
+//                         + $(this).attr('data-val')
+//                         + "><span class='itemName'>"
+//                         + txt
+//                         + "</span><span class='deleteItem'>삭제</span></li></ul>";
+//                 $('table tbody tr:nth-child(1) td').eq(index).empty().append(addBread);
+//                 $(this).parents('.bread').parents('li').addClass('on');
+//
+//                 /** menuItem에 빵 추가 */
+//                 menuItem.breadType = txt;
+//                 console.log(menuItem);
+//             } else {
+//                 $(this).parents('.bread').parents('li').removeClass('on');
+//             }
+//         }
+//
+//         /** 토핑 선택 */
+//         if (thisSelectBox.hasClass('topping')) {
+//             selectMenuKind = "topping";
+//         }
+//
+//         /** 야채 선택 및 추가 */
+//         if (!$(this).hasClass('default')) {
+//             if (thisSelectBox.hasClass('vegetable')) {
+//                 addVegetable += "<li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
+//
+//                 menuItem.veggies += txt + ";"; // 메뉴에 저장
+//
+//                 /* 선택된 야채를 표에 넣어준다. */
+//                 $('table tbody tr:nth-child(1) td').eq(index).empty().append("<ul>" + addVegetable + "</ul>");
+//             }
+//         }
+//
+//         /** 소스 선택 및 추가 */
+//         if (!$(this).hasClass('default')) {
+//             if (thisSelectBox.hasClass('sourceBox')) {
+//                 index = 4;
+//                 addSourceBox += "<li><span class='itemName'>" + txt + "</span><span class='deleteItem'>삭제</span></li>";
+//
+//                 menuItem.source += txt + ";"; // 메뉴에 저장
+//
+//                 /* 선택된 소스를 표에 넣어준다. */
+//                 $('table tbody tr:nth-child(1) td').eq(index).empty().append("<ul>" + addSourceBox + "</ul>");
+//             }
+//         }
+//
+//         /** 사이드 메뉴 선택 */
+//         if (thisSelectBox.hasClass('sideDrink')) {
+//             index = 5;
+//             selectMenuKind = "side";
+//         }
+//
+//         if (!$(this).hasClass('default')) {
+//             var _this = $(this);
+//             if (thisSelectBox.hasClass('addPrice')) { //가격 넣기
+//
+//                 /** 샌드위치나 샐러드를 선택시 표에 등록하는 항목 */
+//                 if (thisSelectBox.hasClass('selectMenuName')) {
+//                     $.each(list,function(index,item) {
+//                         if (item.productId == _this.attr('data-val')) {
+//                             addTextList = "<li>" + deleteBtn + "<span class='itemName'>" + item.name + " "
+//                                 + selectLength
+//                                 + "</span>"
+//                                 + "<span class='price'>"
+//                                 + item.price
+//                                 + "</span>"
+//                                 + deleteA
+//                                 + "</li>";
+//                             menuItem.product = item; // 메뉴에 저장
+//                         }
+//                     });
+//                 }
+//                 /** 토핑을 등록 한다. */
+//                 else {
+//                 	$.each(list,function(index,item) {
+//                         if (item.productId == _this.attr('data-val')) {
+//                         	console.log(item);
+//                             addTextList = "<li>" + deleteBtn + "<span class='itemName'>" + item.name + " "
+//                                     + selectLength
+//                                     + "</span>"
+//                                     + "<span class='price'>"
+//                                     + item.price
+//                                     + "</span>"
+//                                     + deleteA
+//                                     + "</li>";
+//                             menuItem.subMenu.push(item); // 메뉴에 저장
+//                         }
+//                     });
+//                 }
+//                 var addMenuList = "<ul>" + addTextList + "</ul>";
+//                 $('table tbody tr:nth-child(1) td').eq(index).children('.default').remove();
+//                 $('table tbody tr:nth-child(1) td').eq(index).append(addMenuList);
+//
+//                 console.log(menuItem); // 메뉴 찍어봅니다.
+//             }
+//         }
+//     });
+//
+//     $(".selectLength").hide(); //길이선택 셀렉트박스 숨기기
+//
+//     function getItemPrice(tdIndex, ItemIndex) { //가격 빼기
+//         $('body').on('click', '.price', function(e) {
+//             var price = $(this).text();
+//             price = parseInt(price.replace(/,/g, ""));
+//             itemPrice = price;
+//         });
+//
+//         $('tr td').eq(tdIndex).find('.price').eq(ItemIndex).trigger(
+//                 'click');
+//         totalPrice -= itemPrice;
+//         var totalpriceTxt = String(totalPrice);
+//         totalpriceTxt = totalpriceTxt.replace(
+//                 /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+//         $('.orderPrice').text(totalpriceTxt); //총가격
+//     }
+//
+//     /** 빵 삭제 */
+//     $('body').on('click', '.deleteItem', function(e) {
+//         var thisParentsTd = $(this).parents('td');
+//         var liLength = $(this).parent('li').siblings('li').length;
+//         var tdIndex = thisParentsTd.index();
+//         var ItemIndex = $(this).parent('li').index();
+//         getItemPrice(tdIndex, ItemIndex) //가격 빼기
+//
+//         if (liLength == 0) {
+//             if (thisParentsTd.index() == 4) {
+//                 thisParentsTd.empty().append(defualtText2);
+//             } else {
+//                 thisParentsTd.empty().append(defualtText1);
+//             }
+//             addTextList = "";
+//         }
+//
+//         /* menuItem 저장항목 삭제 */
+//         menuItem.breadType = "";
+//         console.log(menuItem);
+//     });
+//
+//     /** 주 메뉴 아이템 삭제 */
+//     $('body').on('click','.delete',function(e) {
+//         totalPrice = 0;
+//         $('tr td').empty().append(defualtText1);
+//         $('tr td').eq(4).empty().append(defualtText2);
+//         $('tr td').eq(6).empty().html("<span class='orderPrice'>0</span>");
+//         $('tr').removeClass('on');
+//         $('.info_content>ol>li').removeClass('on');
+//
+//         /* 셀렉트박스 초기화 */
+//         $('.slct_head').each(function(index, item) {
+//             var text = $(this).next('.slct_list').find('li:first-child a').text();
+//             console.log(text);
+//             $(this).text(text);
+//         });
+//
+//         /* menuItem 저장항목 삭제 */
+//         menuItem.product = "";
+//         console.log(menuItem);
+//     });
+// }
+// menuItem을 sessionStorage에 담고 장바구니 페이지로 이동
 function cart() {
     $('.cart').on('click', function() {
         if (!$('.info_content>ol>li').eq(0).hasClass('on')) {
@@ -675,13 +885,32 @@ function cart() {
         } else {
             var result = confirm('장바구니 페이지로 이동하시겠습니까?');
             if (result) {
-                sessionStorage.setItem("menuItem", JSON.stringify(menuItem));
+                // 배열로 만들어서 보낸다.
+                var saving = [];
+                var prev = JSON.parse(sessionStorage.getItem('menuItem'));
+                if(prev != null) { // 세션에 정보가 있으면 받아옴.
+                    saving = prev;
+                }
+                saving.push(menuItem)
+                sessionStorage.setItem("menuItem", JSON.stringify(saving));
                 window.location.href = "myPage/cart";
             }
         }
     })
 }
-
+// 샌드위치 or 샐러드 셀렉트박스 리스트 뿌리기
+function menuList() {
+    $(".selectMenuKind .slct_list>ul>li>a").on('click',function() {
+        var txt = $(this).attr('data-val');
+        var str = "";
+        $.each(list,function(index, item) {
+            if (item.category == txt)
+            str += "<li><a data-val=" + item.productId + " href='#'>" + item.name + "</a></li>";
+        });
+        $('.selectMenuName .slct_list>ul').append(str);
+    });
+}
+// 토핑 리스트 뿌리기
 function addToppingList() {
    var str = "";
    $.each(list, function(index, item) {
@@ -692,7 +921,7 @@ function addToppingList() {
    });
    $(str).insertAfter('.topping .slct_list>ul>li:first-child');
 }
-
+// 사이드 메뉴
 function addSideList() {
    var str = "";
    $.each(list, function(index, item) {
@@ -703,7 +932,7 @@ function addSideList() {
    });
    $(str).insertAfter('.side+.slct_list>ul>li:first-child');
 }
-
+// 드링크 메뉴
 function addDrinkList() {
    var str = "";
    $.each(list, function(index, item) {

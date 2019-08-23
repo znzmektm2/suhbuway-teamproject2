@@ -191,7 +191,6 @@ function gnb(){//gnb
 	$('#gnb>ul>li').eq(gnbIndex).find('.dp2>ul>li').eq(subIndex).find('a').addClass('active');
 	$('.sub_loc>ul>li').eq(subIndex).addClass("active");
 	$('.sub>ul>li').removeClass("active").eq(subIndex).find('a').addClass("active");
-	console.log(subIndex);
 }
 
 
