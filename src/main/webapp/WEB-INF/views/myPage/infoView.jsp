@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,6 +147,7 @@
 								<input type="hidden" name="userId" id="userId" value="${requestScope.user.userId}" >
 								${requestScope.user.userId}</td> 
 							</tr>
+							<c:if test="${sessionScope.userId==null}">
 							<tr>
 								<th scope="col">새 비밀번호<span class="ess"></span></th>
 								<td>
@@ -163,6 +165,7 @@
 									<span style="font-size:13px;" id="pwdCheck"></span>
 								</td>
 							</tr>
+							</c:if>
 							<tr>
 								<th scope="col">이름</th>
 								<td>${requestScope.user.userName}</td>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -204,10 +205,28 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/myPage/info")
-    public String myPage(HttpServletRequest request) {
+    public ModelAndView myPage(HttpServletRequest request, HttpSession session ) {
 //	List<Product> list = service.selectProductsByCategory(category);
 //	request.setAttribute("list", list);
-	return "myPage/info";
+    	ModelAndView mv = new ModelAndView();
+    	// 쇼셜 로그인
+    	String url="myPage/info";
+    	String kakaoId = (String)session.getAttribute("userId");
+    	System.out.println("kakao 로그인중 상세페이지 접속: "+kakaoId);
+		if( kakaoId!=null ) {
+    		User user = userService.selectUserById(kakaoId);
+    		String [] userEmail = user.getUserEmail().split("@");
+    		String email1 = userEmail[0];
+    		String email2 = userEmail[1];
+    		
+    		mv.addObject("user", user );
+    		mv.addObject("email1", email1 );
+    		mv.addObject("email2", email2 );
+    		
+			url="myPage/infoView";
+		}
+		mv.setViewName(url);
+	return mv;
     }
 
     /**
@@ -226,6 +245,7 @@ public class HomeController {
     	String userId = (String)request.getParameter("userId");
     	// user이면
     	if( category.equals("info") ) {
+    		
     		User user = userService.selectUserById(userId);
     		String [] userEmail = user.getUserEmail().split("@");
     		String email1 = userEmail[0];
