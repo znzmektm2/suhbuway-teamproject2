@@ -23,37 +23,20 @@ public class OrderController {
 	OrderService orderService;
 
 	/**
-	 * 결제하기
+	 * 주문하기
 	 */
-	@RequestMapping("/order/payment")
-	public String payment(HttpServletRequest request) {
-		return "order/payment";
-	}
-
-	/**
-	 * 고객이 받은 주문을 저장합니다.
-	 */
-	@RequestMapping("/insertOrder")
-	public String insertOrder() {
-
-		orderService.selectOrderList();
-		return "order/complete";
-	}
-
-	/**
-	 * 결제완료
-	 */
-	@RequestMapping("/order/completeOrder")
+	@RequestMapping("/order/confirm")
 	public String completeOrder(HttpServletRequest request) {
 		return "order/completeOrder";
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////
-	// 이하 좀 다른 것들.
-	@RequestMapping("/store/stores")
-	@ResponseBody
-	public List<Store> selectAllStores() {
+
+	/**
+	 * 마이페이지 장바구니
+	 */
+	@RequestMapping("/myPage/cart")
+	public String cart(HttpServletRequest request) {
 		List<Store> list = orderService.selectStoreList();
-		return list;
+		request.setAttribute("storeList", list);
+		return "myPage/cart";
 	}
 }

@@ -159,19 +159,6 @@ public class HomeController {
 	}
 
 	/**
-	 * 마이페이지 장바구니
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/myPage/cart")
-	public String cart(HttpServletRequest request) {
-//		List<Product> list = service.selectProductsByCategory(category);
-//		request.setAttribute("list", list);
-		return "myPage/cart";
-	}
-
-	/**
 	 * 마이페이지 문의사항
 	 * 
 	 * @param request
