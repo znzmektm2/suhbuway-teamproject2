@@ -17,9 +17,3 @@ public interface AuthoritiesDAO {
 	 * */
 	List<Authority> selectAuthorityByUserName(String userName);
 }
-
-
-
-
-
-

@@ -11,10 +11,10 @@
 			</ul>
 		</div>
 		<!--// util menu -->
-		<span class="addr">서울시 서초구 강남대로 535 프린스빌딩 15층</span> <span class="rep">대표 : 콜린클락</span> <span
-			class="tel">전화 : 02-797-5036</span> <span class="rep">사업자등록번호 : 101-84-04143</span>
-		<p class="copyright">SUBWAY® is a Registered Trademark of Subway IP Inc.© 2018 Subway IP
-			Inc.All Rights Reserved.</p>
+		<span class="addr">경기도 성남시 분당구 삼평동 대왕판교로 670길 유스페이스2 B동 8층</span> <span class="rep">대표 : 알랑가몰라</span>
+		<span class="tel">전화 : 031-123-4567</span>
+		<span class="rep">사업자등록번호 : 123-45-67890</span>
+		<p class="copyright">SUHBUWAY® is a Registered Trademark of Suhbuway IP Inc.© 2018 Suhbuway IP Inc.All Rights Reserved.</p>
 	</div>
 </footer>
 </body>

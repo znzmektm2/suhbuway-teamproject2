@@ -2,18 +2,11 @@ package project.suhbuway.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Complain {
-	
+
 	private int complainId;
 	private int groupNo;
 	private String userId;
@@ -26,7 +19,7 @@ public class Complain {
 	private String storeId;
 	private String storeTitle;
 	private String storeContent;
-	
+
 	private MultipartFile file;
 
 }

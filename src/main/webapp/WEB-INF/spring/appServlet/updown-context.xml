@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- 업로드 기능을 위한 설정 (id는 반드시 고정 미리 약속되어있는 이름이다!!!)-->
+	<!-- 업로드 기능을 위한 설정 (id는 반드시 고정 미리 약속되어있는 이름이다!!!) -->
 	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-	id="multipartResolver"/>
+		id="multipartResolver" />
 
 	<!-- 다운로드를 위한 ViewResolver 실행 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-	  <property name="order" value="0"/> <!-- 우선순위 0순위!! -->
+		<property name="order" value="0" /> <!-- 우선순위 0순위!! -->
 	</bean>
 </beans>

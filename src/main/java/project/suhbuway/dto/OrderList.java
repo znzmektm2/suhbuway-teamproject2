@@ -7,12 +7,12 @@ import lombok.Data;
 @Data
 public class OrderList {
 
-    int orderId;
-    String userId;
-    String storeId;
-    int total;
-    char orderState;
-    String regdate;
+	int orderId;
+	String userId;
+	String storeId;
+	int total;
+	char orderState;
+	String regdate;
 
-    List<OrderItem> orderItems;
+	List<OrderItem> orderItems;
 }

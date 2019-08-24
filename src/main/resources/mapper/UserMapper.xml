@@ -1,60 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userMapper">
-	
-<sql id="userColumn">
-   USER_ID,USER_NAME,USER_PASSWORD,USER_phone,USER_email,USER_profile_img,SOCIAL_TYPE,SOCIAL_TOKEN,REG_DATE,mileage,rating
-</sql>
-<!-- 
-<resultMap type="member" id="memberSelectMap">
-  <id column="MEMBER_ID" property="id"/>
-  <result column="MEMBER_PASSWORD" property="password"/>
-  <result column="MEMBER_NAME" property="name"/>
-  <result column="MEMBER_EMAIL" property="email"/>
-</resultMap>
- -->
-<!-- 전체 검색 -->
-<select id="selectAll" parameterType="string" resultType="user">
-	select <include refid="userColumn"/>
-	from userdb
-</select>
 
-<!-- id에 대한 검색 -->
-<select id="selectUserById" parameterType="string" resultType="user">
-	select <include refid="userColumn"/>
-	from userdb
-	where USER_ID=#{_parameter} 
-</select>
+	<sql id="userColumn">
+		USER_ID,USER_NAME,USER_PASSWORD,USER_phone,USER_email,USER_profile_img,SOCIAL_TYPE,SOCIAL_TOKEN,REG_DATE,mileage,rating
+	</sql>
+	<!-- <resultMap type="member" id="memberSelectMap"> <id column="MEMBER_ID" 
+		property="id"/> <result column="MEMBER_PASSWORD" property="password"/> <result 
+		column="MEMBER_NAME" property="name"/> <result column="MEMBER_EMAIL" property="email"/> 
+		</resultMap> -->
+	<!-- 전체 검색 -->
+	<select id="selectAll" parameterType="string" resultType="user">
+		select
+		<include refid="userColumn" />
+		from userdb
+	</select>
 
-<!-- 일반 회원 회원가입 -->
-<insert id="insertUser" parameterType="user">
-	insert into userdb(USER_ID,USER_NAME,USER_PASSWORD,USER_phone,
-	USER_email,USER_profile_img,SOCIAL_TYPE,SOCIAL_TOKEN,REG_DATE,mileage,rating,USER_profile_size)
-	values(#{userId},#{userName},#{userPassword},#{userPhone},#{userEmail},
-	#{userProfileImg},#{socialType},#{socialToken},sysdate,10000,'bronze',#{userProfileSize})
-</insert>
+	<!-- id에 대한 검색 -->
+	<select id="selectUserById" parameterType="string"
+		resultType="user">
+		select
+		<include refid="userColumn" />
+		from userdb
+		where USER_ID=#{_parameter}
+	</select>
 
-<!-- ID중복체크 -->
-<select id="idcheck" resultType="int">
-	select count(*) from userdb where USER_ID=#{_parameter} 
-</select>
+	<!-- 일반 회원 회원가입 -->
+	<insert id="insertUser" parameterType="user">
+		insert into userdb(USER_ID,USER_NAME,USER_PASSWORD,USER_phone,
+		USER_email,USER_profile_img,SOCIAL_TYPE,SOCIAL_TOKEN,REG_DATE,mileage,rating,USER_profile_size)
+		values(#{userId},#{userName},#{userPassword},#{userPhone},#{userEmail},
+		#{userProfileImg},#{socialType},#{socialToken},sysdate,10000,'bronze',#{userProfileSize})
+	</insert>
 
-<!-- updateBySocialToken -->
-<update id="updateBySocialToken" parameterType="map" >
-	update userdb set SOCIAL_TOKEN=#{socialToken} where USER_ID=#{userId} 
-</update>
+	<!-- ID중복체크 -->
+	<select id="idcheck" resultType="int">
+		select count(*) from userdb where USER_ID=#{_parameter}
+	</select>
 
-<!-- 유저회원 정보 수정 -->
-<update id="updateUser" parameterType="user" >
-	update userdb 
-	<set>
-		<if test="userPassword!=null">USER_PASSWORD=#{userPassword} ,</if>		
-		<if test="userPhone!=null">USER_phone=#{userPhone} ,</if>		
-		<if test="userEmail!=null">USER_email=#{userEmail} </if>
-		<if test="userProfileImg!=null">USER_profile_img=#{userProfileImg}   </if>
-	</set>
-	where USER_ID=#{userId} 
-</update>
+	<!-- updateBySocialToken -->
+	<update id="updateBySocialToken" parameterType="map">
+		update userdb set SOCIAL_TOKEN=#{socialToken} where USER_ID=#{userId}
+	</update>
 
-
+	<!-- 유저회원 정보 수정 -->
+	<update id="updateUser" parameterType="user">
+		update userdb
+		<set>
+			<if test="userPassword!=null">USER_PASSWORD=#{userPassword} ,</if>
+			<if test="userPhone!=null">USER_phone=#{userPhone} ,</if>
+			<if test="userEmail!=null">USER_email=#{userEmail} </if>
+			<if test="userProfileImg!=null">USER_profile_img=#{userProfileImg}   </if>
+		</set>
+		where USER_ID=#{userId}
+	</update>
 </mapper>	

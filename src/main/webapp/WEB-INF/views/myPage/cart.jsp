@@ -55,7 +55,6 @@ function addDefaultText() {
 			$(this).html('<span class="default">선택없음</span>');
 		}
    });
-	 
 }
 
 //숫자 콤마 찍기
@@ -70,7 +69,6 @@ function trDelete() {
 		alert('삭제 하시겠습니까?');
         $(this).parents('tr').empty();
     });
-	 
 }
 
 

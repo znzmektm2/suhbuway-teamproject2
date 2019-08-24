@@ -16,7 +16,8 @@
 		<result column="TOTAL" property="total" />
 		<result column="ORDER_STATE" property="orderState" />
 		<result column="REGDATE" property="regdate" />
-		<collection column="ORDER_ID" property="orderItems" javaType="java.util.ArrayList" ofType="orderItem"
+		<collection column="ORDER_ID" property="orderItems"
+			javaType="java.util.ArrayList" ofType="orderItem"
 			select="getOrderItems" />
 	</resultMap>
 

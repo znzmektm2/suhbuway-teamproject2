@@ -32,12 +32,16 @@
                      <div class="img"><img alt="${item.name}" src="${pageContext.request.contextPath}/resources/images/menu/${item.category}/${item.imgUrl}"></div>
                      <strong class="tit">${item.name}</strong>
                      <span class="eng">${item.nameEng}</span>
-                     <span class="cal">${item.nutrition.calory} kcal</span>
+                     <c:if test="${item.nutrition.calory != null}">
+                     	<span class="cal">${item.nutrition.calory} kcal</span>
+                     </c:if>
                      <span class="price">￦  <fmt:formatNumber value="${item.price}"/></span>
                      <div class="summary">
                         <p>${item.description}</p>
                      </div>
-                     <a class="btn_view" data-id="pm10" href="${pageContext.request.contextPath}/menu/sandwich/${state.count}"></a>
+                     <c:if test="${item.nutrition.calory != null}">
+                     	<a class="btn_view" data-id="pm10" href="${pageContext.request.contextPath}/menu/${item.category}/${item.productId}"></a>
+                     </c:if>
                   </li>
                </c:forEach>
             </ul>

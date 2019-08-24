@@ -11,11 +11,11 @@ import project.suhbuway.dto.OrderList;
  */
 public interface OrderService {
 
-    /**
-     * 주문내역을 불러온다.
-     * 
-     * @return
-     */
-    public List<OrderList> selectOrderList();
+	/**
+	 * 주문내역을 불러온다.
+	 * 
+	 * @return
+	 */
+	public List<OrderList> selectOrderList();
 
 }

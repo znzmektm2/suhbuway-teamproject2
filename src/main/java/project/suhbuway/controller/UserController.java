@@ -23,37 +23,39 @@ import project.suhbuway.security.KakaoAccessToken;
 import project.suhbuway.service.user.UserService;
 
 /**
- * 유저 
+ * 유저
  */
 @Controller
 public class UserController {
-	//@Autowired
+	// @Autowired
 	private KakaoAccessToken kakao = new KakaoAccessToken();
-	private String path ="C:\\Users\\Lenovo\\Desktop\\save"; // 프로필 사진 저장 경로
-	
+	private String path = "C:\\Users\\Lenovo\\Desktop\\save"; // 프로필 사진 저장 경로
+
 	@Autowired
 	private UserService service;
 
 	/**
-	 *  로그인폼
+	 * 로그인폼
 	 */
 	@RequestMapping("/user/login")
-	public void login() {}
-
-	/**
-	 *  로그인 실패: FailHandler의 tiles 적용위한 controller
-	 */
-	@RequestMapping("/errorLogin")
-	public ModelAndView test(HttpServletRequest request) {
-		String errorMessage =(String)request.getAttribute("errorMessage");
-		return new ModelAndView("user/login" , "errorMessage" ,errorMessage );
+	public void login() {
 	}
 
 	/**
-	 *  회원가입폼
+	 * 로그인 실패: FailHandler의 tiles 적용위한 controller
+	 */
+	@RequestMapping("/errorLogin")
+	public ModelAndView test(HttpServletRequest request) {
+		String errorMessage = (String) request.getAttribute("errorMessage");
+		return new ModelAndView("user/login", "errorMessage", errorMessage);
+	}
+
+	/**
+	 * 회원가입폼
 	 */
 	@RequestMapping("/user/register")
-	public void registerForm() {}
+	public void registerForm() {
+	}
 
 	/**
 	 * 아이디 중복확인 Ajax
@@ -61,43 +63,42 @@ public class UserController {
 	@RequestMapping("/idcheckAjax")
 	@ResponseBody
 	public String idCheckAjax(HttpServletRequest request) {
-		//System.out.println("컨트롤러 id체크 : " + request.getParameter("userId") );
+		// System.out.println("컨트롤러 id체크 : " + request.getParameter("userId") );
 		return service.idcheck(request.getParameter("userId"));
 	}
+
 	/**
 	 * 쇼셜 아이디 로그인 방지 Ajax
 	 */
 	@RequestMapping("/socialCheckAjax")
 	@ResponseBody
-	public String socialCheckAjax( String userId ) {
+	public String socialCheckAjax(String userId) {
 		User dbUser = service.selectUserById(userId);
-		if( dbUser.getSocialType() != null ) { // 쇼셜가입이면
+		if (dbUser.getSocialType() != null) { // 쇼셜가입이면
 			return "fail";
 		}
 		return "ok";
 	}
-	
+
 	/**
-	 *  회원가입하기
+	 * 회원가입하기
 	 */
 	@RequestMapping("/userRegister")
-	public String register( User user ) throws IOException {
+	public String register(User user) throws IOException {
 		MultipartFile file = user.getFile(); // user로 들어온 file을 꺼내서 file변수에 저장.
 		System.out.println(file.getName());
-		 if(file.getSize() > 0) {//파일이 첨부되었다면
-		 String fName = file.getOriginalFilename();
-		 long fSize = file.getSize();
-		 user.setUserProfileImg(fName);//dto에 프로필이미지 저장
-		 user.setUserProfileSize(fSize);//dto에 파일사이즈 저장
-		 
-		 file.transferTo(new File(path +"/"+ fName));//파일 저장
-		 }
-		
+		if (file.getSize() > 0) {// 파일이 첨부되었다면
+			String fName = file.getOriginalFilename();
+			long fSize = file.getSize();
+			user.setUserProfileImg(fName);// dto에 프로필이미지 저장
+			user.setUserProfileSize(fSize);// dto에 파일사이즈 저장
+
+			file.transferTo(new File(path + "/" + fName));// 파일 저장
+		}
 		// 수정된 user를 회원가입에 넣기
 		service.joinUser(user);
 		return "index";
 	}
-
 	/**
 	 * kakao 로그인
 	 */
@@ -141,6 +142,7 @@ public class UserController {
 		}
 		return returnUrl;
 	}
+
 	/**
 	 * kakao로그아웃
 	 */
@@ -157,41 +159,47 @@ public class UserController {
         session.invalidate();//전체세션 지움
         return "redirect:/";
     }
+
+	/**
+	 *  마이페이지폼
+	 */
+	@RequestMapping("/user/myPage")
+	public void myPage() {}
 	
 	@RequestMapping("/PasswordCheckAjax")
 	@ResponseBody
-	public String PasswordCheckAjax( String userId, String userPassword ) {
-		// 입력된 비밀번호와  db비번 확인
-		
-		boolean result = service.selectByUserPassword( userId, userPassword);
-		String state= result ? "ok" : "fail";
-		
+	public String PasswordCheckAjax(String userId, String userPassword) {
+		// 입력된 비밀번호와 db비번 확인
+
+		boolean result = service.selectByUserPassword(userId, userPassword);
+		String state = result ? "ok" : "fail";
+
 		return state;
 	}
-	
+
 	/**
 	 * 회원정보 수정
 	 */
 	@RequestMapping("/user/userUpdate")
-	public String userUpdate( User user ) {
+	public String userUpdate(User user) {
 		int result = service.userUpdate(user);
-		String url="myPage/infol";
-		if( result==0 ) {
-			url="err/updateFail";
+		String url = "myPage/infol";
+		if (result == 0) {
+			url = "err/updateFail";
 		}
 		return "redirect:/myPage/info?msg=ok";
 	}
-	
+
 	/**
 	 * 회원탈퇴
 	 */
 	@RequestMapping("/user/userDeleteAjax")
 	@ResponseBody
-	public String userDeleteAjax( String userId ) {
-		System.out.println("회원정보 ID: " + userId );
+	public String userDeleteAjax(String userId) {
+		System.out.println("회원정보 ID: " + userId);
 		System.out.println("삭제할 회원 정보");
-		//String result = service.userDelete(userId);
-		//System.out.println("삭제 결과 : " + result );
+		// String result = service.userDelete(userId);
+		// System.out.println("삭제 결과 : " + result );
 		return "";
 	}
 }

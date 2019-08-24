@@ -1,6 +1,5 @@
 package project.suhbuway.down;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,66 +16,49 @@ import org.springframework.web.servlet.view.AbstractView;
 
 /**
  * 파일다운로드 기능 구현 view
- * */
-
-@Component("downLoadView") //생성 <bean class=""  id="downLoadView"/> 대신
-public class DownLoadCustomView extends AbstractView{ // AbstractView를 상속받으면 자바파일이여도 jsp와 비슷한 역할을 하게 된다.
+ */
+@Component("downLoadView") // 생성 <bean class="" id="downLoadView"/> 대신
+public class DownLoadCustomView extends AbstractView { // AbstractView를 상속받으면 자바파일이여도 jsp와 비슷한 역할을 하게 된다.
 
 	@Override
-	protected void renderMergedOutputModel(Map<String, Object> map,
-		HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		File file = (File) map.get("fileName");//파일객체....(다운로드할 파일객체)//파일이름으로 찾아온다
-		
+	protected void renderMergedOutputModel(Map<String, Object> map, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		File file = (File) map.get("fileName");// 파일객체....(다운로드할 파일객체)//파일이름으로 찾아온다
+
 		response.setContentType("application/download;charset-UTF-8");
-		response.setContentLength((int)file.length());
-	
-		
+		response.setContentLength((int) file.length());
+
 		String userAgent = request.getHeader("User-Agent");
-		
+
 		boolean isInternetExplorer = userAgent.indexOf("MSIE") > -1;
 		String fileName = null;
-		
-		if(isInternetExplorer)
-			fileName = URLEncoder.encode(file.getName() , "UTF-8");
+
+		if (isInternetExplorer)
+			fileName = URLEncoder.encode(file.getName(), "UTF-8");
 		else
-			fileName = new String(file.getName().getBytes("UTF-8") , "iso-8859-1") ;
-		
-		
-		response.setHeader("Content-Disposition","attachment;filename=\"" + fileName.replace("+", "%20") + "\";");
-		//response.setHeader("Content-Transfer-Encoding", "binary");
-		
+			fileName = new String(file.getName().getBytes("UTF-8"), "iso-8859-1");
+
+		response.setHeader("Content-Disposition", "attachment;filename=\"" + fileName.replace("+", "%20") + "\";");
+		// response.setHeader("Content-Transfer-Encoding", "binary");
+
 		OutputStream out = response.getOutputStream();
 		FileInputStream fis = null;
-		try{
+		try {
 			fis = new FileInputStream(file);
 			FileCopyUtils.copy(fis, out);
-			
-		}catch(Exception e){
-			//map.put("error", e.toString());
+
+		} catch (Exception e) {
+			// map.put("error", e.toString());
 			e.printStackTrace();
-		}
-		finally{
-			if(fis != null){
-				try{
+		} finally {
+			if (fis != null) {
+				try {
 					fis.close();
+				} catch (IOException ex) {
 				}
-				catch(IOException ex){}
 			}
-		}		
+		}
 		out.flush();
-		
-		
 	}
-
-
-
-	
 }
-
-
-
-
-
-
-

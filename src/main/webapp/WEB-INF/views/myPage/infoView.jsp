@@ -8,9 +8,7 @@
 <title>내정보 수정</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
 <script>
-
 	$(function(){
-		
 		// # 연락처 길이 검사
 		var phoneState = false;
 		$("#userPhone").keyup(function(){

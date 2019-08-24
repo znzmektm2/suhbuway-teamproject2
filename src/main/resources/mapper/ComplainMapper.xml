@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="complainMapper">
-	
+
 	<!-- ResultMaps -->
 	<resultMap type="complain" id="complainMap">
 		<id column="complain_id" property="complainId" />
@@ -11,54 +11,58 @@
 		<result column="complain_content" property="content" />
 		<result column="complain_date" property="date" />
 		<result column="board_state" property="state" />
-		<result column="filename" property="fileName"/>
-		<result column="filesize" property="fileSize"/>
-		<result column="store_id" property="storeId"/>
-		<result column="store_title" property="storeTitle"/>
-		<result column="store_content" property="storeContent"/>
+		<result column="filename" property="fileName" />
+		<result column="filesize" property="fileSize" />
+		<result column="store_id" property="storeId" />
+		<result column="store_title" property="storeTitle" />
+		<result column="store_content" property="storeContent" />
 	</resultMap>
-	
-<select id="selectAll" resultMap="complainMap">
-  select * from complain_board
-</select>
 
-<select id="selectByCompainId" parameterType="int" resultMap="complainMap">
-select * from complain_board
- <where>
-   <if test="_parameter!=null">
-     complain_id=#{_parameter}
-   </if>
- </where>
-</select>
+	<select id="selectAll" resultMap="complainMap">
+		select * from complain_board
+	</select>
 
-<insert id="insert" parameterType="complain">
-  insert into complain_board(complain_id,user_id,complain_title,complain_content,complain_date,filename,filesize)
-  values (seq_complain_board.nextval,#{userId},#{title},#{content},sysdate,#{fileName},#{fileSize})
-</insert>
+	<select id="selectByCompainId" parameterType="int"
+		resultMap="complainMap">
+		select * from complain_board
+		<where>
+			<if test="_parameter!=null">
+				complain_id=#{_parameter}
+			</if>
+		</where>
+	</select>
 
-<delete id="delete" parameterType="String">
-  delete from complain_board
-   <where>
-    <if test="_parameter!=null">
-     complain_id=#{_parameter}
-    </if>
-   </where>
-</delete>
+	<insert id="insert" parameterType="complain">
+		insert into
+		complain_board(complain_id,user_id,complain_title,complain_content,complain_date,filename,filesize)
+		values
+		(seq_complain_board.nextval,#{userId},#{title},#{content},sysdate,#{fileName},#{fileSize})
+	</insert>
 
-<update id="update" parameterType="complain">
-  UPDATE COMPLAIN_BOARD
-  SET complain_title=#{title},complain_content=#{content},filename=#{fileName},filesize=#{fileSize}
-  <where>
-  complain_id=#{complainId}
-  </where>
-</update>
+	<delete id="delete" parameterType="String">
+		delete from complain_board
+		<where>
+			<if test="_parameter!=null">
+				complain_id=#{_parameter}
+			</if>
+		</where>
+	</delete>
 
-<update id="replyUpdate" parameterType="complain">
-  UPDATE COMPLAIN_BOARD
-  SET store_title=#{storeTitle},store_content=#{storeContent},board_state=1
-  <where>
-  complain_id=#{complainId}
-  </where>
-</update>
-	
+	<update id="update" parameterType="complain">
+		UPDATE COMPLAIN_BOARD
+		SET
+		complain_title=#{title},complain_content=#{content},filename=#{fileName},filesize=#{fileSize}
+		<where>
+			complain_id=#{complainId}
+		</where>
+	</update>
+
+	<update id="replyUpdate" parameterType="complain">
+		UPDATE COMPLAIN_BOARD
+		SET store_title=#{storeTitle},store_content=#{storeContent},board_state=1
+		<where>
+			complain_id=#{complainId}
+		</where>
+	</update>
+
 </mapper>

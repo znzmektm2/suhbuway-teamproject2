@@ -29,8 +29,8 @@
 		var phoneState = false;
 		$("#userPhone").keyup(function(){
 			var userPhone=$(this).val().trim();
-			if( userPhone.length>10 ){ // 10글자 이상이면
-				alert("연락처는 10글자 이하로 입력해주세요.");
+			if( userPhone.length>11 ){ // 10글자 이상이면
+				alert("연락처는 11글자 이하로 입력해주세요.");
 				$("#userPhone").val("");
 				return;
 			} 
@@ -83,7 +83,7 @@
 		})
 		
 		// # 등록하기(회원가입)
- 		$("a.btn.bgc_point.i_reg").click(function(){
+ 		$('a.btn.bgc_point.i_reg').on('click',function(){
  			//checkValid();
  			if( checkValid()==true ) {
 				// 이메일 조합

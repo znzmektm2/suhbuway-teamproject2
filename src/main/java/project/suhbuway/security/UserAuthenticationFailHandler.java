@@ -28,5 +28,4 @@ public class UserAuthenticationFailHandler implements AuthenticationFailureHandl
 		//request.getRequestDispatcher("/WEB-INF/views/user/login.jsp?error=true").forward(request, response);
 		request.getRequestDispatcher("../errorLogin").forward(request, response);
 	}
-
 }
