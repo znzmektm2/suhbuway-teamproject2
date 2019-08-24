@@ -21,5 +21,10 @@ public interface OrderService {
 	 * 점포 정보를 불러온다. 
 	 */
 	public List<Store> selectStoreList();
+	
+	/**
+	 * 주문을 저장한다.
+	 */
+	public OrderList insertOrderList();
 
 }

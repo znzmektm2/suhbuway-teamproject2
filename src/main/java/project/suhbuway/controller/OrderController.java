@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import project.suhbuway.dto.Store;
 import project.suhbuway.service.client.OrderService;
 
@@ -27,7 +27,11 @@ public class OrderController {
 	 */
 	@RequestMapping("/order/confirm")
 	public String completeOrder(HttpServletRequest request) {
-		return "order/completeOrder";
+		System.out.println(request.getParameter("menuList"));
+		System.out.println(request.getParameter("store"));
+		
+		//return "redirect:/myPage/cart"; // 테스트중
+		return "order/completeOrder"; 
 	}
 
 	/**
@@ -36,7 +40,13 @@ public class OrderController {
 	@RequestMapping("/myPage/cart")
 	public String cart(HttpServletRequest request) {
 		List<Store> list = orderService.selectStoreList();
-		request.setAttribute("storeList", list);
+		String jsonList = null;
+		try {
+			jsonList = new ObjectMapper().writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("list", jsonList);
 		return "myPage/cart";
 	}
 }

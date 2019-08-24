@@ -31,4 +31,10 @@ public class OrderServiceImpl implements OrderService {
 		List<Store> list = storeDAO.selectAllStore();
 		return list;
 	}
+
+	@Override
+	public OrderList insertOrderList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

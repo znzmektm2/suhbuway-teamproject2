@@ -651,7 +651,6 @@ $(function() {
         $.each(menuItem.subMenu, function(index, item){
             price += item.price;
         })
-        console.log(price);
         menuItem.price = price;
         $('table tbody tr:nth-child(1) td').eq(6).children('.orderPrice').text(formatNumber(price));
     }

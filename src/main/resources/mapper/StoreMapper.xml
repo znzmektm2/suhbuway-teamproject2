@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="storeMapper">
-	<sql id="storeColumns">
-		store_id,store_name,store_address,store_phone,store_owner,store_sales
+	<sql id="storeColumnsForCustomer">
+		store_id,store_name,store_address,store_phone,store_owner
 	</sql>
 
 	<select id="selectAllStore" resultType="store">
-		SELECT <include refid="storeColumns" />
+		SELECT <include refid="storeColumnsForCustomer" />
 		FROM STORE
 	</select>
 </mapper>
