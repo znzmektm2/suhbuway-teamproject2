@@ -17,7 +17,6 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<Product> selectProductsByCategory(String category) {
 	List<Product> list = productDAO.selectProductsByCategory(category);
-	
 	return list;
     }
 
