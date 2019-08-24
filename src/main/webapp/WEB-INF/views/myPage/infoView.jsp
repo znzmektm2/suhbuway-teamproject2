@@ -45,8 +45,8 @@
 		
 		// # 수정하기 버튼 클릭
  		$("#userConfirm").click(function(){
- 			checkValid();
- 			//if( checkValid()==true ) {
+ 			//checkValid();
+ 			if( checkValid()==true ) {
 				// 이메일 조합
 				var email1 = $("#email1").val(); 
 				var email2 = $("#email2").val();
@@ -55,7 +55,7 @@
 				console.log("전송될 userEmail: "+ userEmail );
 		
 				$("#updateForm").submit();//전송
-			//} 
+			} 
 		})//click
 		
 		// # 회원탈퇴   
@@ -90,8 +90,9 @@
 	// 유효성 체크
 	function checkValid() {
    		var f = window.document.updateForm;
-   		console.log(f.userId.value)
-   		//if(f.socialType.value=="") {// 쇼셜이면
+   		var kakaoId="${sessionScope.userId}";
+   		//console.log("kakaoId"+kakaoId);
+   		if(kakaoId=="") {// 쇼셜이면
 			if ( f.userPassword.value == "" ) {
 				alert( "비밀번호를 입력해 주세요." );
 				f.userPassword.focus();
@@ -102,7 +103,7 @@
 				f.checkedPassword.focus();
 				return false;
 			}
-   		//}
+   		}
 		if ( f.userPhone.value == "" ) {
         	alert( "핸드폰번호를 입력해 주세요." );
         	f.userPhone.focus();
@@ -118,7 +119,7 @@
         	f.email2.focus();
         	return false;
     	}
-    	//return true;
+    	return true;
 	}
 	
 </script>
@@ -129,7 +130,13 @@
 			<form id="updateForm" method="post" name="updateForm" action="${pageContext.request.contextPath}/user/userUpdate">
 				<!-- security csrf 토큰 전송 -->
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
-							
+				<div class="info">
+					<div class="title">
+						<c:if test="${param.msg!=null}">
+							<p style="color: red">회원정보가 수정되었습니다.</p>
+						</c:if>	
+					</div>
+				</div>	
 				<h3 class="h_title">정보입력</h3>
 				<p class="rt_note">필수입력사항<span class="ess"></span></p>
 				<!-- board list s -->
@@ -147,6 +154,7 @@
 								<input type="hidden" name="userId" id="userId" value="${requestScope.user.userId}" >
 								${requestScope.user.userId}</td> 
 							</tr>
+							
 							<c:if test="${sessionScope.userId==null}">
 							<tr>
 								<th scope="col">새 비밀번호<span class="ess"></span></th>
@@ -229,8 +237,6 @@
 				<div class="btns_wrapper">
 					<a class="btn bgc_point i_reg" style="width:170px" id="userConfirm"><span>확인</span></a>
 					<a class="btn bgc_point i_reg od" style="width:170px" id="userDelete"><span>탈퇴하기</span></a>
-				</div>
-				<div class="btns_wrapper"> 
 				</div>
 			</form>
 		</div>

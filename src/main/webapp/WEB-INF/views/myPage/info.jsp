@@ -17,9 +17,6 @@
 		$("#userPassword").keyup(function(){
 			$("#ErrPwd").hide();
 		})
-		
-		// # 카카오 로그인 -- 바로 이동
-		
 		// # 전송
 		$("#btn-submit").click(function() {
 			// 유효성 체크
@@ -49,8 +46,6 @@
 					$("#ErrPwd").show();
 				}
 			});//ajax
-			//${pageContext.request.contextPath}/myPage/info/infoView
-			// $("#frm").submit(); // 전송
 		});// 클릭
 	});
 </script>
@@ -69,6 +64,7 @@
 				<div class="title">
 					<c:if test="${param.msg!=null}">
 						<p style="color: red">회원정보가 수정되었습니다.</p>
+						<br>
 					</c:if>
 					<p>개인정보를 안전하게 보호하기 위하여<br>비밀번호를 한번 더 입력해주세요.</p>
 				</div>

@@ -1,6 +1,7 @@
 package project.suhbuway.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -180,34 +181,50 @@ public class HomeController {
      */
     @RequestMapping("/myPage/qna")
     public String qna(HttpServletRequest request) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
 	return "myPage/qna";
     }
 
     /**
      * 마이페이지 포인트
-     * 
-     * @param request
-     * @return
      */
     @RequestMapping("/myPage/point")
-    public String point(HttpServletRequest request) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
-	return "myPage/point";
+    public ModelAndView point(HttpServletRequest request, HttpSession session, Principal principal ) {
+    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	String kakaoId = (String)session.getAttribute("userId");//카카오 로그인
+    	// 시큐리티 로그인 유저 id
+    	if( principal!= null ) {
+        	String user = principal.getName();
+        	user = user.replace("User(", "" );
+        	user = user.replace(")", "" );
+        	String [] userdd= user.split(",");
+        	
+        	mv.addObject("userId", userdd[0].replace("userId=", "" ) );
+        	mv.addObject("mileage", userdd[9].replace("mileage=", "" ) );
+        	mv.addObject("rating", userdd[10].replace("rating=", "" ) );
+        	
+        	//System.out.println("userId: "+ userdd[0].replace("userId=", "" ) );
+        	//System.out.println("mileage: "+userdd[9].replace("mileage=", "" ) );
+        	//System.out.println("rating: "+userdd[10].replace("rating=", "" ) );    		
+    	}
+    	// 카카오 로그인 유저
+    	if( kakaoId!=null ) {
+        	User kakaoUser = userService.selectUserById(kakaoId);
+        	System.out.println("kakaoUser: " + kakaoUser);
+    		mv.addObject("user", kakaoUser );   		
+    	}
+		mv.setViewName("myPage/point");
+		
+	return mv;
     }
+    
 
     /**
      * 마이페이지 내정보
-     * 
-     * @param request
-     * @return
      */
     @RequestMapping("/myPage/info")
     public ModelAndView myPage(HttpServletRequest request, HttpSession session ) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
     	ModelAndView mv = new ModelAndView();
     	// 쇼셜 로그인
     	String url="myPage/info";
@@ -231,17 +248,10 @@ public class HomeController {
 
     /**
      * 마이페이지 내정보 상세페이지
-     * 
-     * @param category
-     * @param request
-     * @return
      */
     @RequestMapping("/myPage/{category}/infoView")
     public ModelAndView infoView(@PathVariable String category, HttpServletRequest request) {
-//	List<Product> list = service.selectProductsByCategory(category);
-//	request.setAttribute("list", list);
     	ModelAndView mv = new ModelAndView();
-    	
     	String userId = (String)request.getParameter("userId");
     	// user이면
     	if( category.equals("info") ) {
