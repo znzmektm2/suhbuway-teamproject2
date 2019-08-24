@@ -6,11 +6,83 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+</head>
+<body>	
+	<div class="cart">
+		<div class="content">
+			<h3 class="h_title">장바구니</h3>
+			<div class="board_list_wrapper step1">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">메뉴</th>
+							<th scope="col">빵</th>
+							<th scope="col">추가토핑</th>
+							<th scope="col">야채종류</th>
+							<th scope="col">소스종류</th>
+							<th scope="col">사이드메뉴&amp;음료</th>
+							<th scope="col">금액</th>
+						</tr>
+					</thead>
+					<tbody class="item_list">
+						<tr class="on">
+							<td colspan="6">총 결제금액<span class="ess"></span></td> 
+							<td><span class="orderPrice"> 9,900</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<h3 class="h_title">정보입력</h3>
+		<!-- board list s -->
+		<table class="payInfoTable">
+			<caption>회원가입 테이블</caption>
+			<colgroup>
+				<col width="130px">
+				<col width="*">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="col">매장선택<span class="ess"></span></th>
+					<td>
+						<div class="select_box selectMenuKind">
+							<span class="slct_head">매장 선택</span>
+							<div class="slct_list">
+								<ul>
+									<li><a href="#" class="default">매장 선택</a></li>
+									<li><a href="#" data-val="sandwich">판교</a></li>
+									<li><a href="#" data-val="salad">강남</a></li>
+								</ul>
+							</div> 
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="col">결제하기<span class="ess"></span></th>
+					<td>
+						<ul>
+							<li>보유포인트 <input type="text" value="10,000" readonly><a href="#">충전하기</a></li>
+							<li>사용포인트 <input type="text"></li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+				<div class="inquiry_wrapper orderBtn">
+					<div class="btns_wrapper">
+						<a href="${pageContext.request.contextPath}/order/payment" class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<form action="" method="post">
+	
+	</form>
 <script>
 $(function() {
 	attachItems();
 	addDefaultText();
 	trDelete();
+	selectBox();
 })
 
 var obj = JSON.parse(sessionStorage.getItem('menuItem'));
@@ -42,7 +114,7 @@ function attachItems() {
 				+ "<td><span class='price'>"+ formatNumber(item.price) + "<span></td>" // 금액
 				+ "</tr>"
 		console.log(itemInfo);
-		$('tbody tr:last-child').before(itemInfo);
+		$('.item_list tr:last-child').before(itemInfo);
 		
 	});
 	$('.orderPrice').text(formatNumber(totalPrice));
@@ -68,44 +140,28 @@ function trDelete() {
 		var index = $(this).attr('data-val');
 		alert('삭제 하시겠습니까?');
         $(this).parents('tr').empty();
+        
     });
 }
 
-
+// 매장 셀렉트 박스
+function selectBox() {
+	$('.slct_head').click(function () {
+		if(!$(this).parent().hasClass('on')){
+			$(this).parent().addClass('on').children('.slct_list').stop().slideDown('fast');
+		} else{
+			$(this).parent().removeClass('on').children('.slct_list').hide();
+		}
+		$(this).parent().siblings().removeClass('on').children('.slct_list').hide();
+	});
+	
+	$(document).on("click", function(event){ //바깥 클릭시 셀렉트박스 닫기
+        if(!$(event.target).closest(".slct_head").length){
+            $(".slct_list").hide();
+        }
+    });
+}
 </script>
-</head>
-<body>	
-	<div class="cart">
-		<div class="content">
-			<h3 class="h_title">장바구니</h3>
-			<div class="board_list_wrapper step1">
-				<table>
-					<thead>
-						<tr>
-							<th scope="col">메뉴</th>
-							<th scope="col">빵</th>
-							<th scope="col">추가토핑</th>
-							<th scope="col">야채종류</th>
-							<th scope="col">소스종류</th>
-							<th scope="col">사이드메뉴&amp;음료</th>
-							<th scope="col">금액</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="on">
-							<td colspan="6">총 결제금액<span class="ess"></span></td> 
-							<td><span class="orderPrice"> 9,900</span></td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="inquiry_wrapper orderBtn">
-					<div class="btns_wrapper">
-						<a href="${pageContext.request.contextPath}/order/payment" class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
-					</div> 
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>
 

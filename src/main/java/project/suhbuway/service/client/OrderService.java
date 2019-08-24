@@ -3,6 +3,7 @@ package project.suhbuway.service.client;
 import java.util.List;
 
 import project.suhbuway.dto.OrderList;
+import project.suhbuway.dto.Store;
 
 /**
  * 사이트 주문하기 과정에서 필요한 서비스
@@ -13,9 +14,12 @@ public interface OrderService {
 
 	/**
 	 * 주문내역을 불러온다.
-	 * 
-	 * @return
 	 */
 	public List<OrderList> selectOrderList();
+	
+	/**
+	 * 점포 정보를 불러온다. 
+	 */
+	public List<Store> selectStoreList();
 
 }
