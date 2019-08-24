@@ -31,23 +31,6 @@ public interface ProductDAO {
     public List<String> selectMenuListByMenu(String menu);
 
     /**
-     * 메인메뉴에 해당되는 가격을 반환한다.
-     * 
-     * @param name
-     * @param category
-     * @return
-     */
-    public String selectMenuPrice(String name, String category);
-
-    /**
-     * 기타메뉴에 해당되는 가격을 반환한다.
-     * 
-     * @param name
-     * @return
-     */
-    public String selectEtcPrice(String name);
-
-    /**
      * 전체검색(메뉴, 가격 ,카테고리)
      * 
      * @return
