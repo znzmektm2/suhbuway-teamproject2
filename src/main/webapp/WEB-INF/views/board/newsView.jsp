@@ -5,22 +5,37 @@
     <meta charset="utf-8">
     <title>서부웨이 Suhbu Way</title>
 </head>
+<script type="text/javascript">
+$('document').ready(function () {
+	var newsId = ${newsId};
+	$.ajax({
+		url: "http://192.168.0.50:8888/view?pageView="+newsId,
+		type :"post",
+		dataType : "json",
+		success :function(result){
+			$('.title').text(result.title);
+			$('.date').text(result.regDate);
+			$('.news_view_conten').html(result.content);
+			$('img').each(function () {
+				var baseUrl = $(this).attr('src');
+				var url = $(this).attr('src','http://subway.co.kr'+baseUrl);
+			});
+		},
+		error : function(err){
+			console.log(err); 
+		}
+	});
+});
+</script>
 <body>
 	<!-- 뉴스ㆍ공지사항 view s -->
 	<div class="news_view_wrapper">
 		<div class="content">
-			<h2 class="title">써브웨이와 함께하는 SBS '의사요한' </h2>
-			<div class="date">2019.07.25 13:58</div>
-			
-			<div class="news_view_conten">
-				<div class="text_wrap"><p><img src="${pageContext.request.contextPath}/resources/images/common/의사요한-3인_pick_써브웨이_20190725015947857.jpg" style="width: 789px;"><br></p><p><br></p><p>써브웨이와 함께하는 SBS '의사요한'&nbsp; 많은 시청 부탁 드립니다.&nbsp;<br></p></div>
-			</div>
+			<h2 class="title"></h2>
+			<div class="date"></div>
+			<div class="news_view_conten"></div>
 
-			<!-- 첨부파일 -->
-			
-			<!--// 첨부파일 -->
-
-			<div class="btn_list"><a href="#" onclick="view.list();return false;">목록보기</a></div>
+			<div class="btn_list"><a href="javascript:history.back()">목록보기</a></div>
 
 			<!-- 우측 영역 -->
 			<div class="board_right">

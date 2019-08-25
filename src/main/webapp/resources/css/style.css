@@ -479,7 +479,7 @@ h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05
 /* 페이지 */
 .pagination{text-align:center; margin-top:34px;}
 .pagination strong,
-.pagination a{font-family:font_sw; font-weight:bold; font-size:18px; padding:0 3px; margin:0 10px; display:inline-block; color:#bbbbbb;}
+.pagination a{font-family:font_sw; font-weight:bold; font-size:18px; padding:0 3px; margin:0 10px; display:inline-block; color:#bbbbbb;cursor: pointer;}
 .pagination a.active{display:inline-block; color:#009223}
 .pagination .arr{display:inline-block;}
 .pagination .arr:after{content:''; display:block; width:8px; height:12px; background:url(../images/common/icon_page_arr.png) no-repeat;}
