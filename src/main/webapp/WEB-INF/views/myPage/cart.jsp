@@ -91,9 +91,16 @@
 	function confirmBtn() {
 		$('a.confirm').on('click',function(e) {
 			e.preventDefault();
-			$('[name=menuList]').val(JSON.stringify(savedItem));
-			$('[name=store]').val(JSON.stringify(selectedStore));
-			$('#orderForm').submit();
+			
+			if(savedItem == ''){
+				alert('제품이 없습니다.')
+			} else  if(selectedStore == '') {
+				alert('매장을 선택하시오.');
+			} else {
+				$('[name=menuList]').val(JSON.stringify(savedItem));
+				$('[name=store]').val(JSON.stringify(selectedStore));
+				$('#orderForm').submit();
+			} 
 		})
 	}
 	var savedItem = JSON.parse(sessionStorage.getItem('menuItem'));
