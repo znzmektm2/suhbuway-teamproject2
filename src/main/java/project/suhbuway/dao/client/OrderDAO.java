@@ -2,6 +2,7 @@ package project.suhbuway.dao.client;
 
 import java.util.List;
 
+import project.suhbuway.dto.OrderItem;
 import project.suhbuway.dto.OrderList;
 
 public interface OrderDAO {
@@ -14,18 +15,14 @@ public interface OrderDAO {
     
     /**
      * DB에 주문을 넣기위한 메소드
-     * 
-     * @param orderList
-     * @return
      */
     public int insertOrder(OrderList orderList);
-    
     /**
-     * 주문 상태 변경을 위한 메소드
-     * 
-     * @param orderId
-     * @param orderState
-     * @return
+     * DB에 주문을 넣기위한 메소드
      */
-    public int updateOrderState(int orderId, char orderState);
+    public int insertItem(OrderItem orderItem);
+    /**
+     * 
+     */
+	public int getLastItemId();
 }

@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class OrderItem {
 	int itemId;
-	int orderId;
+	String orderId;
 	int productId;
 	String breadType;
 	String veggies;
 	String source;
-	int quantity;
 	int attach;
+	String length;
 }

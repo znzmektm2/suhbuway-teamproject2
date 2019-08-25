@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import project.suhbuway.dto.OrderList;
-import project.suhbuway.dto.OrderWrapper;
+import project.suhbuway.dto.OrderInsertWrapper;
 import project.suhbuway.dto.Store;
 import project.suhbuway.service.client.OrderService;
 
@@ -46,12 +46,14 @@ public class OrderController {
 	 */
 	@RequestMapping("/order/confirm")
 	public String completeOrder(HttpServletRequest request) {
+		
 		Gson gson = new Gson();
-		OrderWrapper[] newOrder = gson.fromJson(request.getParameter("menuList"), OrderWrapper[].class);
+		System.out.println(request.getParameter("menuList"));
+		OrderInsertWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderInsertWrapper[].class);
 		Store store = gson.fromJson(request.getParameter("store"), Store.class);
-		for(OrderWrapper item : newOrder)
-			System.out.println(item);
-		System.out.println(store);
+		
+		orderService.insertOrder(newOrders, store);
+		
 		return "order/completeOrder"; 
 	}
 }
