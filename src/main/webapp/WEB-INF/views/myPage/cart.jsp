@@ -81,7 +81,6 @@
 	<script>
 	$(function() {
 		attachItems();
-		addDefaultText();
 		trDelete();
 		selectBox();
 		confirmBtn();
@@ -92,13 +91,14 @@
 		$('a.confirm').on('click',function(e) {
 			e.preventDefault();
 			
-			if(!sessionStorage.getItem('menuItem')){
+			if(!sessionStorage.getItem('menuItem') || sessionStorage.getItem == ''){
 				alert('제품이 없습니다.')
 			} else  if(selectedStore == '') {
 				alert('매장을 선택하시오.');
 			} else {
 				$('[name=menuList]').val(JSON.stringify(savedItem));
 				$('[name=store]').val(JSON.stringify(selectedStore));
+				sessionStorage.removeItem('menuItem');
 				$('#orderForm').submit();
 			} 
 		})
@@ -107,13 +107,12 @@
 	var storeList = ${requestScope.list};
 	var selectedStore = "";
 	var user = "";
-	console.log(storeList);
 	
 	// 장바구니 아이템 뿌리기
 	function attachItems() {
+		$('.orderPrice').parents('tr').siblings('tr').empty();
 		var totalPrice = 0;
 		$.each(savedItem, function(index, item) {
-			console.log(item);
 			var topping = "";
 			var side = "";
 			totalPrice += item.price;
@@ -134,11 +133,11 @@
 					+ "<td>"+ side.slice(0,-4) + "</td>" // 사이드 메뉴 & 음료
 					+ "<td><span class='price'>"+ formatNumber(item.price) + "<span></td>" // 금액
 					+ "</tr>"
-			console.log(itemInfo);
 			$('.item_list tr:last-child').before(itemInfo);
 			
 		});
 		$('.orderPrice').text(formatNumber(totalPrice));
+		addDefaultText();
 	}
 	
 	// 선택없음 뿌리기
@@ -160,8 +159,14 @@
 		$('table').eq(0).on('click','.delete', function() {
 			var index = $(this).attr('data-val');
 			alert('삭제 하시겠습니까?');
-	        $(this).parents('tr').empty();
-	        
+	        savedItem.splice(index, 1)
+
+	        if(savedItem.length == 0){ // savedItem에 항목이 없으면...
+		        sessionStorage.removeItem('menuItem');
+	        } else { 
+		        sessionStorage.setItem('menuItem', JSON.stringify(savedItem));
+	        }
+	        attachItems();
 	    });
 	}
 	
@@ -193,13 +198,12 @@
 			if(!$(this).hasClass('default')) {
 	            $(this).parents('.slct_list').prev('.slct_head').text($(this).text());
 				selectedStore = storeList.find(x => x.storeId == $(this).attr('data-val'))
-				console.log(selectedStore)
+				//console.log(selectedStore)
 			} else {
 				
 			}
 		})
 	}
-
 	</script>
 </body>
 </html>
