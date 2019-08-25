@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import project.suhbuway.dto.OrderList;
-import project.suhbuway.dto.OrderInsertWrapper;
+import project.suhbuway.dto.OrderSetWrapper;
 import project.suhbuway.dto.Store;
 import project.suhbuway.service.client.OrderService;
 
@@ -48,12 +48,20 @@ public class OrderController {
 	public String completeOrder(HttpServletRequest request) {
 		
 		Gson gson = new Gson();
-		System.out.println(request.getParameter("menuList"));
-		OrderInsertWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderInsertWrapper[].class);
+		OrderSetWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderSetWrapper[].class);
 		Store store = gson.fromJson(request.getParameter("store"), Store.class);
 		
 		String orderId = orderService.insertOrder(newOrders, store);
 		request.setAttribute("orderId", orderId);
 		return "order/completeOrder"; 
+	}
+	
+	/**
+	 * 마이페이지 주문내역
+	 */
+	@RequestMapping("/myPage/orders")
+	public String orders(HttpServletRequest request) {
+		orderService.selectOrderListByUser("test");
+		return "myPage/orders";
 	}
 }

@@ -3,7 +3,7 @@ package project.suhbuway.service.client;
 import java.util.List;
 
 import project.suhbuway.dto.OrderList;
-import project.suhbuway.dto.OrderInsertWrapper;
+import project.suhbuway.dto.OrderSetWrapper;
 import project.suhbuway.dto.Store;
 
 /**
@@ -14,9 +14,9 @@ import project.suhbuway.dto.Store;
 public interface OrderService {
 
 	/**
-	 * 주문내역을 불러온다.
+	 * 유저별 주문 리스트들을 불러오는 메서드
 	 */
-	public List<OrderList> selectOrderList();
+	public List<OrderList> selectOrderListByUser(String userId);
 	
 	/**
 	 * 점포 정보를 불러온다. 
@@ -26,6 +26,6 @@ public interface OrderService {
 	/**
 	 * 주문을 저장한다.
 	 */
-	public String insertOrder(OrderInsertWrapper[] newOrders, Store store);
+	public String insertOrder(OrderSetWrapper[] newOrders, Store store);
 
 }

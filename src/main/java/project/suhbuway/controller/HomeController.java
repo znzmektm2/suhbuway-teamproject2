@@ -146,19 +146,6 @@ public class HomeController {
 	}
 
 	/**
-	 * 마이페이지 주문내역
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/myPage/orders")
-	public String orders(HttpServletRequest request) {
-//		List<Product> list = service.selectProductsByCategory(category);
-//		request.setAttribute("list", list);
-		return "myPage/orders";
-	}
-
-	/**
 	 * 마이페이지 문의사항
 	 * 
 	 * @param request
