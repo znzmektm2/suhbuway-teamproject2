@@ -92,7 +92,7 @@
 		$('a.confirm').on('click',function(e) {
 			e.preventDefault();
 			
-			if(savedItem == ''){
+			if(!sessionStorage.getItem('menuItem')){
 				alert('제품이 없습니다.')
 			} else  if(selectedStore == '') {
 				alert('매장을 선택하시오.');
