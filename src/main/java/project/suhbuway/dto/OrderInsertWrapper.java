@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class OrderInsertWrapper {
-	Product product;
-	String length;
-	int price;
-	String breadType;
-	String[] veggies;
-	String[] source;
-	Product[] subMenu;
+	private Product product;
+	private String length;
+	private int price;
+	private String breadType;
+	private String[] veggies;
+	private String[] source;
+	private Product[] subMenu;
 }
