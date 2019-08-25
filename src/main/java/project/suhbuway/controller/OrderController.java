@@ -52,8 +52,8 @@ public class OrderController {
 		OrderInsertWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderInsertWrapper[].class);
 		Store store = gson.fromJson(request.getParameter("store"), Store.class);
 		
-		orderService.insertOrder(newOrders, store);
-		
+		String orderId = orderService.insertOrder(newOrders, store);
+		request.setAttribute("orderId", orderId);
 		return "order/completeOrder"; 
 	}
 }
