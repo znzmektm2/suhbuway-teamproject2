@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import project.suhbuway.dto.OrderList;
-import project.suhbuway.dto.OrderSetWrapper;
 import project.suhbuway.dto.Store;
+import project.suhbuway.pojo.OrderInsertWrapper;
 import project.suhbuway.service.client.OrderService;
 
 /**
@@ -48,10 +48,10 @@ public class OrderController {
 	public String completeOrder(HttpServletRequest request) {
 		
 		Gson gson = new Gson();
-		OrderSetWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderSetWrapper[].class);
+		OrderInsertWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderInsertWrapper[].class);
 		Store store = gson.fromJson(request.getParameter("store"), Store.class);
 		
-		String orderId = orderService.insertOrder(newOrders, store);
+		String orderId = orderService.insertOrder(newOrders, store, "test1"); //////// 여기에 유저 아이디 넣으면 됨 ////////
 		request.setAttribute("orderId", orderId);
 		return "order/completeOrder"; 
 	}
@@ -61,7 +61,8 @@ public class OrderController {
 	 */
 	@RequestMapping("/myPage/orders")
 	public String orders(HttpServletRequest request) {
-		orderService.selectOrderListByUser("test");
+		
+		orderService.selectOrderListByUser("test1"); //////// 여기에 유저 아이디 넣으면 됨 ////////
 		return "myPage/orders";
 	}
 }

@@ -1,9 +1,10 @@
-package project.suhbuway.dto;
+package project.suhbuway.pojo;
 
 import lombok.Data;
+import project.suhbuway.dto.Product;
 
 @Data
-public class OrderSetWrapper {
+public class OrderInsertWrapper {
 	
 	private Product product;
 	

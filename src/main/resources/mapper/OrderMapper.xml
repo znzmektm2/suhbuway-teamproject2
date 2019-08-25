@@ -6,7 +6,7 @@
 		ORDER_ID,USER_ID,STORE_ID,TOTAL,ORDER_STATE,REGDATE
 	</sql>
 	<sql id="orderItemColumns">
-		ITEM_ID,ORDER_ID,PRODUCT_ID,BREAD_TYPE,VEGGIES,SOURCE,ATTACH
+		ITEM_ID,ORDER_ID,PRODUCT_ID,BREAD_TYPE,VEGGIES,SOURCE,ATTACH,LENGTH
 	</sql>
 
 	<resultMap type="orderList" id="orderListMap">
@@ -48,7 +48,7 @@
 	<!-- 오더 아이템 넣기 -->
 	<insert id="insertOrderItem" parameterType="orderItem">
 		INSERT INTO ORDER_ITEM(<include refid="orderItemColumns" />)
-		VALUES(#{itemId},#{orderId},#{productId},#{breadType},#{veggies},#{source},#{attach})
+		VALUES(#{itemId},#{orderId},#{productId},#{breadType},#{veggies},#{source},#{attach},#{length})
 	</insert>
 
 	<!-- 오더 아이템 마지막번호 불러오기 -->
