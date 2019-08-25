@@ -16,15 +16,21 @@
 		<result column="TOTAL" property="total" />
 		<result column="ORDER_STATE" property="orderState" />
 		<result column="REGDATE" property="regdate" />
-		<collection column="ORDER_ID" property="orderItems"
-			javaType="java.util.ArrayList" ofType="orderItem"
-			select="getOrderItems" />
+		<collection property="orderItems" ofType="orderItem">
+			<id column="ITEM_ID" property="itemId" />
+			<result column="ORDER_ID" property="orderId" />
+			<result column="PRODUCT_ID" property="productId" />
+			<result column="BREAD_TYPE" property="breadType" />
+			<result column="VEGGIES" property="veggies" />
+			<result column="SOURCE" property="source" />
+			<result column="ATTACH" property="attach" />
+		</collection>
 	</resultMap>
 
-	<select id="selectOrderList" resultMap="orderListMap">
+	<select id="selectOrderList" parameterType="string" resultMap="orderListMap">
 		SELECT
-		<include refid="orderListColumns" />
-		FROM ORDER_LIST ORDER BY REGDATE DESC
+		<include refid="orderListColumns" />,ITEM_ID,PRODUCT_ID,BREAD_TYPE,VEGGIES,SOURCE,ATTACH
+		FROM ORDER_LIST JOIN ORDER_ITEM USING(ORDER_ID) WHERE USER_ID=#{_parameter} ORDER BY REGDATE DESC
 	</select>
 
 	<select id="selectOrderItems" resultType="orderItem">

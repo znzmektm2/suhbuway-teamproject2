@@ -16,11 +16,11 @@ public class OrderDAOImpl implements OrderDAO {
 	SqlSession session;
 
 	@Override
-	public List<OrderList> selectOrderLists() {
-		List<OrderList> list = session.selectList("orderMapper.selectOrderList");
+	public List<OrderList> selectOrderListsByUser(String userId) {
+		List<OrderList> list = session.selectList("orderMapper.selectOrderList", userId);
 		return list;
 	}
-
+	
 	@Override
 	public int insertOrder(OrderList orderList) {
 		int result = session.insert("orderMapper.insertOrderList",orderList);

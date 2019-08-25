@@ -16,7 +16,13 @@ public class StoreDAOImpl implements StoreDAO {
 	
 	@Override
 	public List<Store> selectAllStore() {
-		List<Store> list = session.selectList("storeMapper.selectAllStore");
+		List<Store> list = session.selectList("storeMapper.selectStore");
 		return list;
+	}
+
+	@Override
+	public Store selectStoreByStoreId(String storeId) {
+		Store result = session.selectOne("storeMapper.selectStore", storeId);
+		return result;
 	}
 }
