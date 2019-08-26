@@ -11,10 +11,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
-import project.suhbuway.dto.OrderList;
 import project.suhbuway.dto.Store;
 import project.suhbuway.service.client.OrderService;
 import project.suhbuway.wrapper.OrderInsertWrapper;
+import project.suhbuway.wrapper.OrderListWrapper;
 
 /**
  * 유저관리 맵핑은 이곳으로..
@@ -63,7 +63,9 @@ public class OrderController {
     @RequestMapping("/myPage/orders")
     public String orders(HttpServletRequest request) {
 
-	orderService.selectOrderListByUser("test1"); //////// 여기에 유저 아이디 넣으면 됨 ////////
+	List<OrderListWrapper> list = orderService.selectOrderListByUser("test1"); //////// 여기에 유저 아이디 넣으면 됨 ////////
+	request.setAttribute("list", list);
+	
 	return "myPage/orders";
     }
 }

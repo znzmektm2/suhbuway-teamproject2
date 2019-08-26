@@ -78,24 +78,18 @@ public class OrderServiceImpl implements OrderService {
 		    orderItemWrapper.setSubMenu(new ArrayList<Product>());
 		    subMenu.add(orderItemWrapper);
 		} else {
+		    // 
 		    OrderItemWrapper attachTo = subMenu.stream()
 			    .filter(a -> a.getItemId() ==orderItem.getAttach()).findFirst().get();
-		    //System.out.println(attachTo);
-		   // productDAO.selectProductById(orderItem.getProductId());
-		   attachTo.getSubMenu().add(productDAO.selectProductById(orderItem.getProductId()));
+		  
+		    attachTo.getSubMenu().add(productDAO.selectProductById(orderItem.getProductId()));
 		}
 	    }
 	    
 	    wrapper.setItems(subMenu);
-	    System.out.println(wrapper);
-	    System.out.println("---- : " + wrapper.getItems());
 	    
 	    orderLists.add(wrapper);
 	}
-	System.out.println("------------------------------------");
-	for(OrderListWrapper orderItemWrapper : orderLists)
-	    System.out.println(orderItemWrapper);
-	    
 	return orderLists;
     }
 
