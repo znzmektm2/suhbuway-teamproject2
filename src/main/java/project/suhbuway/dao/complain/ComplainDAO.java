@@ -37,4 +37,9 @@ public interface ComplainDAO {
 	    * 관리자 답변
 	    * */
 	   int replyUpdate(Complain complain);
+	   
+		/**
+		 * 유저에 따른 게시판
+		 */
+	   List<Complain> selectByUserId( String userId );
 }

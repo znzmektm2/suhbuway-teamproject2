@@ -2,6 +2,7 @@ package project.suhbuway.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.suhbuway.dto.Complain;
+import project.suhbuway.dto.User;
 import project.suhbuway.service.complain.ComplainService;
 
 @Controller
@@ -25,13 +27,38 @@ public class ComplainController {
 	private ComplainService service;
 	
 	/*
-	 * ��� �Խñ� �˻�
+	 * 문의사항폼 
 	 * */
 	@RequestMapping("/board/complainList")
-	public String selectAll(HttpServletRequest request) {
-		 List<Complain> list = service.selectAll();
-		 request.setAttribute("list",list);
-		return "board/complainList";
+	public ModelAndView selectAll(HttpServletRequest request, HttpSession session, Principal principal) {
+		ModelAndView mv = new ModelAndView();
+    	String kakaoId = (String)session.getAttribute("userId");//카카오 로그인
+    	// 시큐리티 로그인 유저 id
+    	if( principal!= null ) {
+    		String user = principal.getName();
+    		if(!user.equals("admin")) {
+    			//System.out.println("principaluser: " + user);
+            	user = user.replace("User(", "" );
+            	user = user.replace(")", "" );
+            	String [] userdd= user.split(",");
+            	String userId =  userdd[0].replace("userId=", "" );
+            	
+        		List<Complain> userComplain = service.selectByUserId(userId);
+        		mv.addObject("list", userComplain );   
+            	
+        	} else {
+        		mv.addObject("admin", "admin" );
+       		 	List<Complain> list = service.selectAll();
+       		 	mv.addObject("list", list );
+        	}
+    	}
+    	// 카카오 로그인 유저
+    	if( kakaoId!=null ) {
+    		List<Complain> kakaoComplain = service.selectByUserId(kakaoId);
+    		mv.addObject("list", kakaoComplain );   		
+    	}
+		mv.setViewName("board/complainList");
+	return mv;
 	}
 	
 	/*

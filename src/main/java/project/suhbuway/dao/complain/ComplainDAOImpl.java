@@ -1,6 +1,7 @@
 package project.suhbuway.dao.complain;
 
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,5 +41,13 @@ public class ComplainDAOImpl implements ComplainDAO {
 	@Override
 	public int replyUpdate(Complain complain) {
 		return session.update("complainMapper.replyUpdate", complain);
+	}
+
+	/**
+	 * 유저에 따른 게시판
+	 */
+	@Override
+	public List<Complain> selectByUserId(String userId) {
+		return session.selectList("complainMapper.selectByUserId",userId);
 	}
 }
