@@ -760,14 +760,12 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 
 /* 장바구니 */
 .myPage .board_list_wrapper.step1{width:100%;}
-.myPage .board_list_wrapper.step1 table th{height:42px;font-size: 14px;}
-.myPage .board_list_wrapper.step1 table span{font-size: 12px;}
-.myPage .board_list_wrapper.step1 table td{height:55px;font-size:12px;}
-.myPage .board_list_wrapper.step1 table span.orderPrice{font-size: 14px;}
 .total{margin-top:20px;text-align: right;}
 .total span{display:inline-block;vertical-align: middle;font-size:18px;}
+.cart table tr:last-child td{height:65px;font-size:18px;font-weight:bold;}
+.cart .board_list_wrapper.step1 table td{line-height:20px;}
 .total .price{margin-left:20px;padding-left:20px;color: #d92820;border-left:2px solid #888;}
- 
+
 /* 주문내역 */
 .orders .board_list_wrapper.step1 table th{height: 45px;font-size: 16px;}
 .orders .board_list_wrapper.step1 table td{padding:10px;font-size:14px;}
@@ -814,4 +812,3 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 .completeOrderContainer .num{margin-top:15px;}
 .completeOrderContainer .errorWrap{padding:70px 0 90px;}
 .completeOrderContainer .errorWrap a{background-color: #009223;}
-

@@ -6,41 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
-<script>
-$(function() {
-	var obj = JSON.parse(sessionStorage.getItem('menuItem'));
-	console.log(obj);
-
-	function attachItems() {
-		$.each(obj, function(index, item) {
-			console.log(item);
-			var topping = "";
-			var side = "";
-			$.each(item.subMenu, function (ind, ite) {
-				if(ite.category == "topping"){
-					topping += ite.name + ",";
-				} else {
-					side += ite.name + ",";
-				}
-			});
-			var itemInfo = "<tr>"
-					+ "<td><span class=\"delete\">삭제</span><span>" + item.product.name + "</span></td>" // 메뉴
-					+ "<td>"+ item.breadType + "</td>" // 빵
-					+ "<td>"+ topping.slice(0,-1) + "</td>" // 추가토핑
-					+ "<td>"+ item.veggies.join() + "</td>" // 야채종류
-					+ "<td>"+ item.source.join() + "</td>" // 소스종류
-					+ "<td>"+ side.slice(0,-1) + "</td>" // 사이드 메뉴 & 음료
-					+ "<td>"+ item.price + "</td>" // 금액
-					+ "</tr>"
-			console.log(itemInfo)
-			$('tbody').append(itemInfo);
-		})
-	}
-	attachItems();
-})
-</script>
 </head>
 <body>	
+	
 	<div class="cart">
 		<div class="content">
 			<h3 class="h_title">장바구니</h3>
@@ -57,107 +25,186 @@ $(function() {
 							<th scope="col">금액</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<ul>
-									<li>
-										<span class="delete">삭제</span>
-										<span>이탈리안 비엠티 15cm</span>
-										<span class="price">￦6,000</span>
-									</li>
-								</ul>
-							</td>
-							<td>허니오트</td>
-							<td>
-								<ul>
-									<li>
-										<span>더블치즈</span>
-										<span class="price">￦800</span>
-									</li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li>
-										<span>양상추</span>
-									</li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li>
-										<span>스위트어니언</span>
-									</li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li>
-										<span>Bacon Cheesy 웨지 포테이토</span>
-										<span class="price">￦200</span>
-									</li>
-								</ul>
-							</td>
-							<td><span class="orderPrice">￦  7,000</span></td>
-						</tr>
-						<tr>
-							<td>
-								<ul>
-									<li>
-										<span class="delete">삭제</span>
-										<span>이탈리안 비엠티 15cm</span>
-										<span class="price">￦6,000</span>
-									</li>
-								</ul>
-							</td>
-							<td>허니오트</td>
-							<td>
-								<ul>
-									<li>
-										<span>더블치즈</span>
-										<span class="price">￦800</span>
-									</li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li>
-										<span>양상추</span>
-									</li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li>
-										<span>스위트어니언</span>
-									</li>
-								</ul>
-							</td>
-							<td>
-								<ul>
-									<li>
-										<span>Bacon Cheesy 웨지 포테이토</span>
-										<span class="price">￦200</span>
-									</li>
-								</ul>
-							</td>
-							<td><span class="orderPrice">￦  7,000</span></td>
+					<tbody class="item_list">
+						<tr class="on">
+							<td colspan="6">총 결제금액<span class="ess"></span></td> 
+							<td><span class="orderPrice"> 9,900</span></td>
 						</tr>
 					</tbody>
 				</table>
-				<div class="total">
-					<span>총 결제금액</span>
-					<span class="price">￦ 14,000</span>
-				</div>
+				<h3 class="h_title">정보입력</h3>
+		<!-- board list s -->
+		<table class="payInfoTable">
+			<caption>회원가입 테이블</caption>
+			<colgroup>
+				<col width="130px">
+				<col width="*">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="col">매장선택<span class="ess"></span></th>
+					<td>
+						<div class="select_box selectStore">
+							<span class="slct_head">매장 선택</span>
+							<div class="slct_list">
+								<ul>
+									<li><a href="#" class="default">매장 선택</a></li>
+								</ul>
+							</div> 
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="col">결제하기<span class="ess"></span></th>
+					<td>
+						<ul>
+							<li>보유포인트 <input type="text" value="10,000" readonly><a href="#">충전하기</a></li>
+							<li>사용포인트 <input type="text"></li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 				<div class="inquiry_wrapper orderBtn">
 					<div class="btns_wrapper">
-						<a href="${pageContext.request.contextPath}/order/payment" class="btn bgc_point i_reg od" style="width:170px"><span>주문하기</span></a>
+						<a href="" class="btn bgc_point i_reg od confirm" style="width:170px"><span>주문하기</span></a>
 					</div> 
 				</div>
 			</div>
 		</div>
 	</div>
+	<form id="orderForm" action="${pageContext.request.contextPath}/order/confirm" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+		<input type="hidden" name="menuList" >
+		<input type="hidden" name="store" >
+	</form>
+	<script>
+	$(function() {
+		attachItems();
+		trDelete();
+		selectBox();
+		confirmBtn();
+	})
+	
+	// 주문하기 버튼 클릭
+	function confirmBtn() {
+		$('a.confirm').on('click',function(e) {
+			e.preventDefault();
+			
+			if(!sessionStorage.getItem('menuItem') || sessionStorage.getItem == ''){
+				alert('제품이 없습니다.')
+			} else  if(selectedStore == '') {
+				alert('매장을 선택하시오.');
+			} else {
+				$('[name=menuList]').val(JSON.stringify(savedItem));
+				$('[name=store]').val(JSON.stringify(selectedStore));
+				sessionStorage.removeItem('menuItem');
+				$('#orderForm').submit();
+			} 
+		})
+	}
+	var savedItem = JSON.parse(sessionStorage.getItem('menuItem'));
+	var storeList = ${requestScope.list};
+	var selectedStore = "";
+	var user = "";
+	
+	// 장바구니 아이템 뿌리기
+	function attachItems() {
+		$('.orderPrice').parents('tr').siblings('tr').empty();
+		var totalPrice = 0;
+		$.each(savedItem, function(index, item) {
+			var topping = "";
+			var side = "";
+			totalPrice += item.price;
+			
+			$.each(item.subMenu, function (ind, ite) {
+				if(ite.category == "topping"){
+					topping += ite.name + "<br>";
+				} else {
+					side += ite.name + "<br>";
+				}
+			});
+			var itemInfo = "<tr>"
+					+ "<td><ul><li><span class=\"delete\" data-val='" + index + "'>삭제</span><span>" + item.product.name + "</span></li><ul></td>" // 메뉴
+					+ "<td>" + item.breadType + "</td>" // 빵
+					+ "<td>"+ topping.slice(0,-4) + "</td>" // 추가토핑
+					+ "<td>"+ item.veggies.join('<br>') + "</td>" // 야채종류
+					+ "<td>"+ item.source.join('<br>') + "</td>" // 소스종류
+					+ "<td>"+ side.slice(0,-4) + "</td>" // 사이드 메뉴 & 음료
+					+ "<td><span class='price'>"+ formatNumber(item.price) + "<span></td>" // 금액
+					+ "</tr>"
+			$('.item_list tr:last-child').before(itemInfo);
+			
+		});
+		$('.orderPrice').text(formatNumber(totalPrice));
+		addDefaultText();
+	}
+	
+	// 선택없음 뿌리기
+	function addDefaultText() {
+		$.each($('tbody td'), function(index, item) {
+			if($(this).text() == ""){
+				$(this).html('<span class="default">선택없음</span>');
+			}
+	   });
+	}
+	
+	//숫자 콤마 찍기
+	function formatNumber(num) {
+		return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+	
+	//행 삭제 
+	function trDelete() {
+		$('table').eq(0).on('click','.delete', function() {
+			var index = $(this).attr('data-val');
+			alert('삭제 하시겠습니까?');
+	        savedItem.splice(index, 1)
+
+	        if(savedItem.length == 0){ // savedItem에 항목이 없으면...
+		        sessionStorage.removeItem('menuItem');
+	        } else { 
+		        sessionStorage.setItem('menuItem', JSON.stringify(savedItem));
+	        }
+	        attachItems();
+	    });
+	}
+	
+	// 매장 셀렉트 박스
+	function selectBox() {
+		$.each(storeList, function(index, item) {
+			var str = '<li><a href="#" data-val="' + item.storeId + '">' + item.storeName + '</a></li>';
+			$('.slct_list>ul').append(str);
+		})
+		
+		
+		$('.slct_head').click(function () {
+			if(!$(this).parent().hasClass('on')){
+				$(this).parent().addClass('on').children('.slct_list').stop().slideDown('fast');
+			} else{
+				$(this).parent().removeClass('on').children('.slct_list').hide();
+			}
+			$(this).parent().siblings().removeClass('on').children('.slct_list').hide();
+		});
+		
+		$(document).on("click", function(event){ //바깥 클릭시 셀렉트박스 닫기
+	        if(!$(event.target).closest(".slct_head").length){
+	            $(".slct_list").hide();
+	        }
+	    });
+		// 매장 선택 시 
+		$('.selectStore').on('click','div>ul>li>a',function(e) {
+			e.preventDefault();
+			if(!$(this).hasClass('default')) {
+	            $(this).parents('.slct_list').prev('.slct_head').text($(this).text());
+				selectedStore = storeList.find(x => x.storeId == $(this).attr('data-val'))
+				//console.log(selectedStore)
+			} else {
+				
+			}
+		})
+	}
+	</script>
 </body>
 </html>
 

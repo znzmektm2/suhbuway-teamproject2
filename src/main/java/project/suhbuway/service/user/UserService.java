@@ -40,8 +40,4 @@ public interface UserService {
 	 * 회원정보 수정
 	 */
 	int userUpdate(User user);
-	
-	
-	
-	
 }

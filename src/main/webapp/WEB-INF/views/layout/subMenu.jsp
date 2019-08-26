@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="sub_header"><!-- 메뉴소개일경우 type01클래스 추가 -->
+<div class="sub_header">
+	<!-- 메뉴소개일경우 type01클래스 추가 -->
 	<div class="content">
 		<a class="logo" href="${pageContext.request.contextPath}">HOME</a>
 		<!-- sub location -->
