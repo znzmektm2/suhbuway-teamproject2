@@ -110,7 +110,7 @@
 	function checkValid() {
    		var f = window.document.registerForm;
    		console.log(f.userId.value)
-   		//if(f.socialType.value=="") {// 쇼셜이면
+   		if(f.socialType.value=="") {// 쇼셜이면
 			if ( f.userId.value == "") {
 	 		    alert( "아이디를 입력해 주세요." );
 				f.userId.focus();
@@ -131,7 +131,7 @@
 				f.userName.focus();
 				return false;
 			}
-   		//}
+   		}
 		if ( f.userPhone.value == "" ) {
         	alert( "핸드폰번호를 입력해 주세요." );
         	f.userPhone.focus();
@@ -147,7 +147,7 @@
         	f.email2.focus();
         	return false;
     	}
-    	//return true;
+    	return true;
 	}
 
 	/* 프로필 사진 이름으로 표시하기 위한 함수 */
@@ -179,22 +179,21 @@
 						<div class="board_write_wrapper">
 							<p class="rt_note">필수입력사항<span class="ess"></span></p>
 							<table>
-								<caption>회원가입 테이블</caption>
+								<caption>회원가입 테이블</caption> 
 								<colgroup>
 									<col width="130px">
 									<col width="*">
 								</colgroup>
 								<tbody>
+									<input type="hidden" name="socialType" id="socialType" value="${socialType}" /> 
+									<input type="hidden" name="socialToken" id="socialToken" value="${socialToken}" /> 
+									
 									<!-- 쇼셜 회원가입일 경우 -->
 									<c:if test="${requestScope.socialType!=null}">
-									<input type="hidden" name="userId" value="${userId}" /> 
-									<input type="hidden" name="userPassword" value="${userId}+${socialType}" /> 
-									<input type="hidden" name="checkedPassword" value="${userId}+${socialType}" /> 
-									<input type="hidden" name="userName" value="${requestScope.userName}" /> 
-									
-									<input type="hidden" name="socialType" value="${socialType}" /> 
-									<input type="hidden" name="socialToken" value="${socialToken}" /> 
-									
+									<input type="hidden" name="userId" id="userId" value="${userId}" /> 
+									<input type="hidden" name="userPassword" id="userPassword" value="${userId}+${socialType}" /> 
+									<input type="hidden" name="checkedPassword" id="checkedPassword" value="${userId}+${socialType}" /> 
+									<input type="hidden" name="userName" id="userName" value="${requestScope.userName}" /> 
 									</c:if>
 									<!-- ======여기부터====== -->
 									<c:if test="${requestScope.socialType==null}">
