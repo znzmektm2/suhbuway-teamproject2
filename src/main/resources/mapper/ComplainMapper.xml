@@ -64,5 +64,14 @@
 			complain_id=#{complainId}
 		</where>
 	</update>
+	
+	<select id="selectByUserId" parameterType="string" resultMap="complainMap">
+		select * from complain_board
+		<where>
+			<if test="_parameter!=null">
+				user_id=#{_parameter}
+			</if>
+		</where>
+	</select>
 
 </mapper>

@@ -171,18 +171,23 @@ public class HomeController {
     	String kakaoId = (String)session.getAttribute("userId");//카카오 로그인
     	// 시큐리티 로그인 유저 id
     	if( principal!= null ) {
-        	String user = principal.getName();
-        	user = user.replace("User(", "" );
-        	user = user.replace(")", "" );
-        	String [] userdd= user.split(",");
-        	
-        	mv.addObject("userId", userdd[0].replace("userId=", "" ) );
-        	mv.addObject("mileage", userdd[9].replace("mileage=", "" ) );
-        	mv.addObject("rating", userdd[10].replace("rating=", "" ) );
-        	
-        	//System.out.println("userId: "+ userdd[0].replace("userId=", "" ) );
-        	//System.out.println("mileage: "+userdd[9].replace("mileage=", "" ) );
-        	//System.out.println("rating: "+userdd[10].replace("rating=", "" ) );    		
+    		String user = principal.getName();
+    		if(!user.equals("admin")) {
+    			System.out.println("principaluser: " + user);
+            	user = user.replace("User(", "" );
+            	user = user.replace(")", "" );
+            	String [] userdd= user.split(",");
+            	
+            	mv.addObject("userId", userdd[0].replace("userId=", "" ) );
+            	mv.addObject("mileage", userdd[9].replace("mileage=", "" ) );
+            	mv.addObject("rating", userdd[10].replace("rating=", "" ) );
+            	
+            	//System.out.println("userId: "+ userdd[0].replace("userId=", "" ) );
+            	//System.out.println("mileage: "+userdd[9].replace("mileage=", "" ) );
+            	//System.out.println("rating: "+userdd[10].replace("rating=", "" ) );    		
+        	} else {
+        		mv.addObject("admin", "admin" );
+        	}
     	}
     	// 카카오 로그인 유저
     	if( kakaoId!=null ) {
