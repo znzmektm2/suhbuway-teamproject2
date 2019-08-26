@@ -65,7 +65,7 @@ public class OrderController {
 
 	List<OrderListWrapper> list = orderService.selectOrderListByUser("test1"); //////// 여기에 유저 아이디 넣으면 됨 ////////
 	request.setAttribute("list", list);
-	
+
 	return "myPage/orders";
     }
 }
