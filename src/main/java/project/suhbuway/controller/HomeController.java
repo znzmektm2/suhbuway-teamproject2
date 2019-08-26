@@ -111,8 +111,7 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/board/newsView")
-    public String newsView(@RequestParam(defaultValue = "1") int page, @RequestParam int newsId, HttpServletRequest request) {
-		request.setAttribute("page", page);
+    public String newsView(@RequestParam(defaultValue = "1") int newsId, HttpServletRequest request) {
 		request.setAttribute("newsId", newsId);
 		return "board/newsView";
     }

@@ -669,6 +669,7 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 .news_view_wrapper .title{color:#292929; font-size:36px; font-weight:300; width:800px; letter-spacing:-0.04em; line-height:50px;}
 .news_view_wrapper .date{margin:17px 0; color:#bbbbbb; font-size:16px; font-family:font_sw;}
 .news_view_wrapper .news_view_conten{margin-bottom:57px; width:800px; line-height:26px;}
+.news_view_wrapper .news_view_conten table{border:none;}
 .news_view_wrapper .news_view_conten .text_wrap{margin-top:23px; font-size:16px; color:#666666; line-height:26px; letter-spacing:-0.045em}
 
 .news_view_wrapper .board_right{position:absolute; left:870px; top:10px; width:300px; border-top:1px solid #dddddd}
