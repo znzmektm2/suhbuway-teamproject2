@@ -12,7 +12,7 @@
 <div class="innerWrap errorWrap">
 	<h2 class="whoops">주문완료!</h2>
 	<p class="txt">주문해 주셔서 감사합니다.<br>주문상태는 마이페이지 주문내역에서 확인 가능합니다.</p>
-	<h2 class="num">주문번호 [2570번]</h2>
+	<h2 class="num">주문번호 [${orderId}번]</h2>
 	<div class="errorBtn">
 		<a href="${pageContext.request.contextPath}/myPage/orders"><span>주문내역 확인</span></a>
 	</div>

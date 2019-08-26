@@ -31,4 +31,13 @@ public interface UserService {
 	 */
 	int updateBySocialToken(String id,String socialToken);
 	
+	/**
+	 * 비밀번호 일치 확인
+	 */
+	boolean selectByUserPassword(String id,String passowrd);
+	
+	/**
+	 * 회원정보 수정
+	 */
+	int userUpdate(User user);
 }

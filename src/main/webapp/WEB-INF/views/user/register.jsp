@@ -10,7 +10,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){ 
+	$(function(){
 		
 		// # 아이디 길이 검사
 		var idState = false;
@@ -23,6 +23,17 @@
 				$("#idcheckspan").html("");
 				idState = true;
 			}//else
+		});//keyup
+		
+		// # 연락처 길이 검사
+		var phoneState = false;
+		$("#userPhone").keyup(function(){
+			var userPhone=$(this).val().trim();
+			if( userPhone.length>11 ){ // 10글자 이상이면
+				alert("연락처는 11글자 이하로 입력해주세요.");
+				$("#userPhone").val("");
+				return;
+			} 
 		});//keyup
 		
 		// # 아이디 일치 검사
@@ -72,9 +83,9 @@
 		})
 		
 		// # 등록하기(회원가입)
- 		$("a.btn.bgc_point.i_reg").click(function(){
- 			checkValid();
- 			//if( checkValid()==true ) {
+ 		$('a.btn.bgc_point.i_reg').on('click',function(){
+ 			//checkValid();
+ 			if( checkValid()==true ) {
 				// 이메일 조합
 				var email1 = $("#email1").val(); 
 				var email2 = $("#email2").val();
@@ -83,7 +94,16 @@
 				console.log("전송될 userEmail: "+ userEmail );
 		
 				$("#registerForm").submit();//전송
-			//} 
+			} 
+		})//click
+		
+		// # 취소
+		$("a.btn.bgc_white").click(function(){
+			$("#idcheckspan").html("");
+			$("#pwdCheck").text("");
+			$( "#registerForm" ).each( function () {
+	            this.reset();
+	        });
 		})//click
 	})
 	// 유효성 체크
@@ -129,6 +149,15 @@
     	}
     	//return true;
 	}
+
+	/* 프로필 사진 이름으로 표시하기 위한 함수 */
+	function formFile(fis) {
+		var str=fis.value;
+		var strFileName=str.lastIndexOf('\\');
+		var result = str.substring(strFileName+1);
+		$("#userProfileImg").val(result);
+	}
+	
 </script>
 </head>
 <body>
@@ -139,12 +168,10 @@
 			<div class="inquiry_wrapper">
 				<h2 class="subTitle">회원가입</h2>
 				<div class="content">
-				
-					<!-- enctype="multipart/form-data"   -->
-					<form id="registerForm" method="post" name="registerForm"  
+					<form id="registerForm" method="post" name="registerForm" enctype="multipart/form-data"
 							 action="${pageContext.request.contextPath}/userRegister?${_csrf.parameterName}=${_csrf.token}">
 						<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+						<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" > --%>
 						
 						<h3 class="h_title">정보입력</h3>
 	
@@ -185,8 +212,7 @@
 										<th scope="col">비밀번호<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="userPassword" id="userPassword" placeholder="비밀번호를 입력해주세요" type="password" 
-												value="${userId}+${socialType}">
+												<input maxlength="16" name="userPassword" id="userPassword" placeholder="비밀번호를 입력해주세요" type="password"  >
 											</span>
 										</td>
 									</tr>
@@ -194,8 +220,7 @@
 										<th scope="col">비밀번호 확인<span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input maxlength="16" name="checkedPassword" id="checkedPassword" placeholder="비밀번호를 확인해주세요"  type="password" 
-												value="${userId}+${socialType}">
+												<input maxlength="16" name="checkedPassword" id="checkedPassword" placeholder="비밀번호를 확인해주세요"  type="password" >
 											</span>
 											<span style="font-size:13px;" id="pwdCheck"></span>
 										</td>
@@ -252,11 +277,10 @@
 										<th scope="col">프로필</th>
 										<td>
 											<label class="form_file" style="width:466px;">
-												<input data-maxsize="2" data-maxupload="1" id="file" name="file" type="file">
-												<input readonly="readonly" type="text" id="fileName">
+												<input maxlength="60" size="40" id="file" name="file" type="file" onchange="formFile(this); return false;">
+												<input readonly="readonly" type="text" id="userProfileImg">
 											</label>
-	
-											<span class="file_note">※ 등록 가능 확장자 : jpg, gif, png / 최대 2MB</span>
+											<span class="file_note">※ 등록 가능 확장자 : jpg, gif, png</span>
 										</td>
 									</tr>
 								</tbody>

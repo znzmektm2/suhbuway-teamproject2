@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 </head>
-<body>	
+<body>
 	<div class="point">
 		<div class="content">
 			<h3 class="h_title">포인트</h3>

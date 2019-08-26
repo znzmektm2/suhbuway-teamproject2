@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>서부웨이 Suhbu Way</title>
+<meta charset="utf-8">
+<title>서부웨이 Suhbu Way</title>
 </head>
 <script type="text/javascript">
 $('document').ready(function () {
 	var newsId = ${newsId};
 	$.ajax({
-		url: "http://192.168.0.50:8888/view?pageView="+newsId,
+		url: "http://192.168.0.169:8888/view?pageView="+newsId,
 		type :"post",
 		dataType : "json",
 		success :function(result){
@@ -34,7 +34,6 @@ $('document').ready(function () {
 			<h2 class="title"></h2>
 			<div class="date"></div>
 			<div class="news_view_conten"></div>
-
 			<div class="btn_list"><a href="javascript:history.back()">목록보기</a></div>
 
 			<!-- 우측 영역 -->
@@ -53,7 +52,7 @@ $('document').ready(function () {
 				<ul class="board_nav">
 					<li class="prev"><a href="#" onclick="view.view(213)">써브웨이와 함께하는 Mnet ''쇼미더머니8"</a></li>
 					<li><strong>써브웨이와 함께하는 SBS '의사요한' </strong></li>
-					<li class="next"><a href="#" onclick="view.view(211)">써브웨이와 함께하는 tvN '호텔델루나'   </a></li>
+					<li class="next"><a href="#" onclick="view.view(211)">써브웨이와 함께하는 tvN '호텔델루나' </a></li>
 				</ul>
 				<!--// 이전,다음글 영역 -->
 			</div>

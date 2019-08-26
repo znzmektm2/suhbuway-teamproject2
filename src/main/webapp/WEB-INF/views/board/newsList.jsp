@@ -19,7 +19,7 @@ function paging(index) {
 	
 	pagination.empty();
 	$.ajax({
-		url: "http://192.168.0.50:8888?page="+index,
+		url: "http://192.168.0.169:8888?page="+index,
 		type :"post",
 		dataType : "json",
 		success :function(result){
@@ -64,7 +64,6 @@ function paging(index) {
 		}
 	});
 }
-
 </script>
 </head>
 <body>
@@ -95,12 +94,5 @@ function paging(index) {
 		<!--// board 페이지 -->
 	</div>
 	<!--// 뉴스ㆍ공지사항 list e -->
-<script>
-$(document).ready(function(){
-	
-});
-
-</script>
-
 </body>
 </html>

@@ -11,27 +11,28 @@ import project.suhbuway.dto.Product;
  */
 public interface HomeService {
 
-    /**
-     * 카테고리로 상품 리스트 검색
-     * 
-     * @param type
-     * @return
-     */
-    public List<Product> selectProductsByCategory(String category);
-    
-    /**
-     * 아이디로 상품 검색
-     * @param id
-     * @return
-     */
-    public Product selectProductById(int id);
-    
-	/** 
-     * 전체검색(메뉴, 가격 ,카테고리)
-     * 
-     * @param name
-     * @param category
-     * @return
-     */
+	/**
+	 * 카테고리로 상품 리스트 검색
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public List<Product> selectProductsByCategory(String category);
+
+	/**
+	 * 아이디로 상품 검색
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Product selectProductById(int id);
+
+	/**
+	 * 전체검색(메뉴, 가격 ,카테고리)
+	 * 
+	 * @param name
+	 * @param category
+	 * @return
+	 */
 	public List<Product> selectAll();
 }

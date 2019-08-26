@@ -154,3 +154,4 @@ $RECYCLE.BIN/
 #User-defined ignore files
 target/
 src/main/resources/config/
+/.idea/
