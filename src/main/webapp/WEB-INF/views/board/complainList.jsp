@@ -43,9 +43,8 @@
 			<c:choose>
     <c:when test="${empty requestScope.list}">
 	<tr>
-	    <td></td>
-        <td>
-         	  등록된 상품이 없습니다.
+        <td colspan="4">
+         	  등록된 문의사항이 없습니다.
         </td>
     </tr>
     </c:when>

@@ -12,7 +12,14 @@
 <body>
 <!-- kakao 로그인 -->
 <c:choose>
-	<c:when test="${sessionScope.userId==null && requestScope.userId==null}">
+	<c:when test="${requestScope.admin!=null}">
+		<div class="info">
+			<div class="title">
+				<p>일반 회원 페이지 입니다</p>
+			</div>
+		</div>
+	</c:when>
+	<c:when test="${sessionScope.userId==null && requestScope.userId==null }">
 		<div class="info">
 			<div class="title">
 				<p>로그인하고 접근해주세요</p>

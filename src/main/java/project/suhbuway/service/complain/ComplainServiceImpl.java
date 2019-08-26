@@ -60,5 +60,14 @@ public class ComplainServiceImpl implements ComplainService {
 	}
 
 	
+	/**
+	 * 유저에 따른 게시판
+	 */
+	@Override
+	public List<Complain> selectByUserId(String userId) {
+		return dao.selectByUserId(userId);
+	}
+
+	
 
 }

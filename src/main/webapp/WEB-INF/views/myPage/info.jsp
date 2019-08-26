@@ -58,6 +58,13 @@
 		</div>
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<div class="info">
+				<div class="title">
+					<p>일반 회원 페이지 입니다</p>
+				</div>
+			</div>
+		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_USER')">
 			<div class="info">
 				<div class="title">
