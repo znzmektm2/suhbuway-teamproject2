@@ -52,7 +52,7 @@ public class OrderController {
 	OrderInsertWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderInsertWrapper[].class);
 	Store store = gson.fromJson(request.getParameter("store"), Store.class);
 
-	String orderId = orderService.insertOrder(newOrders, store, "test1"); //////// 여기에 유저 아이디 넣으면 됨 ////////
+	String orderId = orderService.insertOrder(newOrders, store, "12345"); //////// 여기에 유저 아이디 넣으면 됨 ////////
 	request.setAttribute("orderId", orderId);
 	return "order/completeOrder";
     }
