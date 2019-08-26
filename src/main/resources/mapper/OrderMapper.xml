@@ -29,8 +29,13 @@
 
 	<select id="selectOrderList" parameterType="string" resultMap="orderListMap">
 		SELECT
-		<include refid="orderListColumns" />,ITEM_ID,PRODUCT_ID,BREAD_TYPE,VEGGIES,SOURCE,ATTACH
-		FROM ORDER_LIST JOIN ORDER_ITEM USING(ORDER_ID) WHERE USER_ID=#{_parameter} ORDER BY REGDATE DESC
+		<include refid="orderListColumns" />
+		,ITEM_ID,PRODUCT_ID,BREAD_TYPE,VEGGIES,SOURCE,ATTACH
+		FROM ORDER_LIST JOIN ORDER_ITEM USING(ORDER_ID)
+		<if test="_parameter!= null">
+			WHERE USER_ID=#{_parameter}
+		</if>
+		ORDER BY REGDATE DESC, ATTACH
 	</select>
 
 	<select id="selectOrderItems" resultType="orderItem">
@@ -38,7 +43,7 @@
 		<include refid="orderItemColumns" />
 		FROM ORDER_ITEM
 	</select>
-	
+
 	<!-- 오더리스트에 집어넣기 -->
 	<insert id="insertOrderList" parameterType="orderList">
 		INSERT INTO ORDER_LIST(ORDER_ID,USER_ID,STORE_ID,TOTAL,REGDATE)
@@ -47,7 +52,9 @@
 
 	<!-- 오더 아이템 넣기 -->
 	<insert id="insertOrderItem" parameterType="orderItem">
-		INSERT INTO ORDER_ITEM(<include refid="orderItemColumns" />)
+		INSERT INTO ORDER_ITEM(
+		<include refid="orderItemColumns" />
+		)
 		VALUES(#{itemId},#{orderId},#{productId},#{breadType},#{veggies},#{source},#{attach},#{length})
 	</insert>
 

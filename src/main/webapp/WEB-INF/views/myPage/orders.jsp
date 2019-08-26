@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 <!DOCTYPE html>
@@ -7,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 </head>
-<body>	
+<body>
 	<div class="orders">
 		<div class="content">
 			<h3 class="h_title">주문내역</h3>
@@ -23,33 +24,26 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- <tr>
-							<td colspan="9">주문내역이 존재하지 않습니다.</td>
-						</tr> -->
-						<tr>
-							<td>2019.08.19</td>
-							<td>판교</td>
-							<td>
-								<span class="menuImg">
-									<img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/sandwich/sandwich_pm10.jpg">
-								</span>
-								<a href="#;" class="menuTit">에그마요 15cm 외</a>
-							</td>
-							<td>￦  7,000</td>
-							<td><span class="state">주문접수</span></td>
-						</tr>
-						<tr>
-							<td>2019.08.19</td>
-							<td>판교</td>
-							<td>
-								<span class="menuImg">
-									<img alt="쉬림프" src="${pageContext.request.contextPath}/resources/images/menu/salad/salad_cl01.jpg">
-								</span>
-								<a href="#;" class="menuTit">쉬림프 외</a>
-							</td>
-							<td>￦  7,000</td>
-							<td><span class="state on">준비완료</span></td>
-						</tr>
+						<c:choose>
+							<c:when test="${requestScope.list == null}">
+								<tr>
+									<td colspan="9">주문내역이 존재하지 않습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${requestScope.list}" var="orderList">
+									<tr>
+										<td>${orderList.regdate}</td>
+										<td>${orderList.store.storeName }</td>
+										<td><span class="menuImg"> <img alt="쉬림프"
+												src="${pageContext.request.contextPath}/resources/images/menu/${orderList.items.get(0).mainMenu.category}/${orderList.items.get(0).mainMenu.imgUrl}">
+										</span><a href="#;" class="menuTit">${orderList.items.get(0).mainMenu.name} ${orderList.items.get(0).length} 외</a></td>
+										<td>￦ ${orderList.total}</td>
+										<td>${orderList.orderState}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>
