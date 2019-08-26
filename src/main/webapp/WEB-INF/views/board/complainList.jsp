@@ -30,47 +30,50 @@
 </style>
 </head>
 <body>
-	<table style="margin-bottom: 20px;">
-		<thead>
-			<tr>
-				<th scope="col">ID</th>
-				<th scope="col" style="padding-left: 100px; padding-right: 100px;">제목</th>
-				<th scope="col">게시글 날짜</th>
-				<th scope="col">게시글 상황</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-    <c:when test="${empty requestScope.list}">
-	<tr>
-        <td colspan="4">
-         	  등록된 문의사항이 없습니다.
-        </td>
-    </tr>
-    </c:when>
-    <c:otherwise>
-	<c:forEach items="${requestScope.list}" var="complain">
-		    <tr>
-		        <td>${complain.userId}</td>
-		        <td><a href="${pageContext.request.contextPath}/board/Read/${complain.complainId}">${complain.title}</a></td>
-		        <td>${complain.date}</td>
-		        <td>
-		        <c:choose>
-		         <c:when test="${complain.state==false}">처리 전</c:when>
-		         <c:otherwise>처리 완료</c:otherwise>
-		        </c:choose>
-		        </td>
-		    </tr>
-    </c:forEach>
-	</c:otherwise>
-    </c:choose>
-		</tbody>
-	</table>
-	
-	   <div class="white">
-            <ul>
-                <li class="detail"><a href="${pageContext.request.contextPath}/board/write">글쓰기</a></li><br>
-            </ul>
-        </div>
+	<h2 class="subTitle">뉴스ㆍ공지사항</h2>
+
+	<div class="board_list_wrapper">
+		<div class="content">
+			<table style="margin-bottom: 20px;">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col" style="padding-left: 100px; padding-right: 100px;">제목</th>
+						<th scope="col">게시글 날짜</th>
+						<th scope="col">게시글 상황</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:choose>
+				    <c:when test="${empty requestScope.list}">
+						<tr>
+					        <td colspan="4">등록된 문의사항이 없습니다.</td>
+					    </tr>
+				    </c:when>
+				    <c:otherwise>
+					<c:forEach items="${requestScope.list}" var="complain">
+					    <tr>
+					        <td>${complain.userId}</td>
+					        <td><a href="${pageContext.request.contextPath}/board/Read/${complain.complainId}">${complain.title}</a></td>
+					        <td>${complain.date}</td>
+					        <td>
+					        <c:choose>
+					         <c:when test="${complain.state==false}">처리 전</c:when>
+					         <c:otherwise>처리 완료</c:otherwise>
+					        </c:choose>
+					        </td>
+					    </tr>
+				    </c:forEach>
+					</c:otherwise>
+			    </c:choose>
+				</tbody>
+			</table>
+			<div class="white">
+		        <ul>
+		            <li class="detail"><a href="${pageContext.request.contextPath}/board/write">글쓰기</a></li><br>
+			    </ul>
+			</div>
+		</div>
+	</div>
 </body>
 </html> 

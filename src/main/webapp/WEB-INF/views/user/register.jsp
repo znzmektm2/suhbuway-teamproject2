@@ -204,7 +204,9 @@
 												<input maxlength="20" name="userId" id="userId" placeholder="아이디를 입력해주세요" type="text" 
 												value="${userId}">
 											</span>
-											<input type="button" name="idCheck" id="idCheck" value="중복확인"><span id="idcheckspan"></span>
+											<span class="idCheckWrap">
+												<input type="button" name="idCheck" id="idCheck" value="중복확인"><span id="idcheckspan"></span>
+											</span>
 										</td>
 									</tr>
 									<tr>
