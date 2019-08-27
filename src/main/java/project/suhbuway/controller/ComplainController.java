@@ -78,9 +78,6 @@ public class ComplainController {
 		mv.addObject("complain", complain);
 		mv.setViewName("board/complainRead");
 		
-		
-		
-		
 		String kakaoId = (String) session.getAttribute("userId");// 카카오 로그인
 		// 시큐리티 로그인 유저 id
 		if (principal != null) {
@@ -106,15 +103,39 @@ public class ComplainController {
 	}
 
 	/*
-	 * �۾��� ��
+	 * 문의사항 글쓰기
 	 */
 	@RequestMapping("/board/write")
-	public String insertForm() {
-		return "board/complainWrite";
+	public ModelAndView insertForm( HttpSession session, Principal principal  ) {
+		
+		ModelAndView mv = new ModelAndView();
+		String kakaoId = (String) session.getAttribute("userId");// 카카오 로그인
+		// 시큐리티 로그인 유저 id
+		if (principal != null) {
+		    String user = principal.getName();
+		    if (!user.equals("admin")) {
+			System.out.println("principaluser: " + user);
+			user = user.replace("User(", "");
+			user = user.replace(")", "");
+			String[] userdd = user.split(",");
+			
+			mv.addObject("userId", userdd[0].replace("userId=", ""));
+		    } else {
+			mv.addObject("admin", "admin");
+		    }
+		}
+		// 카카오 로그인 유저
+		if (kakaoId != null) {
+		    User kakaoUser = userService.selectUserById(kakaoId);
+		    //System.out.println("kakaoUser: " + kakaoUser);
+		    mv.addObject("userId", kakaoUser.getUserId() );
+		}
+		mv.setViewName("board/complainWrite");
+		return mv;
 	}
 
 	/*
-	 * �Խñ� �Է�
+	 * 건의사항 파일저장
 	 */
 	@RequestMapping("/board/insert")
 	public String insert(Complain complain) throws IOException {
@@ -133,7 +154,7 @@ public class ComplainController {
 	}
 
 	/*
-	 * �����ϱ�
+	 * 건의사항 삭제
 	 */
 	@RequestMapping("/board/delete")
 	public String delete(String userId, int complainId) {
@@ -151,11 +172,36 @@ public class ComplainController {
 	}
 
 	/*
-	 * 수정 하기
+	 * 수정하기
 	 */
 	@RequestMapping("/board/update")
-	public String update(Complain complain) throws IOException {
-		MultipartFile file = complain.getFile(); // complain으로 들어온 file을 꺼내서 file변수에 저장.
+	public ModelAndView update(Complain complain, HttpSession session, Principal principal ) throws IOException {
+		
+		ModelAndView mv = new ModelAndView();
+		String kakaoId = (String) session.getAttribute("userId");// 카카오 로그인
+		// 시큐리티 로그인 유저 id
+		if (principal != null) {
+		    String user = principal.getName();
+		    if (!user.equals("admin")) {
+			System.out.println("principaluser: " + user);
+			user = user.replace("User(", "");
+			user = user.replace(")", "");
+			String[] userdd = user.split(",");
+			
+			mv.addObject("userId", userdd[0].replace("userId=", ""));
+		    } else {
+			mv.addObject("admin", "admin");
+		    }
+		}
+		// 카카오 로그인 유저
+		if (kakaoId != null) {
+		    User kakaoUser = userService.selectUserById(kakaoId);
+		    //System.out.println("kakaoUser: " + kakaoUser);
+		    mv.addObject("userId", kakaoUser.getUserId() );
+		}
+		
+		// complain으로 들어온 file을 꺼내서 file변수에 저장
+		MultipartFile file = complain.getFile(); 
 		if (file.getSize() > 0) {// 파일이 첨부되었다면
 			String fName = file.getOriginalFilename();
 			long fSize = file.getSize();
@@ -164,9 +210,10 @@ public class ComplainController {
 			// 파일 저장
 			file.transferTo(new File(path + "/" + fName));// 파일 저장
 		}
-
+		
 		service.update(complain);
-		return "redirect:complainList";
+		mv.setViewName("redirect:complainList");
+		return mv;
 	}
 
 	/*

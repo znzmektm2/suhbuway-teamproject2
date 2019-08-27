@@ -35,14 +35,12 @@
 </head>
 <body>
 	<div class="inquiry_wrapper">
-
 		<h2 class="subTitle">문의 사항</h2>
-
 		<div class="content">
 			<form id="frm" method="post" name="frm" onSubmit='return checkValid()'
 				enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/board/insert?${_csrf.parameterName}=${_csrf.token}">
-				<input type=hidden name="userId" value="<sec:authentication property="principal.userId" />">
+				<input type=hidden name="userId" value="${requestScope.userId}">
 				<div class="board_write_wrapper">
 					<p class="rt_note">
 						필수입력사항<span class="ess"></span>
