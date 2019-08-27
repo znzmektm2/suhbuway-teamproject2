@@ -9,6 +9,18 @@
 <title></title>
 </head>
 <body>
+<c:choose>
+	<c:when test="${requestScope.userId==null}">
+		<div class="info">
+			<div class="title">
+				<br><br><br>
+				<p >로그인하고 접근해주세요</p>
+				<br><br><br>
+			</div>
+		</div>
+	</c:when>
+	<c:when test="${requestScope.userId!=null}">
+
 	<div class="orders">
 		<div class="content">
 			<h3 class="h_title">주문내역</h3>
@@ -25,7 +37,7 @@
 					</thead>
 					<tbody>
 						<c:choose>
-							<c:when test="${requestScope.list == null}">
+							<c:when test="${ empty requestScope.list}">
 								<tr>
 									<td colspan="9">주문내역이 존재하지 않습니다.</td>
 								</tr>
@@ -49,6 +61,9 @@
 			</div>
 		</div>
 	</div>
+	
+	</c:when>
+</c:choose>
 </body>
 </html>
 

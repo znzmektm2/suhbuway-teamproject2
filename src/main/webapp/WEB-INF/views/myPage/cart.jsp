@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,18 @@
 <title></title>
 </head>
 <body>	
-	
+<c:choose>
+	<c:when test="${requestScope.userId==null}">
+		<div class="info">
+			<div class="title">
+				<br><br><br>
+				<p >로그인하고 접근해주세요</p>
+				<br><br><br>
+			</div>
+		</div>
+	</c:when>
+	<c:when test="${requestScope.userId!=null}">
+
 	<div class="cart">
 		<div class="content">
 			<h3 class="h_title">장바구니</h3>
@@ -35,7 +48,7 @@
 				<h3 class="h_title">정보입력</h3>
 		<!-- board list s -->
 		<table class="payInfoTable">
-			<caption>회원가입 테이블</caption>
+			<caption>장바구니 테이블</caption>
 			<colgroup>
 				<col width="130px">
 				<col width="*">
@@ -188,7 +201,7 @@
 		});
 		
 		$(document).on("click", function(event){ //바깥 클릭시 셀렉트박스 닫기
-	        if(!$(event.target).closest(".slct_head").length){
+	        if(!$(event.target).closest(".slct_head").length){ 
 	            $(".slct_list").hide();
 	        }
 	    });
@@ -205,6 +218,8 @@
 		})
 	}
 	</script>
+	</c:when>
+</c:choose>
 </body>
 </html>
 

@@ -14,8 +14,8 @@
 		var phoneState = false;
 		$("#userPhone").keyup(function(){
 			var userPhone=$(this).val().trim();
-			if( userPhone.length>10 ){ // 10글자 이상이면
-				alert("연락처는 10글자 이하로 입력해주세요.");
+			if( userPhone.length>11 ){ // 11글자 이상이면
+				alert("연락처는 11글자 이하로 입력해주세요.");
 				$("#userPhone").val("");
 				return;
 			} 
@@ -125,7 +125,8 @@
 <body>	
 	<div class="infoView">
 		<div class="content">
-			<form id="updateForm" method="post" name="updateForm" action="${pageContext.request.contextPath}/user/userUpdate">
+			<form id="updateForm" method="post" name="updateForm" enctype="multipart/form-data"
+			action="${pageContext.request.contextPath}/user/userUpdate?${_csrf.parameterName}=${_csrf.token}">
 				<!-- security csrf 토큰 전송 -->
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 				<div class="info">

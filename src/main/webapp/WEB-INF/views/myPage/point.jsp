@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,15 +48,19 @@
 								</tr>
 								<tr>
 									<th scope="col">포인트</th>
-									<td><input type="hidden" name="mileage" id="mileage"
-										value="${requestScope.user.mileage}">
-										${requestScope.user.mileage}</td>
+									<td>
+										<input type="hidden" name="mileage" id="mileage" value="${requestScope.user.mileage}">
+			<%-- 							￦ ${requestScope.user.mileage}
+										￦ <fmt:parseNumber value="${requestScope.user.mileage}" pattern="#,###" /> --%>
+									 	￦ <fmt:formatNumber value="${requestScope.user.mileage}" pattern="#,###" />  
+									</td>
 								</tr>
 								<tr>
 									<th scope="col">등급</th>
-									<td><input type="hidden" name="rating" id="rating"
-										value="${requestScope.user.rating}">
-										${requestScope.user.rating}</td>
+									<td>
+										<input type="hidden" name="rating" id="rating" value="${requestScope.user.rating}">
+										${requestScope.user.rating}
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -84,9 +89,9 @@
 								</tr>
 								<tr>
 									<th scope="col">포인트</th>
-									<td><input type="hidden" name="mileage" id="mileage"
-										value="${requestScope.mileage}">
-										${requestScope.mileage}</td>
+									<td><input type="hidden" name="mileage" id="mileage" value="${requestScope.mileage}">
+						 				￦ <fmt:formatNumber value="${requestScope.mileage}"  />
+									</td>
 								</tr>
 								<tr>
 									<th scope="col">등급</th>
@@ -100,9 +105,6 @@
 				</div>
 			</div>
 	</c:when>
-	<c:otherwise>
-		그 외에 루트?
-	</c:otherwise>
 </c:choose>
 </body>
 </html>

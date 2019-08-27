@@ -42,7 +42,7 @@
 						if(data=="fail"){// 존재할때
 							alert("kakaoID로 로그인 불가능합니다.");  
 						}else if (data=="ok") {// 존재안할때						
-							alert("로그인 성공"); 	
+							//alert("로그인 성공"); 	
 							$("#frm").submit(); // 전송
 						}
 					} ,
@@ -61,7 +61,7 @@
 	<div class="contentWrap">
 		<div class="bg_type01 login" id="container">
 			<div class="titWrap">
-				<strong class="tit"><span>특별한 날</span>엔 써브웨이와 함께!</strong>
+				<strong class="tit"><span>특별한 날</span>엔 서부웨이와 함께!</strong>
 				<h2>환경을 생각하는 서부웨이에 오신것을 환영합니다.</h2>
 			</div>
 			<!-- sub content s -->
@@ -96,7 +96,7 @@
 								</table>
 								<!-- errorMessage != null 이면 이라는 조건문 작성하자! -->
 									<c:if test="${requestScope.errorMessage!=null}">
-										<span style="color: red">${requestScope.errorMessage}</<span>
+										<span class="loginTxt" style="color: red">${requestScope.errorMessage}</<span>
 									</c:if>
 							</div>
 							<div class="btns_wrapper">
@@ -109,7 +109,7 @@
 							<ul>
 								<li><a href="#;">아이디 찾기</a></li>
 								<li><a href="#;">비밀번호 찾기</a></li>
-								<li><a href="#;">회원가입</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/register">회원가입</a></li>
 							</ul>
 						</div>
 					</div>

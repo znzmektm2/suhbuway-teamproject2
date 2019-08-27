@@ -27,10 +27,10 @@ import project.suhbuway.service.user.UserService;
 @Controller
 public class HomeController {
 
-	@Autowired
-	HomeService service;
-	
-	@Autowired
+    @Autowired
+    HomeService service;
+
+    @Autowired
     UserService userService;
 
     /**
@@ -77,9 +77,34 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/order")
-    public String order(HttpServletRequest request) {
-		List<Product> list = service.selectAll();
-	
+    public ModelAndView order(HttpServletRequest request, HttpSession session, Principal principal) {
+    	
+    	ModelAndView mv = new ModelAndView();
+    	List<Product> list = null;
+    	String kakaoId = (String) session.getAttribute("userId");// 카카오 로그인
+		// 시큐리티 로그인 유저 id
+		if (principal != null) {
+		    String user = principal.getName();
+		    if (!user.equals("admin")) {
+			System.out.println("principaluser: " + user);
+			user = user.replace("User(", "");
+			user = user.replace(")", "");
+			String[] userdd = user.split(",");
+			mv.addObject("userId", userdd[0].replace("userId=", ""));
+			list = service.selectAll();
+		    } else {
+			mv.addObject("admin", "admin");
+		    }
+		}
+		// 카카오 로그인 유저
+		if (kakaoId != null) {
+		    User kakaoUser = userService.selectUserById(kakaoId);
+		    //System.out.println("kakaoUser: " + kakaoUser);
+		    mv.addObject("userId", kakaoUser.getUserId() );
+		    list = service.selectAll();
+		}
+
+		// 주문할 매뉴 상품 리스트 
 		String jsonList = null;
 		try {
 		    jsonList = new ObjectMapper().writeValueAsString(list);
@@ -87,8 +112,9 @@ public class HomeController {
 		    e.printStackTrace();
 		}
 		System.out.println(jsonList);
-		request.setAttribute("list", jsonList);
-		return "order/order";
+		mv.addObject("list", jsonList);
+		mv.setViewName("order/order");
+		return mv;
     }
 
     /**
@@ -125,8 +151,6 @@ public class HomeController {
      */
     @RequestMapping("/storeSearch")
     public String storeSearch(HttpServletRequest request) {
-	//	List<Product> list = service.selectProductsByCategory(category);
-	//	request.setAttribute("list", list);
 		return "storeSearch/storeSearch";
     }
 
@@ -137,74 +161,71 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/myPage/qna")
-    public String qna(HttpServletRequest request) {
-	//	List<Product> list = service.selectProductsByCategory(category);
-	//	request.setAttribute("list", list);
-		return "myPage/qna";
+    public String qna(HttpServletRequest request, HttpSession session, Principal principal) {
+    	return "myPage/qna";
     }
 
     /**
      * 마이페이지 포인트
      */
     @RequestMapping("/myPage/point")
-    public ModelAndView point(HttpServletRequest request, HttpSession session, Principal principal ) {
-    	
-    	ModelAndView mv = new ModelAndView();
-    	
-    	String kakaoId = (String)session.getAttribute("userId");//카카오 로그인
-    	// 시큐리티 로그인 유저 id
-    	if( principal!= null ) {
-    		String user = principal.getName();
-    		if(!user.equals("admin")) {
-    			System.out.println("principaluser: " + user);
-            	user = user.replace("User(", "" );
-            	user = user.replace(")", "" );
-            	String [] userdd= user.split(",");
-            	
-            	mv.addObject("userId", userdd[0].replace("userId=", "" ) );
-            	mv.addObject("mileage", userdd[9].replace("mileage=", "" ) );
-            	mv.addObject("rating", userdd[10].replace("rating=", "" ) );
-            	
-            	//System.out.println("userId: "+ userdd[0].replace("userId=", "" ) );
-            	//System.out.println("mileage: "+userdd[9].replace("mileage=", "" ) );
-            	//System.out.println("rating: "+userdd[10].replace("rating=", "" ) );    		
-        	} else {
-        		mv.addObject("admin", "admin" );
-        	}
-    	}
-    	// 카카오 로그인 유저
-    	if( kakaoId!=null ) {
-        	User kakaoUser = userService.selectUserById(kakaoId);
-        	System.out.println("kakaoUser: " + kakaoUser);
-    		mv.addObject("user", kakaoUser );   		
-    	}
+    public ModelAndView point(HttpServletRequest request,HttpSession session, Principal principal) {
+
+		ModelAndView mv = new ModelAndView();
+	
+		String kakaoId = (String) session.getAttribute("userId");// 카카오 로그인
+		// 시큐리티 로그인 유저 id
+		if (principal != null) {
+		    String user = principal.getName();
+		    if (!user.equals("admin")) {
+			System.out.println("principaluser: " + user);
+			user = user.replace("User(", "");
+			user = user.replace(")", "");
+			String[] userdd = user.split(",");
+	
+			mv.addObject("userId", userdd[0].replace("userId=", ""));
+			mv.addObject("mileage", userdd[9].replace("mileage=", "").trim());
+			mv.addObject("rating", userdd[10].replace("rating=", ""));
+	
+			// System.out.println("userId: "+ userdd[0].replace("userId=", "" ) );
+			// System.out.println("mileage: "+userdd[9].replace("mileage=", "" ) );
+			// System.out.println("rating: "+userdd[10].replace("rating=", "" ) );
+		    } else {
+			mv.addObject("admin", "admin");
+		    }
+		}
+		// 카카오 로그인 유저
+		if (kakaoId != null) {
+		    User kakaoUser = userService.selectUserById(kakaoId);
+		    System.out.println("kakaoUser: " + kakaoUser);
+		    mv.addObject("user", kakaoUser);
+		}
 		mv.setViewName("myPage/point");
-		
-	return mv;
+	
+		return mv;
     }
-    
 
     /**
      * 마이페이지 내정보
      */
     @RequestMapping("/myPage/info")
-    public ModelAndView myPage(HttpServletRequest request, HttpSession session ) {
-    	ModelAndView mv = new ModelAndView();
-    	// 쇼셜 로그인
-    	String url="myPage/info";
-    	String kakaoId = (String)session.getAttribute("userId");
-    	System.out.println("kakao 로그인중 상세페이지 접속: "+kakaoId);
-		if( kakaoId!=null ) {
-    		User user = userService.selectUserById(kakaoId);
-    		String [] userEmail = user.getUserEmail().split("@");
-    		String email1 = userEmail[0];
-    		String email2 = userEmail[1];
-    		
-    		mv.addObject("user", user );
-    		mv.addObject("email1", email1 );
-    		mv.addObject("email2", email2 );
-    		
-			url="myPage/infoView";
+    public ModelAndView myPage(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		// 쇼셜 로그인
+		String url = "myPage/info";
+		String kakaoId = (String) session.getAttribute("userId");
+		System.out.println("kakao 로그인중 상세페이지 접속: " + kakaoId);
+		if (kakaoId != null) {
+		    User user = userService.selectUserById(kakaoId);
+		    String[] userEmail = user.getUserEmail().split("@");
+		    String email1 = userEmail[0];
+		    String email2 = userEmail[1];
+	
+		    mv.addObject("user", user);
+		    mv.addObject("email1", email1);
+		    mv.addObject("email2", email2);
+	
+		    url = "myPage/infoView";
 		}
 		mv.setViewName(url);
 		return mv;
@@ -215,22 +236,23 @@ public class HomeController {
      */
     @RequestMapping("/myPage/{category}/infoView")
     public ModelAndView infoView(@PathVariable String category, HttpServletRequest request) {
-    	ModelAndView mv = new ModelAndView();
-    	String userId = (String)request.getParameter("userId");
-    	// user이면
-    	if( category.equals("info") ) {
-    		
-    		User user = userService.selectUserById(userId);
-    		String [] userEmail = user.getUserEmail().split("@");
-    		String email1 = userEmail[0];
-    		String email2 = userEmail[1];
-    		
-    		mv.addObject("user", user );
-    		mv.addObject("email1", email1 );
-    		mv.addObject("email2", email2 );
-    		mv.setViewName("myPage/infoView");
-    	}
-    	return mv;
+		ModelAndView mv = new ModelAndView();
+		String userId = (String) request.getParameter("userId");
+		// user이면
+		if (category.equals("info")) {
+	
+		    User user = userService.selectUserById(userId);
+		    String[] userEmail = user.getUserEmail().split("@");
+		    String email1 = userEmail[0];
+		    String email2 = userEmail[1];
+	
+		    mv.addObject("user", user);
+		    mv.addObject("email1", email1);
+		    mv.addObject("email2", email2);
+		    mv.setViewName("myPage/infoView");
+		}
+	
+		return mv;
     }
 
 }

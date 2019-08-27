@@ -6,8 +6,8 @@
 			<ul>
 				<li><a href="javascript:;">이용약관</a></li>
 				<li><a href="javascript:;"><strong>개인정보취급방침</strong></a></li>
-				<li><a href="javascript:;">점주관리자</a></li>
-				<li><a class="eng" href="javascript:;">Subway Listens</a></li>
+				<li><a href="http://localhost:8000/store/">점주관리자</a></li>
+				<li><a class="eng" href="javascript:;">Suhbway Listens</a></li>
 			</ul>
 		</div>
 		<!--// util menu -->

@@ -39,7 +39,7 @@
 			<form id="frm" method="post" name="frm" onSubmit='return checkValid()'
 				enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/board/update?${_csrf.parameterName}=${_csrf.token}">
-				<input type=hidden name="userId" value="<sec:authentication property="principal.userId" />">
+				<input type=hidden name="userId" value="${requestScope.userId}">
 				<input type=hidden name="complainId" value="${complain.complainId}">
 				<div class="board_write_wrapper">
 					<p class="rt_note">

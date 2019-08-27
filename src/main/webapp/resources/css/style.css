@@ -43,6 +43,7 @@ select{
 select::-ms-expand {
    display: none;            /* 화살표 없애기 for IE10, 11*/
 }
+form>input{margin:5px;width:100px;font-size:16px;border:1px solid #ddd;background: #fff;padding:7px 12px;}
 
 ol,ul{list-style:none}
 a{text-decoration:none; color:#333;}
@@ -63,7 +64,7 @@ em{font-style:normal;}
 #header1 .logo{position:absolute; left:50%; top:35px; margin-left:-130px;  transition-duration:0.3s}
 #header1 .logo a{display:block; background:url(../images/logo.png) 0 0 no-repeat; width:259px; height:40px; overflow:hidden; font-size:0px; line-height:0px; text-indent:-9999px;}
 #header1 .util_menu{position:absolute; right:25px; top:40px;  transition-duration:0.4s}
-#header1 .util_menu ul li{float:left; margin-left:5px;}
+#header1 .util_menu ul li{float:left; margin-left:5px;line-height:28px;}
 #header1 .util_menu ul li a{display:block; border:1px solid #dddddd; border-radius:50px; height:28px; line-height:28px; background-color:#fff; color:#666666; font-size:13px; letter-spacing:-0.02em; padding:0 13px; transition-duration:0.3s}
 #header1 .util_menu ul li a:hover{border-color:#bbb}
 
@@ -824,3 +825,10 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 
 /* 문의사항 */
 .complainListContainer .board_list_wrapper table th{height:auto;}
+ 
+/* 기타 */
+.replyFormContainer .inquiry_wrapper{border:none;}
+.readWrap{margin:100px 0;text-align:left;} 
+.readWrap .btn_list{margin-top:50px;}
+#replyContent .main{display: block;margin-top:20px;}
+.loginTxt{display:block;width:400px;margin:-30px auto 50px;}
