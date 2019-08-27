@@ -30,7 +30,7 @@
 </style>
 </head>
 <body>
-	<h2 class="subTitle">뉴스ㆍ공지사항</h2>
+	<h2 class="subTitle">문의사항</h2>
 
 	<div class="board_list_wrapper">
 		<div class="content">

@@ -125,6 +125,8 @@ em{font-style:normal;}
 .subway_menu_slider_wrapper .subway_menu_slider .bx-wrapper .bx-controls-direction .bx-prev:hover{background-position:0 100%}
 .subway_menu_slider_wrapper .subway_menu_slider .bx-wrapper .bx-controls-direction .bx-next{background-position:100% 0; right:-150px}
 .subway_menu_slider_wrapper .subway_menu_slider .bx-wrapper .bx-controls-direction .bx-next:hover{background-position:100% 100%}
+.main .subway_menu_slider_wrapper .subway_menu_slider .bx-wrapper .bx-controls-direction .bx-prev{left:-50px;}
+.main .subway_menu_slider_wrapper .subway_menu_slider .bx-wrapper .bx-controls-direction .bx-next{right:-50px;}
 
 .subway_menu_slider_wrapper .subway_menu_slider ul li{width:260px; height:320px; padding:0 5px; margin-left:30px; float:left;}
 .subway_menu_slider_wrapper .subway_menu_slider ul li:first-child{margin-left:0 !important;}
@@ -418,7 +420,7 @@ h3.h_title{font-size:28px; color:#292929; font-weight:bold; letter-spacing:-0.05
 .menu_list_wrapper .visual.salad .img02{position:absolute; left:50%; margin-left:-818px; top:0px; background:url(../images/menu/img_visual_salad02.jpg) 0 0 no-repeat; width:669px; height:336px; opacity:0;}
 
 .menu_list_wrapper .visual.sides_drink{background:url(../images/menu/bg_visual_sides_drink.jpg) 50% no-repeat;}
-.menu_list_wrapper .visual.sides_drink .img01{position:absolute; left:50%; margin-left:120px; bottom:-100px; background:url(../images/menu/img_visual_sides_drink01.jpg) 0 0 no-repeat; width:840px; height:250px; opacity:0}
+.menu_list_wrapper .visual.sides_drink .img01{position:absolute; top:auto!important;left:50%; margin-left:120px; bottom:-100px; background:url(../images/menu/img_visual_sides_drink01.jpg) 0 0 no-repeat; width:840px; height:250px; opacity:0}
 .menu_list_wrapper .visual.sides_drink .img02{position:absolute; left:50%; margin-left:-754px; bottom:-100px; background:url(../images/menu/img_visual_sides_drink02.jpg) 0 0 no-repeat; width:520px; height:380px; opacity:0}
 
 .menu_list_wrapper .visual.fresh{background-color:#07a5e6;}
@@ -819,3 +821,6 @@ width:12px;height:12px;background: url(../images/ico_star_big_g.png) no-repeat;b
 .idCheckWrap{display:inline-block;margin-top:10px;}
 .idCheckWrap input{vertical-align: middle;background: #fff;border: 1px solid #ddd;padding: 5px 10px;}
 #idcheckspan{display:inline-block;margin-left:10px;vertical-align: middle;}
+
+/* 문의사항 */
+.complainListContainer .board_list_wrapper table th{height:auto;}
