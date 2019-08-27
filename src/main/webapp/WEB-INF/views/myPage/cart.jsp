@@ -48,7 +48,7 @@
 				<h3 class="h_title">정보입력</h3>
 		<!-- board list s -->
 		<table class="payInfoTable">
-			<caption>회원가입 테이블</caption>
+			<caption>장바구니 테이블</caption>
 			<colgroup>
 				<col width="130px">
 				<col width="*">
