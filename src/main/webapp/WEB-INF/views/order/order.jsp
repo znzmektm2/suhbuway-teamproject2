@@ -9,6 +9,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:choose>
+	<c:when test="${requestScope.userId==null}">
+		<div class="info">
+			<div class="title">
+				<br><br><br>
+				<p >로그인하고 접근해주세요</p>
+				<br><br><br>
+			</div>
+		</div>
+	</c:when>
+	<c:when test="${requestScope.userId!=null}">
+	
 <h2 class="subTitle">써브웨이 이용방법</h2>
 <!-- 써브웨이 이용방법 -->
 <div class="utilization_subway_wrapper">
@@ -738,5 +750,9 @@ function formatNumber(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 </script>
+
+
+	</c:when>
+</c:choose>
 </body>
 </html>

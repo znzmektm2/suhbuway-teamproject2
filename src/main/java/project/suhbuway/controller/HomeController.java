@@ -81,18 +81,44 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/order")
-    public String order(HttpServletRequest request) {
-	List<Product> list = service.selectAll();
+    public ModelAndView order(HttpServletRequest request, HttpSession session, Principal principal) {
+    	
+    	ModelAndView mv = new ModelAndView();
+    	List<Product> list = null;
+    	String kakaoId = (String) session.getAttribute("userId");// 카카오 로그인
+		// 시큐리티 로그인 유저 id
+		if (principal != null) {
+		    String user = principal.getName();
+		    if (!user.equals("admin")) {
+			System.out.println("principaluser: " + user);
+			user = user.replace("User(", "");
+			user = user.replace(")", "");
+			String[] userdd = user.split(",");
+			mv.addObject("userId", userdd[0].replace("userId=", ""));
+			list = service.selectAll();
+		    } else {
+			mv.addObject("admin", "admin");
+		    }
+		}
+		// 카카오 로그인 유저
+		if (kakaoId != null) {
+		    User kakaoUser = userService.selectUserById(kakaoId);
+		    //System.out.println("kakaoUser: " + kakaoUser);
+		    mv.addObject("userId", kakaoUser.getUserId() );
+		    list = service.selectAll();
+		}
 
-	String jsonList = null;
-	try {
-	    jsonList = new ObjectMapper().writeValueAsString(list);
-	} catch (JsonProcessingException e) {
-	    e.printStackTrace();
-	}
-	System.out.println(jsonList);
-	request.setAttribute("list", jsonList);
-	return "order/order";
+		// 주문할 매뉴 상품 리스트 
+		String jsonList = null;
+		try {
+			jsonList = new ObjectMapper().writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.out.println(jsonList);
+		mv.addObject("list", jsonList);
+		mv.setViewName("order/order");
+		return mv;
     }
 
     /**
@@ -177,7 +203,7 @@ public class HomeController {
 		String[] userdd = user.split(",");
 
 		mv.addObject("userId", userdd[0].replace("userId=", ""));
-		mv.addObject("mileage", userdd[9].replace("mileage=", ""));
+		mv.addObject("mileage", userdd[9].replace("mileage=", "").trim());
 		mv.addObject("rating", userdd[10].replace("rating=", ""));
 
 		// System.out.println("userId: "+ userdd[0].replace("userId=", "" ) );

@@ -48,17 +48,19 @@
 								</tr>
 								<tr>
 									<th scope="col">포인트</th>
-									<td><input type="hidden" name="mileage" id="mileage"
-										value="${requestScope.user.mileage}">
-										￦ ${requestScope.user.mileage}
-									<%-- 	<fmt:formatNumber value="${requestScope.user.mileage}" pattern="#,###" /> --%>
+									<td>
+										<input type="hidden" name="mileage" id="mileage" value="${requestScope.user.mileage}">
+			<%-- 							￦ ${requestScope.user.mileage}
+										￦ <fmt:parseNumber value="${requestScope.user.mileage}" pattern="#,###" /> --%>
+									 	￦ <fmt:formatNumber value="${requestScope.user.mileage}" pattern="#,###" />  
 									</td>
 								</tr>
 								<tr>
 									<th scope="col">등급</th>
-									<td><input type="hidden" name="rating" id="rating"
-										value="${requestScope.user.rating}">
-										${requestScope.user.rating}</td>
+									<td>
+										<input type="hidden" name="rating" id="rating" value="${requestScope.user.rating}">
+										${requestScope.user.rating}
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -87,11 +89,9 @@
 								</tr>
 								<tr>
 									<th scope="col">포인트</th>
-									<td><input type="hidden" name="mileage" id="mileage"
-										value="${requestScope.mileage}">
-										￦ ${requestScope.mileage}
-										<%-- <fmt:formatNumber value="${requestScope.mileage}" pattern="#,###" /> --%>
-										</td>
+									<td><input type="hidden" name="mileage" id="mileage" value="${requestScope.mileage}">
+						 				￦ <fmt:formatNumber value="${requestScope.mileage}"  />
+									</td>
 								</tr>
 								<tr>
 									<th scope="col">등급</th>
@@ -105,9 +105,6 @@
 				</div>
 			</div>
 	</c:when>
-	<c:otherwise>
-		그 외에 루트?
-	</c:otherwise>
 </c:choose>
 </body>
 </html>
