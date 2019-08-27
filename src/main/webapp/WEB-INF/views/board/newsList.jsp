@@ -27,8 +27,6 @@
 </script>
 </head>
 <body>
-	<a href="#" id="test">tetdddd</a>
-	<hr>
 	<h2 class="subTitle">뉴스ㆍ공지사항</h2>
 
 	<!-- 뉴스ㆍ공지사항 list s -->

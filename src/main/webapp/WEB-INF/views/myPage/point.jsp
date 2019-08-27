@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,9 @@
 									<th scope="col">포인트</th>
 									<td><input type="hidden" name="mileage" id="mileage"
 										value="${requestScope.user.mileage}">
-										${requestScope.user.mileage}</td>
+										￦ ${requestScope.user.mileage}
+									<%-- 	<fmt:formatNumber value="${requestScope.user.mileage}" pattern="#,###" /> --%>
+									</td>
 								</tr>
 								<tr>
 									<th scope="col">등급</th>
@@ -86,7 +89,9 @@
 									<th scope="col">포인트</th>
 									<td><input type="hidden" name="mileage" id="mileage"
 										value="${requestScope.mileage}">
-										${requestScope.mileage}</td>
+										￦ ${requestScope.mileage}
+										<%-- <fmt:formatNumber value="${requestScope.mileage}" pattern="#,###" /> --%>
+										</td>
 								</tr>
 								<tr>
 									<th scope="col">등급</th>

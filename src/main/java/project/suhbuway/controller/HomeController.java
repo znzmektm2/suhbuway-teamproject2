@@ -162,7 +162,7 @@ public class HomeController {
      * 마이페이지 포인트
      */
     @RequestMapping("/myPage/point")
-    public ModelAndView point(HttpServletRequest request, HttpSession session, Principal principal) {
+    public ModelAndView point(HttpServletRequest request,HttpSession session, Principal principal) {
 
 	ModelAndView mv = new ModelAndView();
 

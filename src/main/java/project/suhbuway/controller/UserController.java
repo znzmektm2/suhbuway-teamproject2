@@ -179,9 +179,9 @@ public class UserController {
 	@RequestMapping("/user/userUpdate")
 	public String userUpdate(User user) {
 
-		System.out.println("회원정보 수정" + user );
+		//System.out.println("회원정보 수정" + user );
 		int result = service.userUpdate(user);
-		System.out.println("result : " + result );
+		//System.out.println("result : " + result );
 		String url = "myPage/infol";
 		if (result == 0) {
 			url = "err/updateFail";
