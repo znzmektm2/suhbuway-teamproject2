@@ -16,6 +16,9 @@
 	<div class="errorBtn">
 		<a href="${pageContext.request.contextPath}/myPage/orders"><span>주문내역 확인</span></a>
 	</div>
+	<audio controls="" autoplay="" loop="infinite" style="opacity:0">
+		<source src="${pageContext.request.contextPath}/resources/audio/orderComplete1.m4a" type="audio/mp4" />
+	</audio>
 </div>
 <script> 
 $(document).ready(function(){
