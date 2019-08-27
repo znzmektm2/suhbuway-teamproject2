@@ -114,7 +114,7 @@ public class OrderServiceImpl implements OrderService {
 	/* orderList 생성 및 기본 데이터 입력 */
 	OrderList orderList = new OrderList();
 	orderList.setOrderId(orderId);
-	orderList.setUserId("test1");
+	orderList.setUserId(userId);
 	orderList.setStoreId(store.getStoreId());
 
 	int total = 0; // 주문 총계 계산용

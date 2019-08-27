@@ -52,7 +52,7 @@ public class OrderController {
 	OrderInsertWrapper[] newOrders = gson.fromJson(request.getParameter("menuList"), OrderInsertWrapper[].class);
 	Store store = gson.fromJson(request.getParameter("store"), Store.class);
 
-	String orderId = orderService.insertOrder(newOrders, store, "12345"); //////// 여기에 유저 아이디 넣으면 됨 ////////
+	String orderId = orderService.insertOrder(newOrders, store, "99999"); //////// 여기에 유저 아이디 넣으면 됨 ////////
 	request.setAttribute("orderId", orderId);
 	return "order/completeOrder";
     }
@@ -63,7 +63,7 @@ public class OrderController {
     @RequestMapping("/myPage/orders")
     public String orders(HttpServletRequest request) {
 
-	List<OrderListWrapper> list = orderService.selectOrderListByUser("test1"); //////// 여기에 유저 아이디 넣으면 됨 ////////
+	List<OrderListWrapper> list = orderService.selectOrderListByUser("99999"); //////// 여기에 유저 아이디 넣으면 됨 ////////
 	request.setAttribute("list", list);
 
 	return "myPage/orders";
