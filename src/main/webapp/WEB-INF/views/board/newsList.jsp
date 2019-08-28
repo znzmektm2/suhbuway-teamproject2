@@ -20,7 +20,7 @@ function paging(index) {
 	var pagination = $('.pagination').eq(0);
 	pagination.empty();
 	$.ajax({
-		url: "http://192.168.0.169:8888?page="+index,
+		url: "http://localhost:8888?page="+index,
 		type :"post",
 		dataType : "json",
 		success :function(result){

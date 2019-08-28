@@ -18,7 +18,7 @@ $('document').ready(function () {
 function thisPageInfo() {
 	// 페이지 정보
 	$.ajax({
-		url: "http://192.168.0.169:8888/view?pageView="+newsId,
+		url: "http://localhost:8888/view?pageView="+newsId,
 		type :"post",
 		dataType : "json",
 		success :function(result){
@@ -54,7 +54,7 @@ function thisPageInfo() {
 function PrevPageInfo() {
 	// 이전 페이지 링크
 	$.ajax({
-		url: "http://192.168.0.169:8888/view?pageView="+prevNewsId,
+		url: "http://localhost:8888/view?pageView="+prevNewsId,
 		type :"post",
 		dataType : "json",
 		success :function(result){
@@ -72,7 +72,7 @@ function PrevPageInfo() {
 function NextPageInfo() {
 	// 다음 페이지 링크
 	$.ajax({
-		url: "http://192.168.0.169:8888/view?pageView="+nextNewsId,
+		url: "http://localhost:8888/view?pageView="+nextNewsId,
 		type :"post",
 		dataType : "json",
 		success :function(result){
