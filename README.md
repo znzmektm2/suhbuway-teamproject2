@@ -11,7 +11,7 @@ KOSTA 교육장에서 진행한 팀 프로젝트로 서브웨이 프렌차이즈
   - 상품 목록 및 상세조회 API 개발
   - 장바구니 및 주문하기 API 개발
   - 주기적으로 서브웨이 공식 홈페이지에서 뉴스ㆍ공지사항 크롤링
-- 개발환경 : java 1.8(Spring MVC, SpringBoot), JSP, JSTL, Lombok, MyBatis, Tiles, Javascript, JQuery, Ajax, HTML5, CSS3, Oracle 11g, Apache Tomcat 8.5, Eclipse, GitHub
+- 개발환경 : java 1.8(Spring MVC), JSP, JSTL, Lombok, MyBatis, Tiles, Javascript, JQuery, Ajax, HTML5, CSS3, Oracle 11g, Apache Tomcat 8.5, Eclipse, GitHub
 
 # View Image
 ![2021-01-15 23 56 08](https://user-images.githubusercontent.com/35294456/104743556-2c4b3c00-578f-11eb-8b17-25a4525193bf.png)
