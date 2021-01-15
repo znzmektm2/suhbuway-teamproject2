@@ -13,3 +13,13 @@ KOSTA 교육장에서 진행한 팀 프로젝트로 서브웨이 프렌차이즈
  - 주기적으로 서브웨이 공식 홈페이지에서 뉴스ㆍ공지사항 크롤링
 - 개발환경 : java 1.8(Spring MVC, SpringBoot), JSP, JSTL, Lombok, MyBatis, Tiles, Javascript, JQuery, Ajax, HTML5, CSS3, Oracle 11g, Apache Tomcat 8.5, Eclipse, GitHub
 
+# View Image
+![2021-01-15 23 56 08](https://user-images.githubusercontent.com/35294456/104743556-2c4b3c00-578f-11eb-8b17-25a4525193bf.png)
+
+![2021-01-15 23 56 50](https://user-images.githubusercontent.com/35294456/104743564-2e14ff80-578f-11eb-97d1-ed165e72bd51.png)
+
+![2021-01-15 23 57 28](https://user-images.githubusercontent.com/35294456/104743566-2e14ff80-578f-11eb-96fa-0cf7531c7afe.png)
+
+![2021-01-16 00 00 18](https://user-images.githubusercontent.com/35294456/104743567-2ead9600-578f-11eb-9bb8-4d83ed96dce1.png)
+
+![2021-01-16-00-07-16](https://user-images.githubusercontent.com/35294456/104743570-2f462c80-578f-11eb-88c5-7615019732c1.png)
